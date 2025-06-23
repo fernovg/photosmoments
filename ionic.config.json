@@ -1,0 +1,7 @@
+{
+  "name": "photosmoments",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
+}
