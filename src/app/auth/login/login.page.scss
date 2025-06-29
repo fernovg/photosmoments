@@ -1,0 +1,107 @@
+.hero-login {
+    // background-color: blue;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    // margin-top: 5px;
+    margin-bottom: 15px;
+
+    img {
+        display: flex;
+        width: 210px;
+        margin-left: auto;
+        margin-right: auto;
+        // margin-bottom: 50px;
+        // margin-top: 70px;
+    }
+
+    p {
+        font-size: 14px;
+        color: var(--subtitulo-color);
+        margin: 4px 0 0 0;
+    }
+}
+
+form {
+    // background-color: red;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    // margin: 15px;
+    margin-bottom: 48px;
+
+    ion-item:first-of-type {
+        margin-top: 0px;
+        border-style: none;
+    }
+
+    ion-item {
+        margin-top: 8px;
+        border-style: none;
+        border-radius: 10px;
+    }
+}
+
+.botones {
+    // background-color: aqua;
+    display: flex;
+    flex-direction: column;
+    // flex-wrap: nowrap;
+    // margin: 15px;
+    align-items: center;
+
+    ion-button {
+        width: 100%;
+        max-width: 280px;
+    }
+}
+
+.extra-login {
+    // background-color: green;
+    // margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+
+    .separador {
+        display: flex;
+        align-items: center;
+        width: 100%;
+        max-width: 300px;
+        color: var(--subtitulo-color);
+        font-size: 13px;
+        margin-bottom: 30px;
+
+        hr {
+            flex-grow: 1;
+            border: none;
+            border-top: 1px solid var(--subtitulo-color);
+            margin: 0 8px;
+        }
+
+        span {
+            white-space: nowrap;
+        }
+    }
+
+    ion-button {
+        width: 100%;
+        max-width: 280px;
+    }
+
+    .registro-link {
+        // margin-top: 90px;
+        font-size: 14px;
+        color: var(--subtitulo-color);
+        text-align: center;
+
+        a {
+            color: var(--ion-color-primary);
+            text-decoration: none;
+            font-weight: bold;
+            cursor: pointer;
+        }
+    }
+}

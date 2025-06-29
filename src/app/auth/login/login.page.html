@@ -1,0 +1,42 @@
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-back-button default-href="/" text=""></ion-back-button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
+
+  <div class="ion-padding contenido-login">
+    <div class="hero-login">
+      <img class="logo"
+        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRwJW5HSsd9Pzs5n7AqpHuRpEUaDGtwOeIoRA&s" alt="">
+      <p>By Enformobile</p>
+    </div>
+  </div>
+
+  <form action="">
+    <ion-item>
+      <ion-input label="Usuario" label-placement="floating" fill="solid" placeholder="Enter text"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-input label="Contraseña" label-placement="floating" fill="solid" placeholder="Enter text"></ion-input>
+    </ion-item>
+  </form>
+
+  <div class="botones">
+    <ion-button>Entrar</ion-button>
+  </div>
+
+  <div class="extra-login">
+    <div class="seperador">
+      <hr>
+      <span>O Inicia Sesion Con</span>
+    </div>
+    <ion-button expand="block" fill="outline" color="dark">Acceder Con Google</ion-button>
+    <p class="registro-link">
+      No Tienes Cuenta? <a href="/signup">Registrate Aqui</a>
+    </p>
+  </div>
+
+</ion-content>
