@@ -21,14 +21,6 @@ export const routes: Routes = [
     path: '**',
     redirectTo: '', // fallback a bienvenida si no se encuentra
   },
-  {
-    path: 'eventos',
-    loadComponent: () => import('./events/eventos/eventos.page').then( m => m.EventosPage)
-  },
-  {
-    path: 'invitads',
-    loadComponent: () => import('./events/invitads/invitads.page').then( m => m.InvitadsPage)
-  },
   // {
   //   path: '',
   //   redirectTo: '',

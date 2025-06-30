@@ -29,7 +29,10 @@ swiper-slide {
     text-align: center;
     box-sizing: border-box;
 }
-
+    ion-button {
+        width: 100%;
+        max-width: 280px;
+    }
 // swiper-slide img {
 //     width: auto;
 //     max-width: 100%;

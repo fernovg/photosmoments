@@ -34,5 +34,29 @@
 
 /* @import "@ionic/angular/css/palettes/dark.always.css"; */
 /* @import "@ionic/angular/css/palettes/dark.class.css"; */
-@import '@ionic/angular/css/palettes/dark.system.css';
+// @import '@ionic/angular/css/palettes/dark.system.css';
+
+:root {
+    --titulo-color: #0e0e0e;
+    --subtitulo-color: #272727;
+    --bg-principal: #f0f0f0;
+    --color-principal: #4d619c;
+
+    // --ion-color-primary: #4d619c !important;
+    // --ion-color-primary-shade: #859fd5;
+    // --ion-color-primary-tint: #acbfe4;
+
+    // --color-50: #f3f5fb;
+    // --color-100: #e3e9f6;
+    // --color-200: #ced9ef;
+    // --color-300: #acbfe4;
+    // --color-400: #859fd5;
+    // --color-500: #657ec8;
+    // --color-600: #5568bb;
+    // --color-700: #4a57ab;
+    // --color-800: #41498c;
+    // --color-900: #383f70;
+    // --color-950: #262945;
+}
+
 // botones
