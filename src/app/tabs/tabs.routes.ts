@@ -3,7 +3,7 @@ import { TabsPage } from './tabs.page';
 
 export const routes: Routes = [
   {
-    path: 'tabs',
+    path: '',
     component: TabsPage,
     children: [
       {
@@ -15,8 +15,16 @@ export const routes: Routes = [
         loadComponent: () => import('../pages/perfil/perfil.page').then(m => m.PerfilPage)
       },
       {
+        path: 'eventos',
+        loadComponent: () => import('../events/eventos/eventos.page').then(m => m.EventosPage)
+      },
+      {
+        path: 'invitads',
+        loadComponent: () => import('../events/invitads/invitads.page').then(m => m.InvitadsPage)
+      },
+      {
         path: '',
-        redirectTo: '/tabs/inicio',
+        redirectTo: 'inicio',
         pathMatch: 'full',
       },
     ],
