@@ -1,0 +1,57 @@
+// .bienvenida-card {
+//     background: linear-gradient(to right, #fceabb, #f8b500);
+//     color: #333;
+//     border-radius: 16px;
+// }
+
+.mis-eventos {
+    h2 {
+        margin-bottom: 0px;
+    }
+
+    .evento-card {
+        margin-top: 2px;
+        position: relative;
+        height: 280px;
+        color: white;
+        overflow: hidden;
+        // border-radius: 16px;
+
+        .fondo-evento {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: var(--img-url);
+            background-size: cover;
+            background-position: center;
+            filter: brightness(0.4); // oscurece para mejorar legibilidad
+            z-index: 1;
+            margin-top: 2px;
+            object-fit: cover;
+        }
+    }
+
+    .contenido-evento {
+        position: relative;
+        z-index: 2;
+        padding: 16px;
+
+        ion-card-title {
+            font-size: 1.4rem;
+            color: white;
+        }
+
+        ion-card-content {
+            margin-top: 50px;
+        }
+
+        ion-item {
+            background: transparent;
+            --background: transparent;
+            --color: white;
+        }
+
+    }
+}
