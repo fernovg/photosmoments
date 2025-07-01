@@ -37,26 +37,24 @@
 // @import '@ionic/angular/css/palettes/dark.system.css';
 
 :root {
-    --titulo-color: #0e0e0e;
-    --subtitulo-color: #272727;
-    --bg-principal: #f0f0f0;
-    --color-principal: #4d619c;
+    --ion-background-color: #f0f0f0; //fondo general
+    --ion-text-color: #333333;      //titulos texto impor
+    --ion-card-background: #ffffff; //fondo tarjetas y secciones internas
+    --ion-color-primary: #1e1e1e;   // Headers oscuros, botones importantes
+    --ion-color-medium: #666666;    //Subtítulos, textos secundarios
+    --ion-color-light: #dcdcdc;     //Líneas separadoras, bordes
 
-    // --ion-color-primary: #4d619c !important;
-    // --ion-color-primary-shade: #859fd5;
-    // --ion-color-primary-tint: #acbfe4;
+    --ion-color-primary-shade: #666666;
+    --ion-color-primary-tint: #333333;
 
-    // --color-50: #f3f5fb;
-    // --color-100: #e3e9f6;
-    // --color-200: #ced9ef;
-    // --color-300: #acbfe4;
-    // --color-400: #859fd5;
-    // --color-500: #657ec8;
-    // --color-600: #5568bb;
-    // --color-700: #4a57ab;
-    // --color-800: #41498c;
-    // --color-900: #383f70;
-    // --color-950: #262945;
+    --color-100: #f0f0f0;
+    --color-200: #dcdcdc;
+    --color-300: #bfbfbf;
+    --color-400: #999999;
+    --color-600: #666666;
+    --color-800: #333333;
+    --color-900: #1e1e1e;
 }
+
 
 // botones
