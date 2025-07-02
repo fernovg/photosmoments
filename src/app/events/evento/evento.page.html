@@ -38,7 +38,7 @@
 
     <ion-segment-content id="albums">
 
-      <ion-card class="publicacion-card">
+      <ion-card class="publicacion-card" *ngFor="let img of imagenes; let i = index">
         <ion-card-header class="publicacion-header">
           <ion-grid>
             <ion-row class="ion-align-items-center">
@@ -60,63 +60,7 @@
           </ion-grid>
         </ion-card-header>
 
-        <img class="foto-publi" src="https://media.sproutsocial.com/uploads/2022/06/profile-picture.jpeg"
-          alt="Foto publicación">
-
-      </ion-card>
-
-      <ion-card class="publicacion-card">
-        <ion-card-header class="publicacion-header">
-          <ion-grid>
-            <ion-row class="ion-align-items-center">
-              <ion-col size="auto">
-                <img
-                  src="https://images.pexels.com/photos/14375833/pexels-photo-14375833.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
-                  alt="Foto perfil" class="foto-perfil">
-              </ion-col>
-              <ion-col>
-                <ion-card-title>Jose Vega</ion-card-title>
-                <p class="tiempo">Hace 10 minutos</p>
-              </ion-col>
-              <ion-col size="auto">
-                <ion-button fill="clear" size="small" id="open-action-sheet">
-                  <ion-icon name="ellipsis-horizontal-outline"></ion-icon>
-                </ion-button>
-              </ion-col>
-            </ion-row>
-          </ion-grid>
-        </ion-card-header>
-
-        <img class="foto-publi"
-          src="https://www.istockphoto.com/resources/images/PhotoFTLP/P1-regional-iStock-1985150440.jpg"
-          alt="Foto publicación">
-
-      </ion-card>
-
-      <ion-card class="publicacion-card">
-        <ion-card-header class="publicacion-header">
-          <ion-grid>
-            <ion-row class="ion-align-items-center">
-              <ion-col size="auto">
-                <img
-                  src="https://plus.unsplash.com/premium_photo-1689568126014-06fea9d5d341?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8cGVyZmlsfGVufDB8fDB8fHww"
-                  alt="Foto perfil" class="foto-perfil">
-              </ion-col>
-              <ion-col>
-                <ion-card-title>Fernando Vega</ion-card-title>
-                <p class="tiempo">Hace 20 minutos</p>
-              </ion-col>
-              <ion-col size="auto">
-                <ion-button fill="clear" size="small" id="open-action-sheet">
-                  <ion-icon name="ellipsis-horizontal-outline"></ion-icon>
-                </ion-button>
-              </ion-col>
-            </ion-row>
-          </ion-grid>
-        </ion-card-header>
-
-        <img class="foto-publi"
-          src="https://img.freepik.com/foto-gratis/fotografia-vertical-palmeras-playa-arena_181624-49124.jpg?semt=ais_hybrid&w=740"
+        <img class="foto-publi" [src]="img" (click)="abrirGaleria(i)"
           alt="Foto publicación">
 
       </ion-card>
@@ -127,9 +71,9 @@
 
       <ion-grid [fixed]="true">
         <ion-row>
-          <ion-col class="grid-foto" size="6" size-md="4" size-lg="2">
+          <ion-col class="grid-foto" size="6" size-md="4" size-lg="2" *ngFor="let img of imagenes; let i = index">
             <ion-card class="card-grid-foto">
-              <img src="https://media.sproutsocial.com/uploads/2022/06/profile-picture.jpeg" alt="">
+              <img [src]="img" alt="" (click)="abrirGaleria(i)">
               <ion-card-header class="overlay-inferior">
                 <ion-grid>
                   <ion-row class="ion-align-items-center">
@@ -144,66 +88,6 @@
                   </ion-row>
                 </ion-grid>
               </ion-card-header>
-            </ion-card>
-          </ion-col>
-
-          <ion-col class="grid-foto" size="6" size-md="4" size-lg="2">
-            <ion-card class="card-grid-foto">
-              <img src="https://media.sproutsocial.com/uploads/2022/06/profile-picture.jpeg" alt="">
-              <ion-card-header class="overlay-inferior">
-                <ion-grid>
-                  <ion-row class="ion-align-items-center">
-                    <ion-col size="auto">
-                      <ion-card-title>Jose Vega</ion-card-title>
-                    </ion-col>
-                    <ion-col size="auto">
-                      <ion-button fill="clear" size="small" id="open-action-sheet">
-                        <ion-icon name="ellipsis-horizontal-outline"></ion-icon>
-                      </ion-button>
-                    </ion-col>
-                  </ion-row>
-                </ion-grid>
-              </ion-card-header>
-            </ion-card>
-          </ion-col>
-
-          <ion-col class="grid-foto" size="6" size-md="4" size-lg="2">
-            <ion-card class="card-grid-foto">
-              <img src="https://media.sproutsocial.com/uploads/2022/06/profile-picture.jpeg" alt="">
-              <!-- <ion-card-header class="overlay-inferior">
-                <ion-grid>
-                  <ion-row class="ion-align-items-center">
-                    <ion-col size="auto">
-                      <ion-card-title>Jose Vega</ion-card-title>
-                    </ion-col>
-                    <ion-col size="auto">
-                      <ion-button fill="clear" size="small" id="open-action-sheet">
-                        <ion-icon name="ellipsis-horizontal-outline"></ion-icon>
-                      </ion-button>
-                    </ion-col>
-                  </ion-row>
-                </ion-grid>
-              </ion-card-header> -->
-            </ion-card>
-          </ion-col>
-
-          <ion-col class="grid-foto" size="6" size-md="4" size-lg="2">
-            <ion-card class="card-grid-foto">
-              <img src="https://media.sproutsocial.com/uploads/2022/06/profile-picture.jpeg" alt="">
-              <!-- <ion-card-header class="overlay-inferior">
-                <ion-grid>
-                  <ion-row class="ion-align-items-center">
-                    <ion-col size="auto">
-                      <ion-card-title>Jose Vega</ion-card-title>
-                    </ion-col>
-                    <ion-col size="auto">
-                      <ion-button fill="clear" size="small" id="open-action-sheet">
-                        <ion-icon name="ellipsis-horizontal-outline"></ion-icon>
-                      </ion-button>
-                    </ion-col>
-                  </ion-row>
-                </ion-grid>
-              </ion-card-header> -->
             </ion-card>
           </ion-col>
 

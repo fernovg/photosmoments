@@ -1,0 +1,15 @@
+<ion-content [fullscreen]="true" class="galeria-modal">
+  <swiper-container #swiperRef
+    [attr.initial-slide]="slideIndex"
+    [zoom]="true"
+    [space-between]="10"
+    [slides-per-view]="1">
+    <swiper-slide *ngFor="let img of imagenes">
+      <img [src]="img" class="imagen-full" />
+    </swiper-slide>
+  </swiper-container>
+
+  <ion-button fill="clear" class="cerrar-btn" (click)="cerrar()">
+    <ion-icon name="close"></ion-icon>
+  </ion-button>
+</ion-content>
