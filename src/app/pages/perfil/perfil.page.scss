@@ -1,0 +1,75 @@
+.perfil-header {
+
+    .perfil-cotent {
+        display: flex;
+        align-items: flex-start;
+
+        ion-button {
+            // margin: 20px;
+            font-size: 20px;
+            color: black;
+            --background: transparent;
+            --background-hover: transparent;
+            --background-activated: transparent;
+            --background-focused: #88f color: black;
+            --border-radius: none;
+            --border-color: transparent;
+            --box-shadow: none;
+        }
+
+        .foto-perfil {
+            margin: 0 auto;
+            // margin-top: 10px;
+            width: 100px;
+            height: 100px;
+        }
+    }
+
+}
+
+.card-select {
+    width: 75%;
+    margin: 0 auto;
+
+    ion-list {
+        background-color: transparent;
+    }
+
+    ion-item {
+        --border-color: transparent;
+        --background: transparent;
+        --highlight-background: transparent;
+    }
+
+    ion-label {
+        width: 100%;
+        font-size: 19px;
+        text-align: center;
+    }
+
+    // ion-select {
+    //     --placeholder-color: #971e49;
+    //     --placeholder-opacity: 1;
+    //     width: 100%;
+    //     justify-content: center;
+    // }
+
+    // ion-select::part(placeholder),
+    // ion-select::part(text) {
+    //     flex: 0 0 auto;
+    // }
+
+    // ion-select::part(placeholder)::first-letter {
+    //     font-size: 24px;
+    //     font-weight: 500;
+    // }
+
+    // ion-select::part(text) {
+    //     color: #545ca7;
+    // }
+
+    // ion-select::part(icon) {
+    //     color: #971e49;
+    //     opacity: 1;
+    // }
+}

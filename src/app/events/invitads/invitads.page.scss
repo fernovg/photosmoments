@@ -1,0 +1,30 @@
+.invitados-header {
+    // display: flex;
+    // align-items: flex-start;
+    // justify-content: space-between;
+    // align-items: center;
+    // margin-top: 20px;
+
+    .invitados-header-content {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        // margin: 10px 10px 0 10px;
+    }
+
+    .invitados-titulos {
+        h2 {
+            font-weight: bold;
+            font-size: 30px;
+            // margin-left: 10px;
+            margin-bottom: 0;
+        }
+
+        p {
+            // font-size: 14px;
+            margin-top: 0;
+            // margin-left: 10px;
+        }
+    }
+
+}
