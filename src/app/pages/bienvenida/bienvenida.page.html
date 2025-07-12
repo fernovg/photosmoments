@@ -5,11 +5,7 @@
 </ion-header> -->
 
 <ion-content [fullscreen]="true" class="ion-padding">
-  <swiper-container
-    pagination="true"
-    slides-per-view="1"
-    space-between="20"
-    style="height: 100%;">
+  <swiper-container pagination="true" slides-per-view="1" space-between="20" style="height: 100%;">
     <swiper-slide>
       <div class="slide-content">
         <img src="../../../assets/evento.png" alt="evento" />
@@ -29,8 +25,10 @@
         <img src="../../../assets/album.png" alt="fotos" />
         <h2>Recuerdos inolvidables</h2>
         <p>Tus invitados podrán subir fotos y compartir momentos especiales.</p>
-        <ion-button expand="block">Soy Inivitado</ion-button>
-        <ion-button expand="block" fill="outline" color="medium" href="/signin">Iniciar Mi Evento</ion-button>
+        <div class="botones">
+          <ion-button expand="block">Soy Inivitado</ion-button>
+          <ion-button expand="block" fill="outline" color="medium" href="/signin">Iniciar Mi Evento</ion-button>
+        </div>
       </div>
     </swiper-slide>
   </swiper-container>

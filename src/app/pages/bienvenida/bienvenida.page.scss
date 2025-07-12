@@ -29,10 +29,21 @@ swiper-slide {
     text-align: center;
     box-sizing: border-box;
 }
+
+.botones {
+    // background-color: aqua;
+    display: flex;
+    flex-direction: column;
+    // flex-wrap: nowrap;
+    // margin: 15px;
+    align-items: center;
+
     ion-button {
         width: 100%;
         max-width: 280px;
     }
+}
+
 // swiper-slide img {
 //     width: auto;
 //     max-width: 100%;
