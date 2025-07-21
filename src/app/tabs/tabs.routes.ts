@@ -8,7 +8,8 @@ export const routes: Routes = [
     children: [
       {
         path: 'inicio',
-        loadComponent: () => import('../pages/home/home.page').then(m => m.HomePage)
+        // loadComponent: () => import('../pages/home/home.page').then(m => m.HomePage)
+        loadComponent: () => import('../events/evento/evento.page').then(m => m.EventoPage)
       },
       {
         path: 'perfil',
