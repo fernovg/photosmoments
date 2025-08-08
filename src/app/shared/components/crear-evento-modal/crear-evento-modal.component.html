@@ -1,3 +1,108 @@
-<p>
-  crear-evento-modal works!
-</p>
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button color="medium" (click)="cancel()">Cancelar</ion-button>
+    </ion-buttons>
+    <ion-title>Crear Evento</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="confirm()" [strong]="true">Crear</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+
+  <form action="" [formGroup]="cEvento">
+    <ion-list>
+
+      <ion-item lines="none">
+        <ion-input label="Nombre" label-placement="floating" type="text" formControlName="name"></ion-input>
+      </ion-item>
+
+      <ion-accordion-group [multiple]="true">
+        <ion-accordion value="first">
+          <ion-item slot="header" color="light">
+            <ion-label>Fecha De Inicio</ion-label>
+          </ion-item>
+          <div class="ion-padding" slot="content"><ion-datetime presentation="date" formControlName="event_date"
+              name="event_date"></ion-datetime></div>
+        </ion-accordion>
+        <ion-accordion value="second">
+          <ion-item slot="header" color="light">
+            <ion-label>Fecha De Fin</ion-label>
+          </ion-item>
+          <div class="ion-padding" slot="content"><ion-datetime presentation="date" formControlName="close_date"
+              name="close_date"></ion-datetime></div>
+        </ion-accordion>
+      </ion-accordion-group>
+
+      <ion-item lines="none">
+        <ion-toggle [enableOnOffLabels]="true" formControlName="can_view_photos_before_event"
+          name="can_view_photos_before_event" helperText="Se pueden ver fotos antes del evento"
+          errorText="No se podran ver las fotos antes del evento" (ionChange)="valVerFotos()">Ver fotos</ion-toggle>
+      </ion-item>
+
+      <ion-item lines="none">
+        <ion-toggle [enableOnOffLabels]="true" formControlName="can_upload_photos_before_event"
+          name="can_upload_photos_before_event" helperText="Se pueden subir fotos antes del evento"
+          errorText="No se podran subir las fotos antes del evento" (ionChange)="valSubirFotos()">Subir
+          fotos</ion-toggle>
+      </ion-item>
+
+
+      <!-- Cantidad de invitados -->
+      <ion-item lines="none">
+        <ion-label position="stacked">Cantidad de invitados</ion-label>
+        <div class="btn-group">
+          <ion-button *ngFor="let g of invitados" size="small"
+            fill="{{ cEvento.value.total_guests === g ? 'solid' : 'outline' }}" (click)="setInvitados(g)">
+            {{ g }}
+          </ion-button>
+
+          <!-- Botón para personalizado -->
+          <ion-button size="small" fill="{{ customInvitados ? 'solid' : 'outline' }}" (click)="setInvitados('custom')">
+            Personalizado
+          </ion-button>
+        </div>
+
+        <!-- Input personalizado -->
+        <ion-input *ngIf="customInvitados" type="number" placeholder="Cantidad" [value]="cEvento.value.total_guests"
+          (ionInput)="cEvento.patchValue({ total_guests: $event.detail.value })">
+        </ion-input>
+      </ion-item>
+
+      <!-- Cantidad de fotos -->
+      <ion-item lines="none">
+        <ion-label position="stacked">Cantidad de fotos por invitado</ion-label>
+        <div class="btn-group">
+          <ion-button *ngFor="let f of fotos" size="small"
+            fill="{{ cEvento.value.max_photos_per_guest === f ? 'solid' : 'outline' }}" (click)="setFotos(f)">
+            {{ f }}
+          </ion-button>
+
+          <ion-button size="small" fill="{{ customFotos ? 'solid' : 'outline' }}" (click)="setFotos('custom')">
+            Personalizado
+          </ion-button>
+        </div>
+
+        <!-- Input personalizado -->
+        <ion-input *ngIf="customFotos" type="number" placeholder="Cantidad" [value]="cEvento.value.max_photos_per_guest"
+          (ionInput)="cEvento.patchValue({ max_photos_per_guest: $event.detail.value })">
+        </ion-input>
+      </ion-item>
+
+      <ion-item lines="none">
+        <ion-label position="stacked">Ver todas las fotos despues de:</ion-label>
+        <div>
+          <ion-button *ngFor="let d of dias" size="small"
+            fill="{{ cEvento.value.days_before_upload === d ? 'solid' : 'outline' }}" (click)="setDias(d)">
+            {{ d }} Dias</ion-button>
+        </div>
+      </ion-item>
+
+
+
+
+    </ion-list>
+  </form>
+</ion-content>

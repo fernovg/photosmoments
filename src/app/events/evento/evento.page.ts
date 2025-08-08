@@ -6,6 +6,7 @@ import { addIcons } from 'ionicons';
 import { addCircle, albums, camera, ellipsisHorizontal, grid, heart, people, qrCodeOutline, settings, ellipsisHorizontalOutline } from 'ionicons/icons';
 // import {  } from '@ionic/angular';
 import { GaleriaModalComponent } from 'src/app/shared/components/galeria-modal/galeria-modal.component';
+import { CrearEventoModalComponent } from 'src/app/shared/components/crear-evento-modal/crear-evento-modal.component';
 
 @Component({
   selector: 'app-evento',
@@ -75,6 +76,15 @@ export class EventoPage implements OnInit {
         imagenes: this.imagenes,
         slideIndex: index
       },
+      cssClass: 'modal-fullscreen',
+      showBackdrop: true
+    });
+    await modal.present();
+  }
+
+  async abrirCrearEvento() {
+    const modal = await this.modalCtrl.create({
+      component: CrearEventoModalComponent,
       cssClass: 'modal-fullscreen',
       showBackdrop: true
     });

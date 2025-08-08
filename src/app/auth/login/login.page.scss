@@ -29,7 +29,7 @@ form {
     flex-direction: column;
     flex-wrap: nowrap;
     // margin: 15px;
-    margin-bottom: 48px;
+    // margin-bottom: 48px;
 
     ion-item:first-of-type {
         margin-top: 0px;
@@ -47,8 +47,7 @@ form {
     // background-color: aqua;
     display: flex;
     flex-direction: column;
-    // flex-wrap: nowrap;
-    // margin: 15px;
+    margin-top: 30px;
     align-items: center;
 
     ion-button {

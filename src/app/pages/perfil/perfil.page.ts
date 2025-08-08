@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonContent, IonCard, IonAvatar, IonList, IonItem, IonSelectOption, IonSelect, IonLabel, IonChip, IonButton, IonIcon } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
 import { cogOutline, createOutline } from 'ionicons/icons';
+import { ServiciosService } from 'src/app/core/services/servicios.service';
 
 @Component({
   selector: 'app-perfil',
@@ -14,11 +15,27 @@ import { cogOutline, createOutline } from 'ionicons/icons';
 })
 export class PerfilPage implements OnInit {
 
+  private infoSerivice = inject(ServiciosService);
+  
+  isLoading = false;
+
+  data: any;
+  
   constructor() { 
     addIcons({createOutline,cogOutline});
   }
 
   ngOnInit() {
+    this.miInfo();
+  }
+
+  miInfo(){
+    this.isLoading = true;
+    this.infoSerivice.traerDatos('profile').subscribe(resp => {
+      this.data = resp;
+      this.isLoading = false;
+      console.log(this.data);
+    })
   }
 
 }

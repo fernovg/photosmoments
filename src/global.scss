@@ -38,11 +38,11 @@
 
 :root {
     --ion-background-color: #f0f0f0; //fondo general
-    --ion-text-color: #333333;      //titulos texto impor
+    --ion-text-color: #333333; //titulos texto impor
     --ion-card-background: #ffffff; //fondo tarjetas y secciones internas
-    --ion-color-primary: #1e1e1e;   // Headers oscuros, botones importantes
-    --ion-color-medium: #666666;    //Subtítulos, textos secundarios
-    --ion-color-light: #dcdcdc;     //Líneas separadoras, bordes
+    --ion-color-primary: #1e1e1e; // Headers oscuros, botones importantes
+    --ion-color-medium: #666666; //Subtítulos, textos secundarios
+    --ion-color-light: #dcdcdc; //Líneas separadoras, bordes
 
     --ion-color-primary-shade: #666666;
     --ion-color-primary-tint: #333333;
@@ -55,6 +55,17 @@
     --color-800: #333333;
     --color-900: #1e1e1e;
 }
+
+@media (min-width: 1000px) {
+    .container {
+        max-width: 430px;
+        max-height: 932px;
+        margin: 0 40%;
+        box-sizing: border-box;
+        background-color: #000000;
+    }
+}
+
 
 
 // botones

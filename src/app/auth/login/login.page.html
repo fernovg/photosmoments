@@ -1,4 +1,5 @@
 <ion-content [fullscreen]="true">
+  <ion-progress-bar type="indeterminate" *ngIf="isLoading"></ion-progress-bar>
   <ion-header collapse="condense">
     <ion-toolbar>
       <ion-buttons slot="start">
@@ -15,25 +16,34 @@
     </div>
   </div>
 
-  <form action="">
+  <form [formGroup]="miLogin" (submit)="login()">
     <ion-item lines="none">
-      <ion-input label="Usuario" label-placement="floating" fill="solid" placeholder="Enter text"></ion-input>
+      <ion-input type="email" label="Correo" formControlName="email" name="email" label-placement="floating"
+        fill="solid" placeholder="guest@gmail.com" autocomplete="username"></ion-input>
+      <span class="form-text text-danger" *ngIf="miLogin.get('email')?.invalid && miLogin.get('email')?.touched"> {{
+        emailErrorMsg }} </span>
     </ion-item>
     <ion-item lines="none">
-      <ion-input label="Contraseña" label-placement="floating" fill="solid" placeholder="Enter text"></ion-input>
+      <ion-input [type]="showPassword ? 'text' : 'password'" formControlName="password" name="password" label="Contraseña"
+        label-placement="floating" fill="solid" autocomplete="username"></ion-input>
+      <ion-button fill="clear" slot="end" aria-label="Show/hide" (click)="togglePasswordVisibility()">
+        <ion-icon slot="icon-only" [name]="showPassword ? 'ban' : 'eye'" aria-hidden="true"></ion-icon>
+      </ion-button>
+      <span class="form-text text-danger" *ngIf="miLogin.get('password')?.invalid && miLogin.get('password')?.touched">
+        La contraseña es requerida </span>
     </ion-item>
+    <div class="botones">
+      <ion-button type="submit" [disabled]="miLogin.invalid"
+        [ngClass]="{'disabled': miLogin.invalid}">Entrar</ion-button>
+    </div>
   </form>
-
-  <div class="botones">
-    <ion-button href="/tabs">Entrar</ion-button>
-  </div>
 
   <div class="extra-login">
     <div class="seperador">
       <hr>
       <span>O Inicia Sesion Con</span>
     </div>
-    <ion-button expand="block" fill="outline" color="dark">Acceder Con Google</ion-button>
+    <ion-button expand="block" fill="outline" color="dark"><ion-icon></ion-icon> Acceder Con Google</ion-button>
     <p class="registro-link">
       No Tienes Cuenta? <a href="/signup">Registrate Aqui</a>
     </p>
