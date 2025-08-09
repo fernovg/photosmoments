@@ -10,8 +10,8 @@ import { ValidatorsForm } from 'src/app/core/services/validator.service';
   standalone: true,
   templateUrl: './crear-evento-modal.component.html',
   styleUrls: ['./crear-evento-modal.component.scss'],
-  imports: [IonTabButton, IonLabel, IonList,
-    FormsModule, IonButton, IonButtons, IonContent, IonHeader, IonInput, IonItem, IonTitle, IonToolbar, ReactiveFormsModule, IonDatetime, IonAccordion, IonAccordionGroup, IonToggle, CommonModule, IonSelectOption]
+  imports: [ IonLabel, IonList,
+    FormsModule, IonButton, IonButtons, IonContent, IonHeader, IonInput, IonItem, IonTitle, IonToolbar, ReactiveFormsModule, IonDatetime, IonAccordion, IonAccordionGroup, IonToggle, CommonModule]
 })
 export class CrearEventoModalComponent implements OnInit {
 

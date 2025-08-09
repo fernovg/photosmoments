@@ -10,8 +10,8 @@ export const routes: Routes = [
       {
         path: 'inicio',
         canActivate: [AuthGuard],
-        // loadComponent: () => import('../pages/home/home.page').then(m => m.HomePage)
-        loadComponent: () => import('../events/evento/evento.page').then(m => m.EventoPage)
+        loadComponent: () => import('../pages/home/home.page').then(m => m.HomePage)
+        // loadComponent: () => import('../events/evento/evento.page').then(m => m.EventoPage)
       },
       {
         path: 'perfil',

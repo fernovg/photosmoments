@@ -6,14 +6,18 @@ import { IonicRouteStrategy, provideIonicAngular } from '@ionic/angular/standalo
 import { routes } from './app/app.routes';
 import { AppComponent } from './app/app.component';
 import { register } from 'swiper/element/bundle';
-import { isDevMode } from '@angular/core';
+import { isDevMode, LOCALE_ID } from '@angular/core';
 import { defineCustomElements } from '@ionic/pwa-elements/loader';
 import { authInterceptor } from './app/core/interceptors/auth.interceptor';
+import { registerLocaleData } from '@angular/common';
+import localeEs from '@angular/common/locales/es';
+
+registerLocaleData(localeEs, 'es');
 
 register();
 bootstrapApplication(AppComponent, {
   providers: [
-    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, { provide: LOCALE_ID, useValue: 'es' },
     provideIonicAngular(),
     provideHttpClient(withFetch(), withInterceptorsFromDi(), withInterceptors([authInterceptor])),
     provideRouter(routes, withPreloading(PreloadAllModules)),

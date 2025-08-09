@@ -82,13 +82,6 @@ export class EventoPage implements OnInit {
     await modal.present();
   }
 
-  async abrirCrearEvento() {
-    const modal = await this.modalCtrl.create({
-      component: CrearEventoModalComponent,
-      cssClass: 'modal-fullscreen',
-      showBackdrop: true
-    });
-    await modal.present();
-  }
+
 
 }
