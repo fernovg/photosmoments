@@ -28,11 +28,11 @@
     <swiper-container slides-per-view="1" space-between="20" pagination="true">
       @for (item of data; track $index) {
       <swiper-slide>
-        <ion-card class="evento-card" href="tabs/evento"
+        <ion-card class="evento-card" [href]="['tabs/evento/' + item.id]"
           style="--img-url: url('https://img.freepik.com/vector-gratis/concepto-letras-feliz-cumpleanos_23-2148499329.jpg?semt=ais_hybrid&w=740')">
           <div class="fondo-evento"></div>
           <div class="contenido-evento">
-            <ion-card-header>
+            <ion-card-header>.
               <ion-card-title> {{ item.name }} </ion-card-title>
             </ion-card-header>
             <ion-card-content>
@@ -65,7 +65,7 @@
 
   @if (eventoProximo) {
     <div class="prox-evento">
-      <ion-card class="evento-card" href="tabs/evento"
+      <ion-card class="evento-card" [href]="['tabs/evento/' + eventoProximo.id]"
         style="--img-url: url('https://img.freepik.com/vector-gratis/concepto-letras-feliz-cumpleanos_23-2148499329.jpg?semt=ais_hybrid&w=740')">
         <div class="fondo-evento"></div>
         <div class="contenido-evento">
@@ -92,7 +92,7 @@
     </div>
   } @else {
     <div class="prox-evento">
-      <ion-card class="evento-card" href="tabs/evento"
+      <ion-card class="evento-card"
         style="--img-url: url('https://img.freepik.com/vector-gratis/concepto-letras-feliz-cumpleanos_23-2148499329.jpg?semt=ais_hybrid&w=740')">
         <div class="fondo-evento"></div>
         <div class="contenido-evento">

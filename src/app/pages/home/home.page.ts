@@ -5,7 +5,6 @@ import {
   IonContent, IonCard, IonCardContent, IonCardHeader, IonCardTitle, IonCardSubtitle, IonButton, IonIcon,
   IonChip, IonLabel, IonItem, ModalController
 } from '@ionic/angular/standalone';
-import { RouterLink } from '@angular/router';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { addIcons } from 'ionicons';
 import { addCircle, calendar, camera, location, people, qrCode, qrCodeOutline } from 'ionicons/icons';
@@ -71,9 +70,6 @@ export class HomePage implements OnInit {
     });
   }
 
-
-
-
   async abrirCrearEvento() {
     const modal = await this.modalCtrl.create({
       component: CrearEventoModalComponent,
@@ -81,5 +77,11 @@ export class HomePage implements OnInit {
       showBackdrop: true
     });
     await modal.present();
+
+    const { data, role } = await modal.onDidDismiss();
+    if (role === 'confirm') {
+      this.ngOnInit();
+      console.log(data, 'evento creado');
+    }
   }
 }

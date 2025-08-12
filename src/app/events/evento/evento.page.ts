@@ -7,6 +7,10 @@ import { addCircle, albums, camera, ellipsisHorizontal, grid, heart, people, qrC
 // import {  } from '@ionic/angular';
 import { GaleriaModalComponent } from 'src/app/shared/components/galeria-modal/galeria-modal.component';
 import { CrearEventoModalComponent } from 'src/app/shared/components/crear-evento-modal/crear-evento-modal.component';
+import { ServiciosService } from 'src/app/core/services/servicios.service';
+import { evento } from 'src/app/core/models/general.interface';
+import { ActivatedRoute, Router } from '@angular/router';
+import { EditarEventoModalComponent } from 'src/app/shared/components/editar-evento-modal/editar-evento-modal.component';
 
 @Component({
   selector: 'app-evento',
@@ -18,12 +22,33 @@ import { CrearEventoModalComponent } from 'src/app/shared/components/crear-event
 export class EventoPage implements OnInit {
 
   private modalCtrl = inject(ModalController);
+  private servicios = inject(ServiciosService);
+  // private route = inject(Router);
+  private activatedRoute = inject(ActivatedRoute);
 
   constructor() {
-    addIcons({qrCodeOutline,settings,albums,grid,heart,ellipsisHorizontalOutline,addCircle,people,camera,ellipsisHorizontal});
+    addIcons({ qrCodeOutline, settings, albums, grid, heart, ellipsisHorizontalOutline, addCircle, people, camera, ellipsisHorizontal });
   }
 
-  ngOnInit() {
+  evento: evento | null = null;
+  eventoId: string | null = null;
+
+  eventos: evento[] = [];
+
+  async ngOnInit() {
+    this.activatedRoute.params.subscribe((params) => {
+      const id = params['id'];
+      const path = 'events';
+      this.servicios.traerDatosId(path, id).subscribe({
+        next: (data) => {
+          this.evento = data;
+          // console.log(this.evento);
+        },
+        error: (error) => {
+          console.log(error);
+        }
+      })
+    })
   }
 
   //* Action Sheet
@@ -80,6 +105,25 @@ export class EventoPage implements OnInit {
       showBackdrop: true
     });
     await modal.present();
+  }
+
+  async abrirEditarEvento(evento: any) {
+    const modal = await this.modalCtrl.create({
+      component: EditarEventoModalComponent,
+      componentProps: {
+        evento
+      },
+      cssClass: 'modal-fullscreen',
+      showBackdrop: true
+    });
+    await modal.present();
+
+    //para capturar la respuesta al cerrar
+    const {data, role} = await modal.onDidDismiss();
+    if (role==='confirm') {
+      this.ngOnInit();
+      console.log(data, 'evento actualizado');
+    }
   }
 
 

@@ -1,42 +1,54 @@
 import { CommonModule, formatDate } from '@angular/common';
-import { Component, inject, OnInit, ViewChild } from '@angular/core';
+import { Component, inject, input, OnInit, Input } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-import { IonButton, IonButtons, IonContent, IonHeader, IonInput, IonItem, IonModal, IonTitle, IonToolbar, ModalController, IonList, IonDatetime, IonAccordion, IonAccordionGroup, IonLabel, IonToggle, IonSelectOption, IonTabButton } from '@ionic/angular/standalone';
+import { IonButton, IonButtons, IonContent, IonHeader, IonInput, IonItem, IonModal, IonTitle, IonToolbar, ModalController, IonList, IonDatetime, IonAccordion, IonAccordionGroup, IonLabel, IonToggle, IonSelectOption, IonTabButton, IonAlert } from '@ionic/angular/standalone';
 import { ServiciosService } from 'src/app/core/services/servicios.service';
 import { ToastService } from 'src/app/core/services/toast.service';
 import { ValidatorsForm } from 'src/app/core/services/validator.service';
+import type { OverlayEventDetail } from '@ionic/core';
+import { Router } from '@angular/router';
+
 @Component({
-  selector: 'app-crear-evento-modal',
-  standalone: true,
-  templateUrl: './crear-evento-modal.component.html',
-  styleUrls: ['./crear-evento-modal.component.scss'],
-  imports: [ IonLabel, IonList,
-    FormsModule, IonButton, IonButtons, IonContent, IonHeader, IonInput, IonItem, IonTitle, IonToolbar, ReactiveFormsModule, IonDatetime, IonAccordion, IonAccordionGroup, IonToggle, CommonModule]
+  selector: 'app-editar-evento-modal',
+  templateUrl: './editar-evento-modal.component.html',
+  styleUrls: ['./editar-evento-modal.component.scss'],
+  imports: [IonLabel, IonList,
+    FormsModule, IonButton, IonButtons, IonContent, IonHeader, IonInput, IonItem, IonTitle, IonToolbar, ReactiveFormsModule, IonDatetime, IonAccordion, IonAccordionGroup, IonToggle, CommonModule, IonAlert]
 })
-export class CrearEventoModalComponent implements OnInit {
+export class EditarEventoModalComponent implements OnInit {
+
+  @Input() evento: any;
+  cEvento!: FormGroup;
 
   private modalCtrl = inject(ModalController);
   private fb = inject(FormBuilder);
   private toastService = inject(ToastService);
   private valiService = inject(ValidatorsForm);
   private servicios = inject(ServiciosService);
+  private router = inject(Router);
 
   isLoading = false;
 
-  public cEvento: FormGroup = this.fb.group({
-    name: ['', [Validators.required,]],
-    event_date: ['', Validators.required],
-    close_date: ['', Validators.required],
-    total_guests: [10, Validators.required],
-    max_photos_per_guest: [10, Validators.required],
-    can_view_photos_before_event: [true],
-    can_upload_photos_before_event: [true],
-    days_before_upload: [3, Validators.required],
-  });
-
   constructor() { }
 
-  ngOnInit() { }
+  ngOnInit() {
+    // Crear el form
+    this.cEvento = this.fb.group({
+      name: ['', Validators.required],
+      event_date: ['', Validators.required],
+      close_date: ['', Validators.required],
+      total_guests: ['', Validators.required],
+      max_photos_per_guest: ['', Validators.required],
+      can_view_photos_before_event: [true],
+      can_upload_photos_before_event: [true],
+      days_before_upload: ['', Validators.required],
+    });
+
+    // Rellenar el form con los datos recibidos
+    if (this.evento) {
+      this.cEvento.patchValue(this.evento);
+    }
+  }
 
   cancel() {
     return this.modalCtrl.dismiss(null, 'cancel');
@@ -64,15 +76,32 @@ export class CrearEventoModalComponent implements OnInit {
     };
 
     this.isLoading = true;
-    this.servicios.guardarDatos('events', payload).subscribe({
+    this.servicios.actualizarDatos('events/' + this.evento.id, payload).subscribe({
       next: (data) => {
         this.isLoading = false;
-        this.toastService.success('Creado Correctamente');
+        this.toastService.success('Editado Correctamente');
         this.modalCtrl.dismiss(data, 'confirm');
       },
       error: (error) => {
         this.isLoading = false;
         this.toastService.error('Error al crear el evento');
+      }
+    })
+
+  }
+
+  eliminar() {
+    this.isLoading = true;
+    this.servicios.eliminarDatos('events/' + this.evento.id).subscribe({
+      next: (data) => {
+        this.isLoading = false;
+        this.toastService.success('Eliminado Correctamente');
+        this.router.navigate(['/tabs/inicio']);
+        this.modalCtrl.dismiss(data, 'confirm');
+      },
+      error: (error) => {
+        this.isLoading = false;
+        this.toastService.error('Error al eliminar el evento');
       }
     })
   }
@@ -122,4 +151,25 @@ export class CrearEventoModalComponent implements OnInit {
     }
   }
 
+  public alertButtons = [
+    {
+      text: 'Cancelar',
+      role: 'cancel',
+      handler: () => {
+        console.log('Alert canceled');
+      },
+    },
+    {
+      text: 'OK',
+      role: 'Confimar',
+      handler: () => {
+        console.log('Alert confirmed');
+        this.eliminar();
+      },
+    },
+  ];
+
+  setResult(event: CustomEvent<OverlayEventDetail>) {
+    // console.log(`Dismissed with role: ${event.detail.role}`);
+  }
 }

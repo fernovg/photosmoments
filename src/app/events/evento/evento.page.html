@@ -1,13 +1,13 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>Fiesta Fernando</ion-title>
+    <ion-title>{{ evento?.name }}</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true" class="ion-padding">
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">Fiesta de Fernando</ion-title>
+      <ion-title size="large">{{ evento?.name }}</ion-title>
     </ion-toolbar>
   </ion-header>
 
@@ -17,7 +17,7 @@
       <ion-icon name="qr-code-outline" slot="start"></ion-icon>
       Invitar
     </ion-button>
-    <ion-button color="dark" fill="outline">
+    <ion-button color="dark" fill="outline" (click)="abrirEditarEvento(evento)">
       <ion-icon name="settings"></ion-icon>
     </ion-button>
   </div>

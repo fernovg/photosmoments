@@ -19,20 +19,8 @@ export class ServiciosService {
     return this.http.get<any>(`${this.baseUrl}/${endpoint}`, {});
   }
 
-  traerDatosConToken(endpoint: string): Observable<any> {
-    return this.http.get<any>(`${this.baseUrl}/${endpoint}`, {
-      headers: {
-        'Authorization': `Bearer ${localStorage.getItem('token')}`
-      }
-    });
-  }
-
-  traerDatosConTokenPost(endpoint: string, data: any): Observable<any> {
-    return this.http.post<any>(`${this.baseUrl}/${endpoint}`, data, {
-      headers: {
-        'Authorization': `Bearer ${localStorage.getItem('token')}`
-      }
-    });
+  traerDatosId(endpoint: string, id: string): Observable<any> {
+    return this.http.get<any>(`${this.baseUrl}/${endpoint}/${id}`, {});
   }
 
   guardarDatos(endpoint: string, data: any): Observable<any> {
@@ -43,8 +31,8 @@ export class ServiciosService {
     return this.http.put<any>(`${this.baseUrl}/${endpoint}`, data);
   }
 
-  eliminarDatos(endpoint: string, data: any): Observable<any> {
-    return this.http.delete<any>(`${this.baseUrl}/${endpoint}`, data);
+  eliminarDatos(endpoint: string): Observable<any> {
+    return this.http.delete<any>(`${this.baseUrl}/${endpoint}`);
   }
 
   redireccionar(ruta: string) {

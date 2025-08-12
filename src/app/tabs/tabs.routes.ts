@@ -24,7 +24,7 @@ export const routes: Routes = [
         loadComponent: () => import('../events/eventos/eventos.page').then(m => m.EventosPage)
       },
       {
-        path: 'evento',
+        path: 'evento/:id',
         canActivate: [AuthGuard],
         loadComponent: () => import('../events/evento/evento.page').then( m => m.EventoPage)
       },
