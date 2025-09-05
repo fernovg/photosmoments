@@ -40,7 +40,6 @@ export class LoginPage implements OnInit {
     this.isLoggedIn();
     this.authService.headers();
   }
-
   login() {
     this.isLoading = true;
     const { email, password } = this.miLogin.value;

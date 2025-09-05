@@ -5,6 +5,7 @@ import { IonContent, IonHeader, IonTitle, IonToolbar } from '@ionic/angular/stan
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { Router } from '@angular/router';
+import { BIENVENIDA_VERSION } from 'src/app/constants/app-version';
 
 @Component({
   selector: 'app-bienvenida',
@@ -26,14 +27,19 @@ export class BienvenidaPage implements OnInit {
     this.authService.headers();
   }
 
-  finalizar() {
+  finalizar(type:string) {
     console.log('Tutorial finalizado');
     // redireccionar a login o tabs
+    localStorage.setItem('bienvenidaVersion', BIENVENIDA_VERSION);
+    
+    
+    this.router.navigate(['tabs/inicio']);
   }
 
   // si el usuario esta logeado lo manda a inicio
   isLoggedIn() {
     if (this.authService.isAuthenticated()) {
+      localStorage.setItem('bienvenidaVersion', BIENVENIDA_VERSION);
       this.router.navigate(['tabs/inicio'])
     }
   }
