@@ -10,9 +10,7 @@
 
   <div class="ion-padding contenido-login">
     <div class="hero-login">
-      <img class="logo"
-        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRwJW5HSsd9Pzs5n7AqpHuRpEUaDGtwOeIoRA&s" alt="">
-      <p>By Enformobile</p>
+      <img src="assets/logo.png" alt="">
     </div>
   </div>
 
@@ -33,7 +31,7 @@
         La contraseña es requerida </span>
     </ion-item>
     <div class="botones">
-      <ion-button type="submit" [disabled]="miLogin.invalid"
+      <ion-button type="submit" [disabled]="miLogin.invalid || isLoading"
         [ngClass]="{'disabled': miLogin.invalid}">Entrar</ion-button>
     </div>
   </form>

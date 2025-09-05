@@ -26,8 +26,8 @@
         <h2>Recuerdos inolvidables</h2>
         <p>Tus invitados podrán subir fotos y compartir momentos especiales.</p>
         <div class="botones">
-          <ion-button expand="block">Soy Inivitado</ion-button>
-          <ion-button expand="block" fill="outline" color="medium" href="/signin">Iniciar Mi Evento</ion-button>
+          <ion-button expand="block" (click)="finalizar('guest')">Soy Inivitado</ion-button>
+          <ion-button expand="block" fill="outline" color="medium" (click)="finalizar('owner')">Iniciar Mi Evento</ion-button>
         </div>
       </div>
     </swiper-slide>
