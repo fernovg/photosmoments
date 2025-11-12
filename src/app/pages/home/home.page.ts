@@ -11,6 +11,7 @@ import { addCircle, calendar, camera, location, people, qrCode, qrCodeOutline } 
 import { CrearEventoModalComponent } from 'src/app/shared/components/crear-evento-modal/crear-evento-modal.component';
 import { ServiciosService } from 'src/app/core/services/servicios.service';
 import { evento } from 'src/app/core/models/general.interface';
+import { UserInfoService } from 'src/app/core/services/user-info.service';
 
 @Component({
   selector: 'app-home',
@@ -25,11 +26,15 @@ export class HomePage implements OnInit {
 
   private modalCtrl = inject(ModalController);
   private servicios = inject(ServiciosService);
+  private userInfoService = inject(UserInfoService);
 
-  data: evento[] = [];
+  eventos: evento[] = [];
   eventoProximo: evento | null = null;
 
+  user: any;
+
   isLoading = false;
+  loading: boolean = false;
 
   constructor() {
     addIcons({ addCircle, qrCodeOutline, calendar, location, people, camera, qrCode });
@@ -37,27 +42,34 @@ export class HomePage implements OnInit {
 
   ngOnInit() {
     this.misEventos();
+    this.userInfoService.getUserData().subscribe(data => {
+      this.user = data;
+      this.isLoading = false;
+    });
+    this.userInfoService.getLoading().subscribe(isLoading => {
+      this.loading = isLoading;
+    });
   }
 
   misEventos() {
     this.isLoading = true;
     this.servicios.traerDatos('events').subscribe({
-      next: (data) => {
+      next: (eventos) => {
         this.isLoading = false;
-        this.data = data;
+        this.eventos = eventos;
         this.eventoProximo = this.prximoEvento();
         // console.log(data);
       },
       error: (error) => {
         this.isLoading = false;
-        // console.log(error);
+        console.log(error);
       }
     })
   }
 
   prximoEvento() {
     const hoy = new Date();
-    const eventosValidos = this.data?.filter(e => {
+    const eventosValidos = this.eventos?.filter(e => {
       return e.event_date && !isNaN(new Date(e.event_date).getTime()) && new Date(e.event_date) >= hoy;
     });
 
@@ -81,7 +93,8 @@ export class HomePage implements OnInit {
     const { data, role } = await modal.onDidDismiss();
     if (role === 'confirm') {
       this.ngOnInit();
-      console.log(data, 'evento creado');
+      // console.log(data, 'evento creado');
     }
   }
+
 }

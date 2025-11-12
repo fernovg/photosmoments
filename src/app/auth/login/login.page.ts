@@ -7,7 +7,7 @@ import { Router } from '@angular/router';
 import { ValidatorsForm } from 'src/app/core/services/validator.service';
 import { ToastService } from 'src/app/core/services/toast.service';
 import { addIcons } from 'ionicons';
-import { ban, eye, eyeOff } from 'ionicons/icons';
+import { ban, eye, eyeOff, eyeOffOutline, logoGoogle } from 'ionicons/icons';
 
 @Component({
   selector: 'app-login',
@@ -33,7 +33,7 @@ export class LoginPage implements OnInit {
   });
 
   constructor() { 
-    addIcons({ eye, ban, eyeOff });
+    addIcons({ eye, eyeOff, logoGoogle });
   }
 
   ngOnInit() {
@@ -52,7 +52,7 @@ export class LoginPage implements OnInit {
         } else {
           this.toastService.success('Bienvenido!!!');
           this.isLoading = false;
-          // this.router.navigate(['tabs/inicio']);  
+          this.router.navigate(['tabs/inicio']);
         }
       },
       error: (error) => {

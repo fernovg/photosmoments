@@ -13,7 +13,7 @@
 
   <!-- Botón principal para crear evento -->
   <div class="button-group">
-    <ion-button color="primary">
+    <ion-button color="primary" (click)="abrirCrearEvento()">
       <ion-icon name="add-circle" slot="start"></ion-icon>
       Crear evento
     </ion-button>
@@ -25,18 +25,20 @@
 
   <ion-grid>
     <ion-row>
+      @for (item of eventos; track $index) {
+      @if (eventos.length > 1) {
       <ion-col size="6">
         <ion-card class="evento-card" href="tabs/evento"
           style="--img-url: url('https://img.freepik.com/vector-gratis/concepto-letras-feliz-cumpleanos_23-2148499329.jpg?semt=ais_hybrid&w=740')">
           <div class="fondo-evento"></div>
           <div class="contenido-evento">
             <ion-card-header>
-              <ion-card-title>Fiesta de Fernando</ion-card-title>
+              <ion-card-title>{{item.name}}</ion-card-title>
             </ion-card-header>
             <ion-card-content>
               <ion-item lines="none">
                 <ion-icon name="calendar" slot="start"></ion-icon>
-                <ion-label>30 de Jul, 4:00 PM</ion-label>
+                <ion-label>{{ item.event_date | date:'mediumDate' }}, 8:00 PM</ion-label>
               </ion-item>
 
               <ion-chip color="primary">
@@ -51,18 +53,19 @@
           </div>
         </ion-card>
       </ion-col>
+      } @else {
       <ion-col size="6">
         <ion-card class="evento-card" href="tabs/evento"
           style="--img-url: url('https://img.freepik.com/foto-gratis/feliz-familia-multigeneracional-sorprendiendo-anciana-fiesta-su-cumpleanos_637285-10326.jpg')">
           <div class="fondo-evento"></div>
           <div class="contenido-evento">
             <ion-card-header>
-              <ion-card-title>Fiesta Familiar</ion-card-title>
+              <ion-card-title>{{item.name}}</ion-card-title>
             </ion-card-header>
             <ion-card-content>
               <ion-item lines="none">
                 <ion-icon name="calendar" slot="start"></ion-icon>
-                <ion-label>21 de Ago, 6:00 PM</ion-label>
+                <ion-label>{{ item.event_date | date:'mediumDate' }}, 8:00 PM</ion-label>
               </ion-item>
 
               <ion-chip color="primary">
@@ -76,61 +79,10 @@
             </ion-card-content>
           </div>
         </ion-card>
-      </ion-col>
-      <ion-col size="6">
-        <ion-card class="evento-card" href="tabs/evento"
-          style="--img-url: url('https://www.bodastyle.com/blog/wp-content/uploads/2019/02/El-bautizo-de-tu-hij@.jpg')">
-          <div class="fondo-evento"></div>
-          <div class="contenido-evento">
-            <ion-card-header>
-              <ion-card-title>Bautizo</ion-card-title>
-            </ion-card-header>
-            <ion-card-content>
-              <ion-item lines="none">
-                <ion-icon name="calendar" slot="start"></ion-icon>
-                <ion-label>29 de Sep, 1:00 PM</ion-label>
-              </ion-item>
-
-              <ion-chip color="primary">
-                <ion-icon name="camera"></ion-icon>
-                <ion-label>40 fotos</ion-label>
-              </ion-chip>
-              <ion-chip color="tertiary">
-                <ion-icon name="people"></ion-icon>
-                <ion-label>15 invitados</ion-label>
-              </ion-chip>
-            </ion-card-content>
-          </div>
-        </ion-card>
-      </ion-col>
-      <ion-col size="6">
-        <ion-card class="evento-card" href="tabs/evento"
-          style="--img-url: url('https://villacdn.villagroupresorts.com/uploads/photo/image/12283/new_year_puerto_vallarta.jpg')">
-          <div class="fondo-evento"></div>
-          <div class="contenido-evento">
-            <ion-card-header>
-              <ion-card-title>Fiesta año nuevo</ion-card-title>
-            </ion-card-header>
-            <ion-card-content>
-              <ion-item lines="none">
-                <ion-icon name="calendar" slot="start"></ion-icon>
-                <ion-label>31 de Dic, 8:00 PM</ion-label>
-              </ion-item>
-
-              <ion-chip color="primary">
-                <ion-icon name="camera"></ion-icon>
-                <ion-label>30 fotos</ion-label>
-              </ion-chip>
-              <ion-chip color="tertiary">
-                <ion-icon name="people"></ion-icon>
-                <ion-label>20 invitados</ion-label>
-              </ion-chip>
-            </ion-card-content>
-          </div>
-        </ion-card>
-      </ion-col>
+      </ion-col> 
+      }
+      }
     </ion-row>
   </ion-grid>
-
 
 </ion-content>

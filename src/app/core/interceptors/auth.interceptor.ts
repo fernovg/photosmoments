@@ -12,16 +12,13 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
         return next(req);
     }
 
-    //const authReq = req.clone({
-    //  setHeaders: {
-    //    Authorization: `Bearer ${authToken}`,
-    //    
-    //  },
-    //});
-
     const authReq = req.clone({
         setHeaders: {
             'Authorization': `${authToken}`,
+            // 'Content-Type': 'application/json',
+
+            // 'Access-Control-Allow-Origin': '*',
+            'Accept': 'application/json',
         },
     });
 

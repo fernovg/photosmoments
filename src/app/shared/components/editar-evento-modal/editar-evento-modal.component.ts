@@ -84,7 +84,7 @@ export class EditarEventoModalComponent implements OnInit {
       },
       error: (error) => {
         this.isLoading = false;
-        this.toastService.error('Error al crear el evento');
+        this.toastService.error('Error al editar el evento');
       }
     })
 
@@ -156,14 +156,14 @@ export class EditarEventoModalComponent implements OnInit {
       text: 'Cancelar',
       role: 'cancel',
       handler: () => {
-        console.log('Alert canceled');
+        // console.log('Alert canceled');
       },
     },
     {
       text: 'OK',
       role: 'Confimar',
       handler: () => {
-        console.log('Alert confirmed');
+        // console.log('Alert confirmed');
         this.eliminar();
       },
     },

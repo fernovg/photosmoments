@@ -122,7 +122,7 @@ export class EventoPage implements OnInit {
     const {data, role} = await modal.onDidDismiss();
     if (role==='confirm') {
       this.ngOnInit();
-      console.log(data, 'evento actualizado');
+      // console.log(data, 'evento actualizado');
     }
   }
 

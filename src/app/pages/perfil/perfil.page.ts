@@ -5,6 +5,7 @@ import { IonContent, IonCard, IonAvatar, IonList, IonItem, IonSelectOption, IonS
 import { addIcons } from 'ionicons';
 import { cogOutline, createOutline } from 'ionicons/icons';
 import { ServiciosService } from 'src/app/core/services/servicios.service';
+import { UserInfoService } from 'src/app/core/services/user-info.service';
 
 @Component({
   selector: 'app-perfil',
@@ -15,27 +16,26 @@ import { ServiciosService } from 'src/app/core/services/servicios.service';
 })
 export class PerfilPage implements OnInit {
 
-  private infoSerivice = inject(ServiciosService);
-  
-  isLoading = false;
+  private servicios = inject(ServiciosService);
+  private userInfoService = inject(UserInfoService);
 
-  data: any;
-  
-  constructor() { 
-    addIcons({createOutline,cogOutline});
+  user: any;
+
+  isLoading = false;
+  loading: boolean = false;
+
+  constructor() {
+    addIcons({ createOutline, cogOutline });
   }
 
   ngOnInit() {
-    this.miInfo();
-  }
-
-  miInfo(){
-    this.isLoading = true;
-    this.infoSerivice.traerDatos('profile').subscribe(resp => {
-      this.data = resp;
+    this.userInfoService.getUserData().subscribe(data => {
+      this.user = data;
       this.isLoading = false;
-      console.log(this.data);
-    })
+    });
+    this.userInfoService.getLoading().subscribe(isLoading => {
+      this.loading = isLoading;
+    });
   }
 
 }

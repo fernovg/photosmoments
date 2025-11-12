@@ -3,6 +3,7 @@ import { PhotoService } from 'src/app/core/services/photo.service';
 import { IonContent, IonButton, IonIcon, ModalController, IonImg } from '@ionic/angular/standalone';
 import { CommonModule } from '@angular/common';
 import { UserPhoto } from 'src/app/core/models/photos.interface';
+import { ServiciosService } from 'src/app/core/services/servicios.service';
 
 @Component({
   selector: 'app-camara-modal',
@@ -14,7 +15,13 @@ export class CamaraModalComponent implements OnInit {
 
   private modalCtrl = inject(ModalController);
   @Input() photo!: UserPhoto
-  public  photoService = inject(PhotoService);
+  @Input() eventoId!: string;
+  @Input() eventoNombre!: string;
+  public photoService = inject(PhotoService);
+  private servicios = inject(ServiciosService);
+
+  isLoading = false;
+
 
   constructor() { }
 
@@ -24,7 +31,31 @@ export class CamaraModalComponent implements OnInit {
   }
 
   guardar() {
-    // console.log('Imagen base64:', this.photo?.base64);
-    this.modalCtrl.dismiss(); // Opcional: cerrar modal después de guardar
+    if (!this.photo?.file || !this.eventoId) {
+      console.warn('Falta la imagen o el ID del evento');
+      return;
+    }
+
+    const payload = {
+      event_id: this.eventoId,
+      image: this.photo?.file
+    };
+
+    const formData = new FormData();
+    formData.append('event_id', this.eventoId.toString());
+    formData.append('image', this.photo.file);
+
+    this.isLoading = true;
+    this.servicios.guardarDatos('guest-photos', formData).subscribe({
+      next: (data) => {
+        this.isLoading = false;
+        console.log(data);
+        this.modalCtrl.dismiss(data, 'confirm');
+      },
+      error: (error) => {
+        this.isLoading = false;
+        console.log(error);
+      }
+    })
   }
 }

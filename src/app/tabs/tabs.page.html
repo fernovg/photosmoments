@@ -1,10 +1,15 @@
 <ion-tabs>
 
   <ion-fab vertical="bottom" horizontal="center" translucent="true">
-    <ion-fab-button (click)="abrirCamara()">
+    <ion-fab-button id="present-alert">
       <ion-icon name="camera"></ion-icon>
     </ion-fab-button>
   </ion-fab>
+  <!-- <ion-fab vertical="bottom" horizontal="center" translucent="true">
+    <ion-fab-button (click)="abrirCamara()">
+      <ion-icon name="camera"></ion-icon>
+    </ion-fab-button>
+  </ion-fab> -->
 
   <ion-tab-bar slot="bottom">
     <ion-tab-button tab="inicio" href="/tabs/inicio">
@@ -35,3 +40,11 @@
   </ion-tab-bar>
 
 </ion-tabs>
+
+
+<ion-alert
+  trigger="present-alert"
+  header="Selecciona un evento"
+  [buttons]="alertButtons"
+  [inputs]="alertInputs"
+></ion-alert>
