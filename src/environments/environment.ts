@@ -6,6 +6,7 @@ export const environment = {
   production: false,
   base_url: 'http://localhost:8000/api',
   // base_url: 'https://62f7d7079bee.ngrok-free.app/api',
+  // base_url: 'https://8edcca57754f.ngrok-free.app/api',
 };
 
 /*

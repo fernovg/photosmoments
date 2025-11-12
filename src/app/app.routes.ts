@@ -1,9 +1,11 @@
 import { Routes } from '@angular/router';
+import { BienvenidaGuard } from './core/guards/bienvenida.guard';
 
 export const routes: Routes = [
   {
     path: '',
-    loadComponent: () => import('./pages/bienvenida/bienvenida.page').then( m => m.BienvenidaPage)
+    loadComponent: () => import('./pages/bienvenida/bienvenida.page').then( m => m.BienvenidaPage),
+    canActivate: [BienvenidaGuard]
   },
   {
     path: 'tabs',
