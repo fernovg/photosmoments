@@ -6,6 +6,7 @@ import { CamaraModalComponent } from '../shared/components/camara-modal/camara-m
 import { PhotoService } from '../core/services/photo.service';
 import { ServiciosService } from '../core/services/servicios.service';
 import { evento } from '../core/models/general.interface';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-tabs',
@@ -18,6 +19,7 @@ export class TabsPage {
   private servicios = inject(ServiciosService);
   private modalCtrl = inject(ModalController);
   public photoService = inject(PhotoService);
+  private router = inject(Router);
   public environmentInjector = inject(EnvironmentInjector);
 
   eventos: evento[] = [];
@@ -34,10 +36,8 @@ export class TabsPage {
     this.servicios.traerDatos('events').subscribe({
       next: (eventos) => {
         this.eventos = eventos;
-        // console.log(this.eventos);
-
         this.alertInputs = this.eventos.map((ev: any) => ({
-          label: ev.name,        // nombre del evento
+          label: ev.name,
           type: 'radio',
           value: {
             id: ev.id,
@@ -64,6 +64,30 @@ export class TabsPage {
         cssClass: 'modal-fullscreen'
       });
       await modal.present();
+    }
+  }
+
+  async manejarBotonCamara() {
+    const rutaActual = this.router.url;
+    console.log('rutaActual', rutaActual);
+
+    if (rutaActual.startsWith('/tabs/evento/')) {
+      const partes = rutaActual.split('/');
+      const eventoId = partes[partes.length - 1];
+      console.log('Evento ID desde URL:', eventoId);
+
+      const evento = this.eventos.find((ev: any) => ev.id == eventoId);
+      console.log('Evento encontrado:', evento);
+
+      if (evento) {
+        this.abrirCamara(evento);
+      } else {
+        console.warn('Evento no encontrado');
+      }
+
+    } else {
+      const alert = document.querySelector('ion-alert');
+      (alert as any).present();
     }
   }
 
