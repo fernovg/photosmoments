@@ -8,13 +8,14 @@ import { ServiciosService } from 'src/app/core/services/servicios.service';
 import { UserInfoService } from 'src/app/core/services/user-info.service';
 import { evento } from 'src/app/core/models/general.interface';
 import { CrearEventoModalComponent } from 'src/app/shared/components/crear-evento-modal/crear-evento-modal.component';
+import { LoaderComponent } from 'src/app/shared/components/loader/loader.component';
 
 @Component({
   selector: 'app-eventos',
   templateUrl: './eventos.page.html',
   styleUrls: ['./eventos.page.scss'],
   standalone: true,
-  imports: [IonButton, IonChip, IonLabel, IonIcon, IonItem, IonCardTitle, IonCardHeader, IonCardContent, IonCard, IonRow, IonCol, IonGrid, IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule]
+  imports: [IonButton, IonChip, IonLabel, IonIcon, IonItem, IonCardTitle, IonCardHeader, IonCardContent, IonCard, IonRow, IonCol, IonGrid, IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, LoaderComponent]
 })
 export class EventosPage implements OnInit {
 
@@ -24,7 +25,7 @@ export class EventosPage implements OnInit {
 
   eventos: evento[] = [];
 
-  isLoading = false;
+  isLoading = true;
 
   constructor() {
     addIcons({ addCircle, qrCodeOutline, calendar, location, people, camera, qrCode });
@@ -38,12 +39,12 @@ export class EventosPage implements OnInit {
     this.isLoading = true;
     this.servicios.traerDatos('events').subscribe({
       next: (eventos) => {
-        this.isLoading = false;
         this.eventos = eventos;
+        this.isLoading = false;
       },
       error: (error) => {
-        this.isLoading = false;
         console.log(error);
+        this.isLoading = false;
       }
     })
   }

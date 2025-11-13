@@ -17,4 +17,17 @@ export interface evento {
     max_photos_per_guest?: number;
     days_before_upload?: number;
     qr_code_path?: string;
+    photos?: eventoPhoto[];
+}
+
+
+export interface eventoPhoto {
+    id?: number;
+    user_id?: number;
+    event_id?: number;
+    thumbnail_path?: string;
+    image_path?: string;
+    uploaded_at?: Date;
+    created_at?: Date;
+    updated_at?: Date;
 }

@@ -12,6 +12,7 @@ import { CrearEventoModalComponent } from 'src/app/shared/components/crear-event
 import { ServiciosService } from 'src/app/core/services/servicios.service';
 import { evento } from 'src/app/core/models/general.interface';
 import { UserInfoService } from 'src/app/core/services/user-info.service';
+import { LoaderComponent } from 'src/app/shared/components/loader/loader.component';
 
 @Component({
   selector: 'app-home',
@@ -19,7 +20,7 @@ import { UserInfoService } from 'src/app/core/services/user-info.service';
   styleUrls: ['./home.page.scss'],
   standalone: true,
   imports: [IonItem, IonLabel, IonChip, IonIcon, IonButton, IonContent, IonCard,
-    IonCardContent, IonCardHeader, IonCardTitle, CommonModule, FormsModule],
+    IonCardContent, IonCardHeader, IonCardTitle, CommonModule, FormsModule, LoaderComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class HomePage implements OnInit {
@@ -33,21 +34,21 @@ export class HomePage implements OnInit {
 
   user: any;
 
-  isLoading = false;
-  loading: boolean = false;
+  isLoading = true;
 
   constructor() {
     addIcons({ addCircle, qrCodeOutline, calendar, location, people, camera, qrCode });
   }
 
   ngOnInit() {
+    this.isLoading = true;
     this.misEventos();
     this.userInfoService.getUserData().subscribe(data => {
       this.user = data;
-      this.isLoading = false;
+      // this.isLoading = false;
     });
     this.userInfoService.getLoading().subscribe(isLoading => {
-      this.loading = isLoading;
+      // this.isLoading = isLoading;
     });
   }
 
@@ -58,7 +59,6 @@ export class HomePage implements OnInit {
         this.isLoading = false;
         this.eventos = eventos;
         this.eventoProximo = this.prximoEvento();
-        // console.log(data);
       },
       error: (error) => {
         this.isLoading = false;

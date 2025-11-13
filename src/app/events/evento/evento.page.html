@@ -5,6 +5,7 @@
 </ion-header>
 
 <ion-content [fullscreen]="true" class="ion-padding">
+  <app-loader [visible]="isLoading" mensaje="Cargando Evento..."></app-loader>
   <ion-header collapse="condense">
     <ion-toolbar>
       <ion-title size="large">{{ evento?.name }}</ion-title>
@@ -38,7 +39,7 @@
 
     <ion-segment-content id="albums">
 
-      <ion-card class="publicacion-card" *ngFor="let img of imagenes; let i = index">
+      <ion-card class="publicacion-card" *ngFor="let img of evento?.photos; let i = index">
         <ion-card-header class="publicacion-header">
           <ion-grid>
             <ion-row class="ion-align-items-center">
@@ -60,7 +61,7 @@
           </ion-grid>
         </ion-card-header>
 
-        <img class="foto-publi" [src]="img" (click)="abrirGaleria(i)"
+        <img class="foto-publi" [src]="baseUrl + img.thumbnail_path" (click)="abrirGaleria(i)"
           alt="Foto publicación">
 
       </ion-card>
@@ -71,9 +72,9 @@
 
       <ion-grid [fixed]="true">
         <ion-row>
-          <ion-col class="grid-foto" size="6" size-md="4" size-lg="2" *ngFor="let img of imagenes; let i = index">
+          <ion-col class="grid-foto" size="6" size-md="4" size-lg="2" *ngFor="let img of evento?.photos; let i = index">
             <ion-card class="card-grid-foto">
-              <img [src]="img" alt="" (click)="abrirGaleria(i)">
+              <img [src]="baseUrl + img.thumbnail_path" alt="" (click)="abrirGaleria(i)">
               <ion-card-header class="overlay-inferior">
                 <ion-grid>
                   <ion-row class="ion-align-items-center">

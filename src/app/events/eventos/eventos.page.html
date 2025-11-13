@@ -11,6 +11,8 @@
     </ion-toolbar>
   </ion-header>
 
+  <app-loader [visible]="isLoading" mensaje="Cargando Eventos..."></app-loader>
+
   <!-- Botón principal para crear evento -->
   <div class="button-group">
     <ion-button color="primary" (click)="abrirCrearEvento()">
@@ -28,7 +30,7 @@
       @for (item of eventos; track $index) {
       @if (eventos.length > 1) {
       <ion-col size="6">
-        <ion-card class="evento-card" href="tabs/evento"
+        <ion-card class="evento-card" [href]="['tabs/evento/' + item.id]"
           style="--img-url: url('https://img.freepik.com/vector-gratis/concepto-letras-feliz-cumpleanos_23-2148499329.jpg?semt=ais_hybrid&w=740')">
           <div class="fondo-evento"></div>
           <div class="contenido-evento">

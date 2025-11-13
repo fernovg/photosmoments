@@ -11,13 +11,15 @@ import { ServiciosService } from 'src/app/core/services/servicios.service';
 import { evento } from 'src/app/core/models/general.interface';
 import { ActivatedRoute, Router } from '@angular/router';
 import { EditarEventoModalComponent } from 'src/app/shared/components/editar-evento-modal/editar-evento-modal.component';
+import { environment } from 'src/environments/environment';
+import { LoaderComponent } from 'src/app/shared/components/loader/loader.component';
 
 @Component({
   selector: 'app-evento',
   templateUrl: './evento.page.html',
   styleUrls: ['./evento.page.scss'],
   standalone: true,
-  imports: [IonLabel, IonItem, IonAvatar, IonList, IonCol, IonRow, IonGrid, IonActionSheet, IonCardTitle, IonCardHeader, IonCard, IonSegmentButton, IonSegment, IonIcon, IonButton, IonContent, IonHeader, IonTitle, IonToolbar, IonSegmentContent, IonSegmentView, CommonModule, FormsModule]
+  imports: [IonLabel, IonItem, IonAvatar, IonList, IonCol, IonRow, IonGrid, IonActionSheet, IonCardTitle, IonCardHeader, IonCard, IonSegmentButton, IonSegment, IonIcon, IonButton, IonContent, IonHeader, IonTitle, IonToolbar, IonSegmentContent, IonSegmentView, CommonModule, FormsModule,LoaderComponent]
 })
 export class EventoPage implements OnInit {
 
@@ -25,6 +27,8 @@ export class EventoPage implements OnInit {
   private servicios = inject(ServiciosService);
   // private route = inject(Router);
   private activatedRoute = inject(ActivatedRoute);
+
+  baseUrl = environment.img_url;
 
   constructor() {
     addIcons({ qrCodeOutline, settings, albums, grid, heart, ellipsisHorizontalOutline, addCircle, people, camera, ellipsisHorizontal });
@@ -35,7 +39,10 @@ export class EventoPage implements OnInit {
 
   eventos: evento[] = [];
 
+  isLoading = true;
+
   async ngOnInit() {
+    this.isLoading = true;
     this.activatedRoute.params.subscribe((params) => {
       const id = params['id'];
       const path = 'events';
@@ -43,9 +50,11 @@ export class EventoPage implements OnInit {
         next: (data) => {
           this.evento = data;
           // console.log(this.evento);
+          this.isLoading = false;
         },
         error: (error) => {
           console.log(error);
+          this.isLoading = false;
         }
       })
     })
@@ -98,7 +107,8 @@ export class EventoPage implements OnInit {
     const modal = await this.modalCtrl.create({
       component: GaleriaModalComponent,
       componentProps: {
-        imagenes: this.imagenes,
+        // imagenes: this.imagenes,
+        imagenes: this.evento?.photos,
         slideIndex: index
       },
       cssClass: 'modal-fullscreen',

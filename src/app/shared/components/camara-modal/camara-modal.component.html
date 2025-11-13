@@ -1,5 +1,15 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button color="medium" (click)="cerrar()">Cancelar</ion-button>
+    </ion-buttons>
+    <ion-title>Guardar Foto</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="guardar()" [strong]="true">Crear</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
 <ion-content>
-  <ion-img [src]="photo?.file" style="width: 100%; height: 80%"></ion-img>
-  <ion-button expand="full" (click)="cerrar()">Cerrar</ion-button>
-  <ion-button expand="full" (click)="guardar()">Guardar</ion-button>
+  <ion-img [src]="photo?.webviewPath" style="width: 100%; height: auto"></ion-img>
 </ion-content>

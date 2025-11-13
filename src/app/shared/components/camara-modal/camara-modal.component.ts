@@ -1,6 +1,6 @@
 import { Component, inject, Input, OnInit } from '@angular/core';
 import { PhotoService } from 'src/app/core/services/photo.service';
-import { IonContent, IonButton, IonIcon, ModalController, IonImg } from '@ionic/angular/standalone';
+import { IonContent, IonButton, IonIcon, ModalController, IonImg, IonHeader, IonToolbar, IonButtons, IonTitle } from '@ionic/angular/standalone';
 import { CommonModule } from '@angular/common';
 import { UserPhoto } from 'src/app/core/models/photos.interface';
 import { ServiciosService } from 'src/app/core/services/servicios.service';
@@ -9,12 +9,12 @@ import { ServiciosService } from 'src/app/core/services/servicios.service';
   selector: 'app-camara-modal',
   templateUrl: './camara-modal.component.html',
   styleUrls: ['./camara-modal.component.scss'],
-  imports: [IonImg, IonButton, IonContent, CommonModule],
+  imports: [IonTitle, IonButtons, IonToolbar, IonHeader, IonImg, IonButton, IonContent, CommonModule],
 })
 export class CamaraModalComponent implements OnInit {
 
   private modalCtrl = inject(ModalController);
-  @Input() photo!: UserPhoto
+  @Input() photo?: UserPhoto;
   @Input() eventoId!: string;
   @Input() eventoNombre!: string;
   public photoService = inject(PhotoService);
