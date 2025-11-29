@@ -3,5 +3,5 @@ export const environment = {
   // base_url: 'https://a6969d2012ae.ngrok-free.app/api',
   base_url: 'http://localhost:8000/api',
   img_url: 'http://localhost:8000'
-  // base_url: 'https://8edcca57754f.ngrok-free.app/api',
+  // base_url: 'https://pueblosmagicoshidalgo2025.com.mx/photos/public/api',
 };

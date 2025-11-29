@@ -20,7 +20,6 @@ export interface evento {
     photos?: eventoPhoto[];
 }
 
-
 export interface eventoPhoto {
     id?: number;
     user_id?: number;
@@ -30,4 +29,11 @@ export interface eventoPhoto {
     uploaded_at?: Date;
     created_at?: Date;
     updated_at?: Date;
+    user?: user;
+}
+
+export interface user {
+    id?: number;
+    name?: string;
+    lastname?: string;
 }

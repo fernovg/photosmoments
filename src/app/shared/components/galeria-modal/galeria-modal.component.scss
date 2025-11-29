@@ -7,11 +7,12 @@
     object-fit: contain;
   }
 
-  .cerrar-btn {
+  .btngruop {
     position: absolute;
     top: 20px;
-    right: 20px;
     z-index: 99;
+  }
+  .cerrar-btn {
     color: white;
   }
 }

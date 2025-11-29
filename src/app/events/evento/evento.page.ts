@@ -8,7 +8,7 @@ import { addCircle, albums, camera, ellipsisHorizontal, grid, heart, people, qrC
 import { GaleriaModalComponent } from 'src/app/shared/components/galeria-modal/galeria-modal.component';
 import { CrearEventoModalComponent } from 'src/app/shared/components/crear-evento-modal/crear-evento-modal.component';
 import { ServiciosService } from 'src/app/core/services/servicios.service';
-import { evento } from 'src/app/core/models/general.interface';
+import { evento, eventoPhoto } from 'src/app/core/models/general.interface';
 import { ActivatedRoute, Router } from '@angular/router';
 import { EditarEventoModalComponent } from 'src/app/shared/components/editar-evento-modal/editar-evento-modal.component';
 import { environment } from 'src/environments/environment';
@@ -19,7 +19,7 @@ import { LoaderComponent } from 'src/app/shared/components/loader/loader.compone
   templateUrl: './evento.page.html',
   styleUrls: ['./evento.page.scss'],
   standalone: true,
-  imports: [IonLabel, IonItem, IonAvatar, IonList, IonCol, IonRow, IonGrid, IonActionSheet, IonCardTitle, IonCardHeader, IonCard, IonSegmentButton, IonSegment, IonIcon, IonButton, IonContent, IonHeader, IonTitle, IonToolbar, IonSegmentContent, IonSegmentView, CommonModule, FormsModule,LoaderComponent]
+  imports: [IonLabel, IonItem, IonAvatar, IonList, IonCol, IonRow, IonGrid, IonActionSheet, IonCardTitle, IonCardHeader, IonCard, IonSegmentButton, IonSegment, IonIcon, IonButton, IonContent, IonHeader, IonTitle, IonToolbar, IonSegmentContent, IonSegmentView, CommonModule, FormsModule, LoaderComponent]
 })
 export class EventoPage implements OnInit {
 
@@ -38,6 +38,7 @@ export class EventoPage implements OnInit {
   eventoId: string | null = null;
 
   eventos: evento[] = [];
+  eventoPhoto: eventoPhoto[] = [];
 
   isLoading = true;
 
@@ -49,6 +50,7 @@ export class EventoPage implements OnInit {
       this.servicios.traerDatosId(path, id).subscribe({
         next: (data) => {
           this.evento = data;
+          this.traerFotos(id);
           // console.log(this.evento);
           this.isLoading = false;
         },
@@ -60,55 +62,62 @@ export class EventoPage implements OnInit {
     })
   }
 
-  //* Action Sheet
-  isActionSheetOpen = false;
-
-  public actionSheetButtons = [
-    {
-      text: 'Guardar',
-      data: {
-        action: 'save',
+  traerFotos(id: string) {
+    const path = 'guest-photos';
+    this.servicios.traerDatosId(path, id).subscribe({
+      next: (data: any[]) => {
+        // this.eventoPhoto = data;
+        this.eventoPhoto = data.sort((a, b) => {
+          return new Date(b.created_at).getTime() - new Date(a.created_at).getTime();
+        });
       },
-    },
-    {
-      text: 'Borrar',
-      role: 'destructive',
-      data: {
-        action: 'delete',
-      },
-    },
-    {
-      text: 'Compartir',
-      data: {
-        action: 'share',
-      },
-    },
-    {
-      text: 'Cancel',
-      role: 'cancel',
-      data: {
-        action: 'cancel',
-      },
-    },
-  ]
-
-  setOpen(isOpen: boolean) {
-    this.isActionSheetOpen = isOpen;
+      error: (error) => {
+        console.log(error);
+      }
+    })
   }
 
-  //* 
-  imagenes = [
-    'https://media.sproutsocial.com/uploads/2022/06/profile-picture.jpeg',
-    'https://www.istockphoto.com/resources/images/PhotoFTLP/P1-regional-iStock-1985150440.jpg',
-    'https://plus.unsplash.com/premium_photo-1689568126014-06fea9d5d341?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8cGVyZmlsfGVufDB8fDB8fHww'
-  ]
+  //* Action Sheet
+  // isActionSheetOpen = false;
+
+  // public actionSheetButtons = [
+  //   {
+  //     text: 'Guardar',
+  //     data: {
+  //       action: 'save',
+  //     },
+  //   },
+  //   {
+  //     text: 'Borrar',
+  //     role: 'destructive',
+  //     data: {
+  //       action: 'delete',
+  //     },
+  //   },
+  //   // {
+  //   //   text: 'Compartir',
+  //   //   data: {
+  //   //     action: 'share',
+  //   //   },
+  //   // },
+  //   {
+  //     text: 'Cancelar',
+  //     role: 'cancel',
+  //     data: {
+  //       action: 'cancel',
+  //     },
+  //   },
+  // ]
+
+  // setOpen(isOpen: boolean) {
+  //   this.isActionSheetOpen = isOpen;
+  // }
 
   async abrirGaleria(index: number) {
     const modal = await this.modalCtrl.create({
       component: GaleriaModalComponent,
       componentProps: {
-        // imagenes: this.imagenes,
-        imagenes: this.evento?.photos,
+        imagenes: this.eventoPhoto,
         slideIndex: index
       },
       cssClass: 'modal-fullscreen',
@@ -129,8 +138,8 @@ export class EventoPage implements OnInit {
     await modal.present();
 
     //para capturar la respuesta al cerrar
-    const {data, role} = await modal.onDidDismiss();
-    if (role==='confirm') {
+    const { data, role } = await modal.onDidDismiss();
+    if (role === 'confirm') {
       this.ngOnInit();
       // console.log(data, 'evento actualizado');
     }

@@ -15,24 +15,34 @@
     </div>
   </div>
 
-  <form action="">
+  <form [formGroup]="miRegister" (submit)="registrar()">
     <ion-item lines="none">
-      <ion-input label="Nombre Completo" label-placement="floating" fill="solid" placeholder="Enter text"></ion-input>
+      <ion-input label="Nombre" label-placement="floating" fill="solid" placeholder="Nombre" formControlName="name"
+        name="name"></ion-input>
     </ion-item>
     <ion-item lines="none">
-      <ion-input label="Usuario" label-placement="floating" fill="solid" placeholder="Enter text"></ion-input>
+      <ion-input label="Apellidos" label-placement="floating" fill="solid" placeholder="Apellidos"
+        formControlName="lastname" name="lastname"></ion-input>
     </ion-item>
     <ion-item lines="none">
-      <ion-input label="Correo" label-placement="floating" fill="solid" placeholder="Enter text"></ion-input>
+      <ion-input label="Telefono" label-placement="floating" fill="solid" type="tel" placeholder="888-888-8888" formControlName="phone" name="phone"></ion-input>
     </ion-item>
     <ion-item lines="none">
-      <ion-input label="Contraseña" label-placement="floating" fill="solid" placeholder="Enter text"></ion-input>
+      <ion-input label="Correo" label-placement="floating" fill="solid" placeholder="Correo" formControlName="email"
+        name="email"></ion-input>
     </ion-item>
+    <ion-item lines="none">
+      <ion-input label="Contraseña" label-placement="floating" fill="solid" placeholder="Contraseña"
+        formControlName="password" name="password"></ion-input>
+    </ion-item>
+    <ion-item lines="none">
+      <ion-input label="Confirma Contraseña" label-placement="floating" fill="solid" placeholder="Confirma Contraseña"
+        formControlName="password_confirmation" name="password_confirmation"></ion-input>
+    </ion-item>
+    <div class="botones">
+      <ion-button type="submit">Registrar</ion-button>
+    </div>
   </form>
-
-  <div class="botones">
-    <ion-button>Entrar</ion-button>
-  </div>
 
   <div class="extra-login">
     <div class="seperador">

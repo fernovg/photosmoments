@@ -11,5 +11,15 @@
 </ion-header>
 
 <ion-content>
-  <ion-img [src]="photo?.webviewPath" style="width: 100%; height: auto"></ion-img>
+
+  <div class="title-section">
+    <ion-icon name="camera" class="icon"></ion-icon>
+    <h2>¿Deseas guardar esta foto?</h2>
+    <p>Se añadirá al evento seleccionado.</p>
+    <p class="evento-nombre">Evento: {{ eventoNombre }}</p>
+  </div>
+
+  <div class="img-container">
+    <ion-img [src]="photo?.webviewPath"></ion-img>
+  </div>
 </ion-content>

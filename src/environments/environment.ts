@@ -6,7 +6,7 @@ export const environment = {
   production: false,
   base_url: 'http://localhost:8000/api',
   img_url: 'http://localhost:8000'
-  // base_url: 'https://62f7d7079bee.ngrok-free.app/api',
+  // base_url: 'https://pueblosmagicoshidalgo2025.com.mx/photos/public/api',
   // base_url: 'https://8edcca57754f.ngrok-free.app/api',
 };
 

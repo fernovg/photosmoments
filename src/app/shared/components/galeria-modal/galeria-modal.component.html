@@ -1,15 +1,19 @@
 <ion-content [fullscreen]="true" class="galeria-modal">
-  <swiper-container #swiperRef
-    [attr.initial-slide]="slideIndex"
-    [zoom]="true"
-    [space-between]="10"
+  <swiper-container #swiperRef [attr.initial-slide]="slideIndex" [zoom]="true" [space-between]="10"
     [slides-per-view]="1">
     <swiper-slide *ngFor="let img of imagenes">
-      <img [src]="img" class="imagen-full" />
+      <img [src]="baseUrl + img.thumbnail_path" class="imagen-full" />
     </swiper-slide>
   </swiper-container>
 
-  <ion-button fill="clear" class="cerrar-btn" (click)="cerrar()">
-    <ion-icon name="close"></ion-icon>
-  </ion-button>
+  <div class="btngruop">
+    <ion-button fill="clear" class="cerrar-btn" (click)="cerrar()">
+      <ion-icon name="close"></ion-icon>
+    </ion-button>
+    <ion-button fill="clear" class="cerrar-btn" id="open-action-sheet">
+      <ion-icon name="ellipsis-horizontal"></ion-icon>
+    </ion-button>
+  </div>
+
+<ion-action-sheet trigger="open-action-sheet" header="Actions" [buttons]="actionSheetButtons" (didDismiss)="onActionSelected($event)"></ion-action-sheet>
 </ion-content>

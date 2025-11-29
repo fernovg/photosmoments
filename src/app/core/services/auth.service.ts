@@ -1,7 +1,7 @@
 import { inject, Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment';
 import { HttpClient } from '@angular/common/http';
-import { map, Observable, tap } from 'rxjs';
+import { map, Observable, switchMap, tap } from 'rxjs';
 import { AuthResponse } from '../models/auth.models';
 import { Router } from '@angular/router';
 
@@ -22,27 +22,62 @@ export class AuthService {
         };
         return this.http.post<AuthResponse>(`${this.baseUrl}/login`, body).pipe(
             tap(data => {
-                if (data.access_token) {
+                if (data.access_token && data?.token_type) {
                     localStorage.setItem('access_token', data.access_token);
                     localStorage.setItem('token_type', data.token_type);
-                    // this.router.navigate(['tabs/inicio']);
+                } else {
+                    this.clearToken();
                 }
             })
         );
     }
 
-    // logout(): Observable<AuthResponse> {
-    //     return this.http.post<AuthResponse>(`${this.baseUrl}/auth/logout`, {});
-    // }
+    register(name: string, lastname: string, phone: string, email: string, password: string, password_confirmation: string, user_type_id: number): Observable<AuthResponse> {
+        const body = {
+            name: name,
+            lastname: lastname,
+            email: email,
+            password: password,
+            password_confirmation: password_confirmation,
+            phone: phone,
+            user_type_id: user_type_id
+        };
+        return this.http.post<AuthResponse>(`${this.baseUrl}/register`, body).pipe(
+            switchMap(() => {
+                // hacer login después de registrarse
+                return this.login(email, password);
+            })
+        );
+    }
+
+    logout() {
+        this.clearToken();
+        this.router.navigate(['signin'], { replaceUrl: true });
+    }
 
     isAuthenticated(): boolean {
-        return !!localStorage.getItem('access_token');
+        const token = localStorage.getItem('access_token');
+
+        if (!token || token === 'null' || token === 'undefined' || token.trim() === '') {
+            this.clearToken();
+            return false;
+        }
+        return true;
     }
 
     headers() {
         const token = localStorage.getItem('access_token');
-        const tokenType = localStorage.getItem('token_type');
-        const tokenDb = tokenType+' '+ token;
-        return tokenDb
+        const type = localStorage.getItem('token_type');
+
+        if (!token || !type || token === 'null' || token === 'undefined' || type === 'undefined') {
+            return null;
+        }
+
+        return `${type} ${token}`;
+    }
+
+    private clearToken() {
+        localStorage.removeItem('access_token');
+        localStorage.removeItem('token_type');
     }
 }

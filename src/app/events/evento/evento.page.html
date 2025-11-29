@@ -39,7 +39,7 @@
 
     <ion-segment-content id="albums">
 
-      <ion-card class="publicacion-card" *ngFor="let img of evento?.photos; let i = index">
+      <ion-card class="publicacion-card" *ngFor="let img of eventoPhoto; let i = index">
         <ion-card-header class="publicacion-header">
           <ion-grid>
             <ion-row class="ion-align-items-center">
@@ -49,14 +49,14 @@
                   alt="Foto perfil" class="foto-perfil">
               </ion-col>
               <ion-col>
-                <ion-card-title>Jose Vega</ion-card-title>
-                <p class="tiempo">Hace 2 minutos</p>
+                <ion-card-title>{{ img.user?.name }}</ion-card-title>
+                <!-- <p class="tiempo">Hace 2 minutos</p> -->
               </ion-col>
-              <ion-col size="auto">
+              <!-- <ion-col size="auto">
                 <ion-button fill="clear" size="small" id="open-action-sheet">
                   <ion-icon name="ellipsis-horizontal-outline"></ion-icon>
                 </ion-button>
-              </ion-col>
+              </ion-col> -->
             </ion-row>
           </ion-grid>
         </ion-card-header>
@@ -72,20 +72,20 @@
 
       <ion-grid [fixed]="true">
         <ion-row>
-          <ion-col class="grid-foto" size="6" size-md="4" size-lg="2" *ngFor="let img of evento?.photos; let i = index">
+          <ion-col class="grid-foto" size="6" size-md="4" size-lg="2" *ngFor="let img of eventoPhoto; let i = index">
             <ion-card class="card-grid-foto">
               <img [src]="baseUrl + img.thumbnail_path" alt="" (click)="abrirGaleria(i)">
               <ion-card-header class="overlay-inferior">
                 <ion-grid>
                   <ion-row class="ion-align-items-center">
                     <ion-col size="auto">
-                      <ion-card-title>Jose Vega</ion-card-title>
+                      <ion-card-title>{{ img.user?.name }}</ion-card-title>
                     </ion-col>
-                    <ion-col size="auto">
+                    <!-- <ion-col size="auto">
                       <ion-button fill="clear" size="small" id="open-action-sheet">
                         <ion-icon name="ellipsis-horizontal-outline"></ion-icon>
                       </ion-button>
-                    </ion-col>
+                    </ion-col> -->
                   </ion-row>
                 </ion-grid>
               </ion-card-header>
@@ -140,6 +140,6 @@
   </ion-segment-view>
 
 
-  <ion-action-sheet trigger="open-action-sheet" header="Acciones" [buttons]="actionSheetButtons"></ion-action-sheet>
+  <!-- <ion-action-sheet trigger="open-action-sheet" header="Acciones" [buttons]="actionSheetButtons"></ion-action-sheet> -->
 
 </ion-content>
