@@ -1,4 +1,5 @@
 <ion-content [fullscreen]="true">
+  <ion-progress-bar type="indeterminate" *ngIf="isLoading"></ion-progress-bar>
   <ion-header collapse="condense">
     <ion-toolbar>
       <ion-buttons slot="start">
@@ -25,7 +26,8 @@
         formControlName="lastname" name="lastname"></ion-input>
     </ion-item>
     <ion-item lines="none">
-      <ion-input label="Telefono" label-placement="floating" fill="solid" type="tel" placeholder="888-888-8888" formControlName="phone" name="phone"></ion-input>
+      <ion-input label="Telefono" label-placement="floating" fill="solid" type="tel" placeholder="888-888-8888"
+        formControlName="phone" name="phone"></ion-input>
     </ion-item>
     <ion-item lines="none">
       <ion-input label="Correo" label-placement="floating" fill="solid" placeholder="Correo" formControlName="email"
@@ -33,14 +35,25 @@
     </ion-item>
     <ion-item lines="none">
       <ion-input label="Contraseña" label-placement="floating" fill="solid" placeholder="Contraseña"
-        formControlName="password" name="password"></ion-input>
+        formControlName="password" name="password" [type]="showPassword1 ? 'text' : 'password'"></ion-input>
+      <ion-button fill="clear" slot="end" aria-label="Show/hide" (click)="togglePasswordVisibility1()">
+        <ion-icon slot="icon-only" [name]="showPassword1 ? 'eye-off' : 'eye'" aria-hidden="true"></ion-icon>
+      </ion-button>
     </ion-item>
     <ion-item lines="none">
       <ion-input label="Confirma Contraseña" label-placement="floating" fill="solid" placeholder="Confirma Contraseña"
-        formControlName="password_confirmation" name="password_confirmation"></ion-input>
+        formControlName="password_confirmation" name="password_confirmation"
+        [type]="showPassword2 ? 'text' : 'password'"></ion-input>
+      <ion-button fill="clear" slot="end" aria-label="Show/hide" (click)="togglePasswordVisibility2()">
+        <ion-icon slot="icon-only" [name]="showPassword2 ? 'eye-off' : 'eye'" aria-hidden="true"></ion-icon>
+      </ion-button>
+      <ion-text color="danger" *ngIf="miRegister.get('password_confirmation')?.hasError('noSonIguales')">
+        Las contraseñas no coinciden
+      </ion-text>
     </ion-item>
     <div class="botones">
-      <ion-button type="submit">Registrar</ion-button>
+      <ion-button type="submit" [disabled]="miRegister.invalid || isLoading"
+        [ngClass]="{'disabled': miRegister.invalid}">Registrar</ion-button>
     </div>
   </form>
 

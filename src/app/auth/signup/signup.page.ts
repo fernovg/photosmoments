@@ -1,10 +1,10 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-import { IonBackButton, IonButtons, IonContent, IonHeader, IonToolbar, IonItem, IonInput, IonButton, IonProgressBar, IonIcon } from '@ionic/angular/standalone';
+import { IonBackButton, IonButtons, IonContent, IonHeader, IonToolbar, IonItem, IonInput, IonButton, IonProgressBar, IonIcon, IonText } from '@ionic/angular/standalone';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { Router } from '@angular/router';
-import { ValidatorsForm } from 'src/app/core/services/validator.service';
+import { passwordsIgualesValidator, ValidatorsForm } from 'src/app/core/services/validator.service';
 import { ToastService } from 'src/app/core/services/toast.service';
 import { addIcons } from 'ionicons';
 import { eye, eyeOff, logoGoogle } from 'ionicons/icons';
@@ -14,7 +14,7 @@ import { eye, eyeOff, logoGoogle } from 'ionicons/icons';
   templateUrl: './signup.page.html',
   styleUrls: ['./signup.page.scss'],
   standalone: true,
-  imports: [IonButton, IonInput, IonItem, IonBackButton, ReactiveFormsModule, IonButtons, IonButtons, IonContent, IonHeader, IonToolbar, CommonModule, FormsModule]
+  imports: [IonText, IonButton, IonInput, IonItem, IonBackButton, ReactiveFormsModule, IonButtons, IonButtons, IonContent, IonHeader, IonToolbar, CommonModule, FormsModule, IonProgressBar, IonIcon]
 })
 export class SignupPage implements OnInit {
 
@@ -25,7 +25,8 @@ export class SignupPage implements OnInit {
   private router = inject(Router);
 
   isLoading = false;
-  showPassword: boolean = false;
+  showPassword1: boolean = false;
+  showPassword2: boolean = false;
 
   public miRegister: FormGroup = this.formBuilder.group({
     name: ['', Validators.required],
@@ -35,7 +36,11 @@ export class SignupPage implements OnInit {
     password: ['', Validators.required],
     password_confirmation: ['', Validators.required],
     user_type_id: [2],
-  });
+  },
+  {
+    validators: [passwordsIgualesValidator('password', 'password_confirmation')]
+  }
+);
 
   constructor() {
     addIcons({ eye, eyeOff, logoGoogle });
@@ -92,8 +97,11 @@ export class SignupPage implements OnInit {
   }
 
   // Método para alternar la visibilidad de la contraseña
-  togglePasswordVisibility() {
-    this.showPassword = !this.showPassword;
+  togglePasswordVisibility1() {
+    this.showPassword1 = !this.showPassword1;
+  }
+  togglePasswordVisibility2() {
+    this.showPassword2 = !this.showPassword2;
   }
 
 }
