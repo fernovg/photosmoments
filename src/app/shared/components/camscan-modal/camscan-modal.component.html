@@ -8,12 +8,14 @@
 </ion-header>
 
 <ion-content>
+<!-- 
 
   <div *ngIf="!hasDevices" class="no-camera">
     <p>No se detectaron cámaras.</p>
-  </div>
+  </div> -->
 
-  <zxing-scanner [formats]="allowedFormats" [device]="deviceSelected" (scanSuccess)="onScanSuccess($event)"
-    (camerasFound)="camarasEncontradas($event)" (camerasNotFound)="sinCamaras()"></zxing-scanner>
+  <zxing-scanner
+  [device]="currentDevice"
+  (scanSuccess)="onScanSuccess($event)"></zxing-scanner>
 
 </ion-content>
