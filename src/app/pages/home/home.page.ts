@@ -158,7 +158,7 @@ export class HomePage implements OnInit {
       next: (data) => {
         this.isLoading = false;
         this.toastService.success('Unido Correctamente');
-        this.router.navigate(['tabs/evento/' + data.id]);
+        this.router.navigate(['tabs/evento/' + payload.event_id]);
       },
       error: (error) => {
         this.isLoading = false;
