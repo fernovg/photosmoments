@@ -97,16 +97,19 @@ export class HomePage implements OnInit {
     const { data } = await modal.onWillDismiss();
 
     if (data) {
-      console.log("QR leído:", data);
+      // console.log("QR leído:", data);
       const partes = data.split('|');
+      const eventId = Number(partes[0]);
+      const userId = Number(partes[1]);
 
       if (partes.length >= 2) {
         const payload = {
-          event_id: partes[0],
-          user_id: partes[1],
+          event_id: eventId,
+          user_id: userId,
         };
-        console.log("Payload listo:", payload);
-        alert(JSON.stringify(payload, null, 2));
+        this.uniseAEvento(payload);
+        // console.log("Payload listo:", payload);
+        // alert(JSON.stringify(payload, null, 2));
       }
       // this.unirseAEvento(res.data);
 
@@ -149,11 +152,7 @@ export class HomePage implements OnInit {
     }
   ];
 
-  uniseAEvento(data: number) {
-    const payload = {
-      event_id: '',
-      user_id: '',
-    };
+  uniseAEvento(payload: any) {
     this.isLoading = true;
     this.servicios.guardarDatos('events/guests', payload).subscribe({
       next: (data) => {
