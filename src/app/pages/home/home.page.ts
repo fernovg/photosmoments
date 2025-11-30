@@ -102,7 +102,7 @@ export class HomePage implements OnInit {
       const eventId = Number(partes[0]);
       const userId = this.user.id;
 
-      if (partes.length >= 2) {
+      if (partes.length >= 1) {
         const payload = {
           event_id: eventId,
           guest_id: userId,
