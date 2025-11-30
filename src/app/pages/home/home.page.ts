@@ -101,7 +101,7 @@ export class HomePage implements OnInit {
       const partes = data.split('|');
       const eventId = Number(partes[0]);
       const userId = this.user.id;
-      alert(eventId);
+      // alert(eventId);
 
       if (partes.length >= 1) {
         const payload = {
@@ -110,7 +110,7 @@ export class HomePage implements OnInit {
         };
         this.uniseAEvento(payload);
         // console.log("Payload listo:", payload);
-        alert(JSON.stringify(payload, null, 2));
+        // alert(JSON.stringify(payload, null, 2));
       }
       // this.unirseAEvento(res.data);
 
@@ -155,7 +155,7 @@ export class HomePage implements OnInit {
 
   uniseAEvento(payload: any) {
     this.isLoading = true;
-    alert(JSON.stringify(payload, null, 2));
+    // alert(JSON.stringify(payload, null, 2));
     this.servicios.guardarDatos('events/guests', payload).subscribe({
       next: (data) => {
         this.isLoading = false;
