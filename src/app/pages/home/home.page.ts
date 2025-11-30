@@ -154,6 +154,7 @@ export class HomePage implements OnInit {
 
   uniseAEvento(payload: any) {
     this.isLoading = true;
+    alert(JSON.stringify(payload, null, 2));
     this.servicios.guardarDatos('events/guests', payload).subscribe({
       next: (data) => {
         this.isLoading = false;
