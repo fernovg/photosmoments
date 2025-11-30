@@ -34,8 +34,21 @@ export interface eventoPhoto {
     user?: user;
 }
 
+export interface guests {
+    id?: number;
+    event_id?: number;
+    guest_id?: number;
+    guest?: user;
+}
+
 export interface user {
     id?: number;
     name?: string;
     lastname?: string;
 }
+
+// export interface guest {
+//     id?: number;
+//     name?: string;
+//     lastname?: string;
+// }

@@ -23,6 +23,10 @@ export class ServiciosService {
     return this.http.get<any>(`${this.baseUrl}/${endpoint}/${id}`, {});
   }
 
+  traerGuest(endpoint: string, id: string, endpoint1?: string): Observable<any> {
+    return this.http.get<any>(`${this.baseUrl}/${endpoint1}/${id}/${endpoint}`, {});
+  }
+
   guardarDatos(endpoint: string, data: any): Observable<any> {
     return this.http.post<any>(`${this.baseUrl}/${endpoint}`, data);
   }

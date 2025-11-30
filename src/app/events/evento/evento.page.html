@@ -102,40 +102,15 @@
 
       <ion-list class="lista-publi">
 
-        <ion-item lines="none">
+        <ion-item lines="none" *ngFor="let invitado of guests">
           <ion-avatar aria-hidden="true" slot="start">
             <img alt=""
               src="https://images.pexels.com/photos/14375833/pexels-photo-14375833.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500" />
           </ion-avatar>
-          <ion-label>Jose Juan <p>Ha Subido Una Foto</p></ion-label>
-          <img class="foto-publi" alt="" src="https://media.sproutsocial.com/uploads/2022/06/profile-picture.jpeg" />
-        </ion-item>
-
-        <ion-item lines="none">
-          <ion-avatar aria-hidden="true" slot="start">
-            <img alt=""
-              src="https://images.pexels.com/photos/14375833/pexels-photo-14375833.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500" />
-          </ion-avatar>
-          <ion-label>Jose Juan <p>Ha Subido Una Foto</p></ion-label>
-          <img class="foto-publi" alt="" src="https://media.sproutsocial.com/uploads/2022/06/profile-picture.jpeg" />
-        </ion-item>
-
-        <ion-item lines="none">
-          <ion-avatar aria-hidden="true" slot="start">
-            <img alt=""
-              src="https://images.pexels.com/photos/14375833/pexels-photo-14375833.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500" />
-          </ion-avatar>
-          <ion-label>Jose Juan <p>Ha Subido Una Foto</p></ion-label>
-          <img class="foto-publi" alt="" src="https://media.sproutsocial.com/uploads/2022/06/profile-picture.jpeg" />
-        </ion-item>
-
-        <ion-item lines="none">
-          <ion-avatar aria-hidden="true" slot="start">
-            <img alt=""
-              src="https://images.pexels.com/photos/14375833/pexels-photo-14375833.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500" />
-          </ion-avatar>
-          <ion-label>Jose Juan <p>Ha Subido Una Foto</p></ion-label>
-          <img class="foto-publi" alt="" src="https://media.sproutsocial.com/uploads/2022/06/profile-picture.jpeg" />
+          <ion-label>{{ invitado.guest?.name }} 
+            <!-- <p>Ha Subido Una Foto</p> -->
+          </ion-label>
+          <!-- <img class="foto-publi" alt="" src="https://media.sproutsocial.com/uploads/2022/06/profile-picture.jpeg" /> -->
         </ion-item>
 
       </ion-list>

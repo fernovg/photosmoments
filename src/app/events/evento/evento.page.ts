@@ -8,7 +8,7 @@ import { addCircle, albums, camera, ellipsisHorizontal, grid, heart, people, qrC
 import { GaleriaModalComponent } from 'src/app/shared/components/galeria-modal/galeria-modal.component';
 import { CrearEventoModalComponent } from 'src/app/shared/components/crear-evento-modal/crear-evento-modal.component';
 import { ServiciosService } from 'src/app/core/services/servicios.service';
-import { evento, eventoPhoto } from 'src/app/core/models/general.interface';
+import { evento, eventoPhoto, guests } from 'src/app/core/models/general.interface';
 import { ActivatedRoute, Router } from '@angular/router';
 import { EditarEventoModalComponent } from 'src/app/shared/components/editar-evento-modal/editar-evento-modal.component';
 import { environment } from 'src/environments/environment';
@@ -41,6 +41,7 @@ export class EventoPage implements OnInit {
   eventoId: string | null = null;
 
   eventos: evento[] = [];
+  guests: guests[] = [];
   eventoPhoto: eventoPhoto[] = [];
 
   isLoading = true;
@@ -54,6 +55,7 @@ export class EventoPage implements OnInit {
         next: (data) => {
           this.evento = data;
           this.traerFotos(id);
+          this.traerInvitados(id);
           // console.log(this.evento);
           this.isLoading = false;
         },
@@ -77,6 +79,20 @@ export class EventoPage implements OnInit {
         this.eventoPhoto = data.sort((a, b) => {
           return new Date(b.created_at).getTime() - new Date(a.created_at).getTime();
         });
+      },
+      error: (error) => {
+        console.log(error);
+      }
+    })
+  }
+
+  traerInvitados(id:string){
+    const path = 'guests';
+    const path1 = 'events';
+    this.servicios.traerGuest(path, id, path1).subscribe({
+      next: (data: any[]) => {
+        this.guests = data;
+        console.log(this.guests);
       },
       error: (error) => {
         console.log(error);
