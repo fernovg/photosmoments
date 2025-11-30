@@ -19,6 +19,7 @@ export interface evento {
     qr_code_path?: string;
     qr_payload?: string;
     photos?: eventoPhoto[];
+    user?: user;
 }
 
 export interface eventoPhoto {

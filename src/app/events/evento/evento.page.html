@@ -18,9 +18,11 @@
       <ion-icon name="qr-code-outline" slot="start"></ion-icon>
       Invitar
     </ion-button>
+    @if(this.evento?.user?.id === this.user?.id) {
     <ion-button color="dark" fill="outline" (click)="abrirEditarEvento(evento)">
       <ion-icon name="settings"></ion-icon>
     </ion-button>
+    }
   </div>
 
   <ion-segment value="albums">

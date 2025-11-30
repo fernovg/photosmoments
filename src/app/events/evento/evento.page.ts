@@ -1,9 +1,9 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonActionSheet, IonContent, IonHeader, IonTitle, IonToolbar, IonButton, IonIcon, IonSegment, IonSegmentButton, IonSegmentContent, IonSegmentView, IonCard, IonCardHeader, IonCardTitle, ModalController, IonAvatar, IonItem, IonGrid, IonRow, IonCol, IonList, IonLabel, IonModal, IonSearchbar, IonImg } from '@ionic/angular/standalone';
+import { IonActionSheet, IonContent, IonHeader, IonTitle, IonToolbar, IonButton, IonIcon, IonSegment, IonSegmentButton, IonSegmentContent, IonSegmentView, IonCard, IonCardHeader, IonCardTitle, ModalController, IonAvatar, IonItem, IonGrid, IonRow, IonCol, IonList, IonLabel, IonModal, IonSearchbar, IonImg, IonFab } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
-import { addCircle, albums, camera, ellipsisHorizontal, grid, heart, people, qrCodeOutline, settings, ellipsisHorizontalOutline } from 'ionicons/icons';
+import { addCircle, albums, camera, ellipsisHorizontal, grid, heart, people, qrCodeOutline, settings, ellipsisHorizontalOutline, add } from 'ionicons/icons';
 // import {  } from '@ionic/angular';
 import { GaleriaModalComponent } from 'src/app/shared/components/galeria-modal/galeria-modal.component';
 import { CrearEventoModalComponent } from 'src/app/shared/components/crear-evento-modal/crear-evento-modal.component';
@@ -13,13 +13,14 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { EditarEventoModalComponent } from 'src/app/shared/components/editar-evento-modal/editar-evento-modal.component';
 import { environment } from 'src/environments/environment';
 import { LoaderComponent } from 'src/app/shared/components/loader/loader.component';
+import { UserInfoService } from 'src/app/core/services/user-info.service';
 
 @Component({
   selector: 'app-evento',
   templateUrl: './evento.page.html',
   styleUrls: ['./evento.page.scss'],
   standalone: true,
-  imports: [IonModal, IonLabel, IonItem, IonAvatar, IonList, IonCol, IonRow, IonGrid, IonActionSheet, IonCardTitle, IonCardHeader, IonCard, IonSegmentButton, IonSegment, IonIcon, IonButton, IonContent, IonHeader, IonTitle, IonToolbar, IonSegmentContent, IonSegmentView, CommonModule, FormsModule, LoaderComponent]
+  imports: [IonFab, IonModal, IonLabel, IonItem, IonAvatar, IonList, IonCol, IonRow, IonGrid, IonActionSheet, IonCardTitle, IonCardHeader, IonCard, IonSegmentButton, IonSegment, IonIcon, IonButton, IonContent, IonHeader, IonTitle, IonToolbar, IonSegmentContent, IonSegmentView, CommonModule, FormsModule, LoaderComponent]
 })
 export class EventoPage implements OnInit {
 
@@ -27,11 +28,13 @@ export class EventoPage implements OnInit {
   private servicios = inject(ServiciosService);
   // private route = inject(Router);
   private activatedRoute = inject(ActivatedRoute);
+  private userInfoService = inject(UserInfoService);
 
   baseUrl = environment.img_url;
+  user: any;
 
   constructor() {
-    addIcons({ qrCodeOutline, settings, albums, grid, heart, ellipsisHorizontalOutline, addCircle, people, camera, ellipsisHorizontal });
+    addIcons({ qrCodeOutline, add, settings, albums, grid, heart, ellipsisHorizontalOutline, addCircle, people, camera, ellipsisHorizontal });
   }
 
   evento: evento | null = null;
@@ -59,7 +62,11 @@ export class EventoPage implements OnInit {
           this.isLoading = false;
         }
       })
-    })
+    });
+    this.userInfoService.getUserData().subscribe(data => {
+      this.user = data;
+      // this.isLoading = false;
+    });
   }
 
   traerFotos(id: string) {
