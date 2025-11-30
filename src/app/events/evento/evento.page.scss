@@ -94,8 +94,13 @@ ion-segment {
     }
 }
 
-.qr-code {
-    margin: auto 0;
-    max-width: 100%;
-    height: auto;
+.content-modal {
+    display: flex;
+    background-color: red;
+
+    .qr-code {
+        margin: auto 0;
+        max-width: 100%;
+        height: auto;
+    }
 }

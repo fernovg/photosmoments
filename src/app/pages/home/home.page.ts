@@ -105,7 +105,7 @@ export class HomePage implements OnInit {
       if (partes.length >= 2) {
         const payload = {
           event_id: eventId,
-          user_id: userId,
+          guest_id: userId,
         };
         this.uniseAEvento(payload);
         // console.log("Payload listo:", payload);

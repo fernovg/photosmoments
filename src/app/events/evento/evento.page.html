@@ -147,7 +147,7 @@
 
   <ion-modal #modal trigger="open-modal" [initialBreakpoint]="0.5" [breakpoints]="[0, 0.25, 0.5, 0.75]">
     <ng-template>
-      <ion-content>
+      <ion-content class="content-modal">
         <h2>QR</h2>
         <!-- <img [src]="baseUrl + evento?.qr_payload" alt="" class="qr-code"> -->
         <img [src]="baseUrl + evento?.qr_code_path" alt="" class="qr-code">
