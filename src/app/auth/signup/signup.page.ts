@@ -35,7 +35,7 @@ export class SignupPage implements OnInit {
     email: ['', [Validators.required, Validators.pattern(this.valiService.emailPattern)]],
     password: ['', Validators.required],
     password_confirmation: ['', Validators.required],
-    user_type_id: [2],
+    user_type_id: [1],
   },
   {
     validators: [passwordsIgualesValidator('password', 'password_confirmation')]

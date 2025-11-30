@@ -100,7 +100,7 @@ export class HomePage implements OnInit {
       // console.log("QR leído:", data);
       const partes = data.split('|');
       const eventId = Number(partes[0]);
-      const userId = Number(partes[1]);
+      const userId = this.user.id;
 
       if (partes.length >= 2) {
         const payload = {
@@ -163,6 +163,7 @@ export class HomePage implements OnInit {
       },
       error: (error) => {
         this.isLoading = false;
+        // alert(error);
         this.toastService.error('Error al unirse al evento');
       }
     })
