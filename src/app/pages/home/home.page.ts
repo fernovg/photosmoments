@@ -15,6 +15,7 @@ import { UserInfoService } from 'src/app/core/services/user-info.service';
 import { LoaderComponent } from 'src/app/shared/components/loader/loader.component';
 import { CamscanModalComponent } from 'src/app/shared/components/camscan-modal/camscan-modal.component';
 import { ToastService } from 'src/app/core/services/toast.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -31,6 +32,7 @@ export class HomePage implements OnInit {
   private servicios = inject(ServiciosService);
   private userInfoService = inject(UserInfoService);
   private toastService = inject(ToastService);
+  private router = inject(Router);
 
   eventos: evento[] = [];
   eventoProximo: evento | null = null;
@@ -148,7 +150,7 @@ export class HomePage implements OnInit {
       next: (data) => {
         this.isLoading = false;
         this.toastService.success('Unido Correctamente');
-        // this.router.navigate(['tabs/evento/' + data.id]);
+        this.router.navigate(['tabs/evento/' + data.id]);
       },
       error: (error) => {
         this.isLoading = false;
