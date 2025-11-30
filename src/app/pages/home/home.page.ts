@@ -106,7 +106,7 @@ export class HomePage implements OnInit {
           user_id: partes[1],
         };
         console.log("Payload listo:", payload);
-        alert(payload);
+        alert(JSON.stringify(payload, null, 2));
       }
       // this.unirseAEvento(res.data);
 
