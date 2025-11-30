@@ -16,6 +16,7 @@ import { LoaderComponent } from 'src/app/shared/components/loader/loader.compone
 import { CamscanModalComponent } from 'src/app/shared/components/camscan-modal/camscan-modal.component';
 import { ToastService } from 'src/app/core/services/toast.service';
 import { Router } from '@angular/router';
+import { timestamp } from 'rxjs';
 
 @Component({
   selector: 'app-home',
@@ -97,7 +98,16 @@ export class HomePage implements OnInit {
 
     if (data) {
       console.log("QR leído:", data);
-      alert(data);
+      const partes = data.split('|');
+
+      if (partes.length >= 2) {
+        const payload = {
+          event_id: partes[0],
+          user_id: partes[1],
+        };
+        console.log("Payload listo:", payload);
+        alert(payload);
+      }
       // this.unirseAEvento(res.data);
 
     }
@@ -123,7 +133,7 @@ export class HomePage implements OnInit {
     {
       text: 'OK',
       handler: (data: any) => {
-        const codigo = Number(data.codigo); 
+        const codigo = Number(data.codigo);
         this.uniseAEvento(codigo);
       }
     }
@@ -141,10 +151,9 @@ export class HomePage implements OnInit {
 
   uniseAEvento(data: number) {
     const payload = {
-      event_id: data,
-      user_id: this.user.id,
+      event_id: '',
+      user_id: '',
     };
-    console.log(payload);
     this.isLoading = true;
     this.servicios.guardarDatos('events/guests', payload).subscribe({
       next: (data) => {
@@ -157,6 +166,6 @@ export class HomePage implements OnInit {
         this.toastService.error('Error al unirse al evento');
       }
     })
-    
+
   }
 }
