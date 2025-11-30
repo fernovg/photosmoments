@@ -36,7 +36,7 @@ export class CamaraModalComponent implements OnInit {
 
   guardar() {
     if (!this.photo?.file || !this.eventoId) {
-      console.warn('Falta la imagen o el ID del evento');
+      // console.warn('Falta la imagen o el ID del evento');
       return;
     }
 
@@ -53,12 +53,12 @@ export class CamaraModalComponent implements OnInit {
     this.servicios.guardarDatos('guest-photos', formData).subscribe({
       next: (data) => {
         this.isLoading = false;
-        console.log(data);
+        // console.log(data);
         this.modalCtrl.dismiss(data, 'confirm');
       },
       error: (error) => {
         this.isLoading = false;
-        console.log(error);
+        // console.log(error);
       }
     })
   }

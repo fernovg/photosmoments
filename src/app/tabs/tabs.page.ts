@@ -64,6 +64,11 @@ export class TabsPage {
         cssClass: 'modal-fullscreen'
       });
       await modal.present();
+      const { role, data } = await modal.onWillDismiss();
+
+      if (role === 'confirm') {
+        this.recargarEvento(eventoSeleccionado.id);
+      }
     }
   }
 
@@ -109,4 +114,12 @@ export class TabsPage {
     },
   ];
 
+  recargarEvento(eventoId: string) {
+    const url = `/tabs/evento/${eventoId}`;
+
+    // Navega a una ruta "vacía" y luego regresa
+    this.router.navigateByUrl('/tabs/inicio', { skipLocationChange: true }).then(() => {
+      this.router.navigate([url]);
+    });
+  }
 }
