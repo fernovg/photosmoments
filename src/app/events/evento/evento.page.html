@@ -148,8 +148,18 @@
   <ion-modal #modal trigger="open-modal" [initialBreakpoint]="0.5" [breakpoints]="[0, 0.25, 0.5, 0.75]">
     <ng-template>
       <ion-content>
+        <h2>QR</h2>
         <!-- <img [src]="baseUrl + evento?.qr_payload" alt="" class="qr-code"> -->
         <img [src]="baseUrl + evento?.qr_code_path" alt="" class="qr-code">
+
+        <p>Para unirte a este evento, escanee el código QR o ingrese el siguiente codigo:</p>
+        <h2>{{ evento?.id }}</h2>
+        <!-- <ion-text color="primary">
+          <a href="https://pueblosmagicoshidalgo2025.com.mx/photos/public/events/{{ evento?.id }}">
+            https://pueblosmagicoshidalgo2025.com.mx/photos/public/events/{{ evento?.id }}
+          </a>
+        </ion-text> -->
+
       </ion-content>
     </ng-template>
   </ion-modal>

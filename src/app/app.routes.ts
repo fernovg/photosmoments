@@ -4,7 +4,8 @@ import { BienvenidaGuard } from './core/guards/bienvenida.guard';
 export const routes: Routes = [
   {
     path: '',
-    loadComponent: () => import('./pages/bienvenida/bienvenida.page').then( m => m.BienvenidaPage),
+    // loadComponent: () => import('./pages/bienvenida/bienvenida.page').then( m => m.BienvenidaPage),
+    loadComponent: () => import('./auth/login/login.page').then( m => m.LoginPage)
     // canActivate: [BienvenidaGuard]
   },
   {

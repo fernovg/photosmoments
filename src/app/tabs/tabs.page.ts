@@ -23,7 +23,7 @@ export class TabsPage {
   public environmentInjector = inject(EnvironmentInjector);
 
   eventos: evento[] = [];
-  alertInputs: any[] = [];
+  alertInputsCam: any[] = [];
   constructor() {
     addIcons({ home, people, book, person, camera });
   }
@@ -36,7 +36,7 @@ export class TabsPage {
     this.servicios.traerDatos('events').subscribe({
       next: (eventos) => {
         this.eventos = eventos;
-        this.alertInputs = this.eventos.map((ev: any) => ({
+        this.alertInputsCam = this.eventos.map((ev: any) => ({
           label: ev.name,
           type: 'radio',
           value: {
@@ -74,10 +74,10 @@ export class TabsPage {
     if (rutaActual.startsWith('/tabs/evento/')) {
       const partes = rutaActual.split('/');
       const eventoId = partes[partes.length - 1];
-      console.log('Evento ID desde URL:', eventoId);
+      // console.log('Evento ID desde URL:', eventoId);
 
       const evento = this.eventos.find((ev: any) => ev.id == eventoId);
-      console.log('Evento encontrado:', evento);
+      // console.log('Evento encontrado:', evento);
 
       if (evento) {
         this.abrirCamara(evento);
@@ -86,8 +86,10 @@ export class TabsPage {
       }
 
     } else {
-      const alert = document.querySelector('ion-alert');
-      (alert as any).present();
+      const alert = document.querySelector('#alert-tabs') as any;
+      // const alert = document.querySelector('ion-alert');
+      // (alert as any).present();
+      alert.present();
     }
   }
 

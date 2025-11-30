@@ -15,9 +15,8 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
     const authReq = req.clone({
         setHeaders: {
             'Authorization': `${authToken}`,
-            'Access-Control-Allow-Origin': '*',
 
-            // 'Content-Type': 'application/json',
+            'Content-Type': 'application/json',
 
             // 'Access-Control-Allow-Origin': '*',
             'Accept': 'application/json',

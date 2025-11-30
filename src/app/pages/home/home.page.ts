@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import {
   IonContent, IonCard, IonCardContent, IonCardHeader, IonCardTitle, IonCardSubtitle, IonButton, IonIcon,
-  IonChip, IonLabel, IonItem, ModalController
+  IonChip, IonLabel, IonItem, ModalController, IonAlert
 } from '@ionic/angular/standalone';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { addIcons } from 'ionicons';
@@ -14,6 +14,7 @@ import { evento } from 'src/app/core/models/general.interface';
 import { UserInfoService } from 'src/app/core/services/user-info.service';
 import { LoaderComponent } from 'src/app/shared/components/loader/loader.component';
 import { CamscanModalComponent } from 'src/app/shared/components/camscan-modal/camscan-modal.component';
+import { ToastService } from 'src/app/core/services/toast.service';
 
 @Component({
   selector: 'app-home',
@@ -21,7 +22,7 @@ import { CamscanModalComponent } from 'src/app/shared/components/camscan-modal/c
   styleUrls: ['./home.page.scss'],
   standalone: true,
   imports: [IonItem, IonLabel, IonChip, IonIcon, IonButton, IonContent, IonCard,
-    IonCardContent, IonCardHeader, IonCardTitle, CommonModule, FormsModule, LoaderComponent],
+    IonCardContent, IonCardHeader, IonCardTitle, CommonModule, FormsModule, LoaderComponent, IonAlert],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class HomePage implements OnInit {
@@ -29,6 +30,7 @@ export class HomePage implements OnInit {
   private modalCtrl = inject(ModalController);
   private servicios = inject(ServiciosService);
   private userInfoService = inject(UserInfoService);
+  private toastService = inject(ToastService);
 
   eventos: evento[] = [];
   eventoProximo: evento | null = null;
@@ -95,12 +97,10 @@ export class HomePage implements OnInit {
       console.log("QR leído:", data);
       alert(data);
       // this.unirseAEvento(res.data);
-      
+
     }
 
-
   }
-
 
   async abrirCrearEvento() {
     const modal = await this.modalCtrl.create({
@@ -117,4 +117,44 @@ export class HomePage implements OnInit {
     }
   }
 
+  public alertButtonsEvento = [
+    {
+      text: 'OK',
+      handler: (data: any) => {
+        const codigo = Number(data.codigo); 
+        this.uniseAEvento(codigo);
+      }
+    }
+  ];
+  public alertInputsEvento = [
+    {
+      name: 'codigo',
+      type: 'number',
+      inputmode: 'numeric',
+      placeholder: 'Codigo Del Evento',
+      min: 1,
+      max: 10,
+    }
+  ];
+
+  uniseAEvento(data: number) {
+    const payload = {
+      event_id: data,
+      user_id: this.user.id,
+    };
+    console.log(payload);
+    this.isLoading = true;
+    this.servicios.guardarDatos('events/guests', payload).subscribe({
+      next: (data) => {
+        this.isLoading = false;
+        this.toastService.success('Unido Correctamente');
+        // this.router.navigate(['tabs/evento/' + data.id]);
+      },
+      error: (error) => {
+        this.isLoading = false;
+        this.toastService.error('Error al unirse al evento');
+      }
+    })
+    
+  }
 }
