@@ -1,0 +1,19 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="cerrar()">Cerrar</ion-button>
+    </ion-buttons>
+    <ion-title>Escanear QR</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <div *ngIf="!hasDevices" class="no-camera">
+    <p>No se detectaron cámaras.</p>
+  </div>
+
+  <zxing-scanner [formats]="allowedFormats" [device]="deviceSelected" (scanSuccess)="onScanSuccess($event)"
+    (camerasFound)="camarasEncontradas($event)" (camerasNotFound)="sinCamaras()"></zxing-scanner>
+
+</ion-content>

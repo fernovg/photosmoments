@@ -17,6 +17,7 @@ export interface evento {
     max_photos_per_guest?: number;
     days_before_upload?: number;
     qr_code_path?: string;
+    qr_payload?: string;
     photos?: eventoPhoto[];
 }
 

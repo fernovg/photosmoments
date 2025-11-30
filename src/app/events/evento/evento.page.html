@@ -14,7 +14,7 @@
 
   <!-- Botón principal para crear evento -->
   <div class="button-group">
-    <ion-button color="primary">
+    <ion-button color="primary" id="open-modal">
       <ion-icon name="qr-code-outline" slot="start"></ion-icon>
       Invitar
     </ion-button>
@@ -61,8 +61,7 @@
           </ion-grid>
         </ion-card-header>
 
-        <img class="foto-publi" [src]="baseUrl + img.thumbnail_path" (click)="abrirGaleria(i)"
-          alt="Foto publicación">
+        <img class="foto-publi" [src]="baseUrl + img.thumbnail_path" (click)="abrirGaleria(i)" alt="Foto publicación">
 
       </ion-card>
 
@@ -103,34 +102,38 @@
 
         <ion-item lines="none">
           <ion-avatar aria-hidden="true" slot="start">
-            <img alt="" src="https://images.pexels.com/photos/14375833/pexels-photo-14375833.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500" />
+            <img alt=""
+              src="https://images.pexels.com/photos/14375833/pexels-photo-14375833.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500" />
           </ion-avatar>
           <ion-label>Jose Juan <p>Ha Subido Una Foto</p></ion-label>
-          <img class="foto-publi" alt="" src="https://media.sproutsocial.com/uploads/2022/06/profile-picture.jpeg"/>
+          <img class="foto-publi" alt="" src="https://media.sproutsocial.com/uploads/2022/06/profile-picture.jpeg" />
         </ion-item>
 
         <ion-item lines="none">
           <ion-avatar aria-hidden="true" slot="start">
-            <img alt="" src="https://images.pexels.com/photos/14375833/pexels-photo-14375833.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500" />
+            <img alt=""
+              src="https://images.pexels.com/photos/14375833/pexels-photo-14375833.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500" />
           </ion-avatar>
           <ion-label>Jose Juan <p>Ha Subido Una Foto</p></ion-label>
-          <img class="foto-publi" alt="" src="https://media.sproutsocial.com/uploads/2022/06/profile-picture.jpeg"/>
+          <img class="foto-publi" alt="" src="https://media.sproutsocial.com/uploads/2022/06/profile-picture.jpeg" />
         </ion-item>
 
         <ion-item lines="none">
           <ion-avatar aria-hidden="true" slot="start">
-            <img alt="" src="https://images.pexels.com/photos/14375833/pexels-photo-14375833.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500" />
+            <img alt=""
+              src="https://images.pexels.com/photos/14375833/pexels-photo-14375833.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500" />
           </ion-avatar>
           <ion-label>Jose Juan <p>Ha Subido Una Foto</p></ion-label>
-          <img class="foto-publi" alt="" src="https://media.sproutsocial.com/uploads/2022/06/profile-picture.jpeg"/>
+          <img class="foto-publi" alt="" src="https://media.sproutsocial.com/uploads/2022/06/profile-picture.jpeg" />
         </ion-item>
 
         <ion-item lines="none">
           <ion-avatar aria-hidden="true" slot="start">
-            <img alt="" src="https://images.pexels.com/photos/14375833/pexels-photo-14375833.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500" />
+            <img alt=""
+              src="https://images.pexels.com/photos/14375833/pexels-photo-14375833.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500" />
           </ion-avatar>
           <ion-label>Jose Juan <p>Ha Subido Una Foto</p></ion-label>
-          <img class="foto-publi" alt="" src="https://media.sproutsocial.com/uploads/2022/06/profile-picture.jpeg"/>
+          <img class="foto-publi" alt="" src="https://media.sproutsocial.com/uploads/2022/06/profile-picture.jpeg" />
         </ion-item>
 
       </ion-list>
@@ -142,4 +145,12 @@
 
   <!-- <ion-action-sheet trigger="open-action-sheet" header="Acciones" [buttons]="actionSheetButtons"></ion-action-sheet> -->
 
+  <ion-modal #modal trigger="open-modal" [initialBreakpoint]="0.25" [breakpoints]="[0, 0.25, 0.5, 0.75]">
+    <ng-template>
+      <ion-content>
+        <img [src]="evento?.qr_payload" alt="" class="qr-code">
+        <img [src]="baseUrl + evento?.qr_code_path" alt="">
+      </ion-content>
+    </ng-template>
+  </ion-modal>
 </ion-content>

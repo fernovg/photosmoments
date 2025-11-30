@@ -13,6 +13,7 @@ import { ServiciosService } from 'src/app/core/services/servicios.service';
 import { evento } from 'src/app/core/models/general.interface';
 import { UserInfoService } from 'src/app/core/services/user-info.service';
 import { LoaderComponent } from 'src/app/shared/components/loader/loader.component';
+import { CamscanModalComponent } from 'src/app/shared/components/camscan-modal/camscan-modal.component';
 
 @Component({
   selector: 'app-home',
@@ -81,6 +82,23 @@ export class HomePage implements OnInit {
       return fechaPrev < fechaCurr ? prev : curr;
     });
   }
+
+  async abrirScanner() {
+    const modal = await this.modalCtrl.create({
+      component: CamscanModalComponent,
+      componentProps: {}
+    });
+
+    modal.onDidDismiss().then(res => {
+      if (res.data) {
+        console.log("QR leído:", res.data);
+        // this.unirseAEvento(res.data);
+      }
+    });
+
+    await modal.present();
+  }
+
 
   async abrirCrearEvento() {
     const modal = await this.modalCtrl.create({

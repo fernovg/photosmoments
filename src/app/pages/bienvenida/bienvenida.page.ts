@@ -30,7 +30,7 @@ export class BienvenidaPage implements OnInit {
   finalizar(type:string) {
     console.log('Tutorial finalizado');
     // redireccionar a login o tabs
-    localStorage.setItem('bienvenidaVersion', BIENVENIDA_VERSION);
+    // localStorage.setItem('bienvenidaVersion', BIENVENIDA_VERSION);
     
     
     this.router.navigate(['tabs/inicio']);
@@ -39,7 +39,7 @@ export class BienvenidaPage implements OnInit {
   // si el usuario esta logeado lo manda a inicio
   isLoggedIn() {
     if (this.authService.isAuthenticated()) {
-      localStorage.setItem('bienvenidaVersion', BIENVENIDA_VERSION);
+      // localStorage.setItem('bienvenidaVersion', BIENVENIDA_VERSION);
       this.router.navigate(['tabs/inicio'])
     }
   }

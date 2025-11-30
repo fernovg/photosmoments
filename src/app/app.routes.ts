@@ -5,7 +5,7 @@ export const routes: Routes = [
   {
     path: '',
     loadComponent: () => import('./pages/bienvenida/bienvenida.page').then( m => m.BienvenidaPage),
-    canActivate: [BienvenidaGuard]
+    // canActivate: [BienvenidaGuard]
   },
   {
     path: 'tabs',
