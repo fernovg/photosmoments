@@ -86,17 +86,19 @@ export class HomePage implements OnInit {
   async abrirScanner() {
     const modal = await this.modalCtrl.create({
       component: CamscanModalComponent,
-      componentProps: {}
+      backdropDismiss: false,
     });
-
-    modal.onDidDismiss().then(res => {
-      if (res.data) {
-        console.log("QR leído:", res.data);
-        // this.unirseAEvento(res.data);
-      }
-    });
-
     await modal.present();
+    const { data } = await modal.onWillDismiss();
+
+    if (data) {
+      console.log("QR leído:", data);
+      alert(data);
+      // this.unirseAEvento(res.data);
+      
+    }
+
+
   }
 
 

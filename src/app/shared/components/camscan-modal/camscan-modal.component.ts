@@ -1,9 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, ElementRef, ViewChild, OnInit } from '@angular/core';
-// import { BarcodeScanner } from '@capacitor-mlkit/barcode-scanning';
 import { IonButton, IonButtons, IonContent, IonHeader, IonInput, IonItem, IonModal, IonTitle, IonToolbar, ModalController, IonList, IonDatetime, IonAccordion, IonAccordionGroup, IonLabel, IonToggle, IonSelectOption, IonTabButton } from '@ionic/angular/standalone';
 import { ZXingScannerModule } from '@zxing/ngx-scanner';
-// import { BarcodeFormat } from '@zxing/library';
 
 @Component({
   selector: 'app-camscan-modal',
@@ -35,7 +33,5 @@ export class CamscanModalComponent implements OnInit {
     console.log('QR detectado:', result);
     this.modalCtrl.dismiss(result);
   }
-
-
 
 }
