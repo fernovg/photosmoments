@@ -11,6 +11,7 @@ import { defineCustomElements } from '@ionic/pwa-elements/loader';
 import { authInterceptor } from './app/core/interceptors/auth.interceptor';
 import { registerLocaleData } from '@angular/common';
 import localeEs from '@angular/common/locales/es';
+import { tokenInterceptor } from './app/core/interceptors/error.interceptor';
 
 registerLocaleData(localeEs, 'es');
 
@@ -18,8 +19,10 @@ register();
 bootstrapApplication(AppComponent, {
   providers: [
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, { provide: LOCALE_ID, useValue: 'es' },
-    provideIonicAngular(),
-    provideHttpClient(withFetch(), withInterceptorsFromDi(), withInterceptors([authInterceptor])),
+    provideIonicAngular({
+      mode: 'ios', // fuerza el esquema iOS en toda la app
+    }),
+    provideHttpClient(withFetch(), withInterceptorsFromDi(), withInterceptors([authInterceptor, tokenInterceptor])),
     provideRouter(routes, withPreloading(PreloadAllModules)),
 
   ],

@@ -37,7 +37,10 @@
 // @import '@ionic/angular/css/palettes/dark.system.css';
 
 :root {
+      --ion-safe-area-top: env(safe-area-inset-top);
+  --ion-safe-area-bottom: env(safe-area-inset-bottom);
     --ion-background-color: #f0f0f0; //fondo general
+    --ion-background-color: #e9e8e6;
     --ion-text-color: #333333; //titulos texto impor
     --ion-card-background: #ffffff; //fondo tarjetas y secciones internas
     --ion-color-primary: #1e1e1e; // Headers oscuros, botones importantes
@@ -55,7 +58,9 @@
     --color-800: #333333;
     --color-900: #1e1e1e;
 }
-
+.safe-area {
+    --padding-top: calc(var(--ion-safe-area-top, 0px) + 8px);
+}
 @media (min-width: 1000px) {
     .container {
         max-width: 430px;

@@ -3,6 +3,10 @@
 //     color: #333;
 //     border-radius: 16px;
 // }
+
+.safe-area {
+    --padding-top: calc(var(--ion-safe-area-top, 0px) + 8px);
+}
 .button-group {
     display: flex;
     justify-content: space-evenly;

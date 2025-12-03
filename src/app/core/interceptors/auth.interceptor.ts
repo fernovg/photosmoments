@@ -5,7 +5,7 @@ import { AuthService } from '../services/auth.service';
 export const authInterceptor: HttpInterceptorFn = (req, next) => {
     const authToken = inject(AuthService).headers();
 
-    // console.log("Authorization:", authToken);
+    console.log("Authorization:", authToken);
 
     if (!authToken) {
         // console.warn("no token");

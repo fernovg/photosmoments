@@ -7,6 +7,7 @@ import { PhotoService } from '../core/services/photo.service';
 import { ServiciosService } from '../core/services/servicios.service';
 import { evento } from '../core/models/general.interface';
 import { Router } from '@angular/router';
+import { UserInfoService } from '../core/services/user-info.service';
 
 @Component({
   selector: 'app-tabs',
@@ -15,7 +16,7 @@ import { Router } from '@angular/router';
   imports: [IonFabButton, IonFab, IonTabs, IonTabBar, IonTabButton, IonIcon, IonAlert],
 })
 export class TabsPage {
-
+private userInfoService = inject(UserInfoService);
   private servicios = inject(ServiciosService);
   private modalCtrl = inject(ModalController);
   public photoService = inject(PhotoService);
@@ -30,6 +31,7 @@ export class TabsPage {
 
   ngOnInit() {
     this.misEventos();
+    this.userInfoService.cargarInfo();
   }
 
   misEventos() {

@@ -1,4 +1,11 @@
-<ion-content [fullscreen]="true">
+ <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-back-button default-href="/" text=""></ion-back-button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
+<ion-content [fullscreen]="false">
   <ion-progress-bar type="indeterminate" *ngIf="isLoading"></ion-progress-bar>
   <ion-header collapse="condense">
     <ion-toolbar>
@@ -10,7 +17,8 @@
 
   <div class="ion-padding contenido-login">
     <div class="hero-login">
-      <img src="assets/logo.png" alt="">
+     <!-- <img src="assets/logo2.png" alt="">-->
+      <h2>Crear Cuenta</h2>
     </div>
   </div>
 

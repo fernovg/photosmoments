@@ -1,12 +1,8 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>{{ evento?.name }}</ion-title>
-  </ion-toolbar>
-</ion-header>
 
-<ion-content [fullscreen]="true" class="ion-padding">
+
+<ion-content class="ion-padding safe-area" [fullscreen]="true">
   <app-loader [visible]="isLoading" mensaje="Cargando Evento..."></app-loader>
-  <ion-header collapse="condense">
+  <ion-header collapse="condense" class="ion-no-border">
     <ion-toolbar>
       <ion-title size="large">{{ evento?.name }}</ion-title>
     </ion-toolbar>

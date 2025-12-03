@@ -1,4 +1,4 @@
-<ion-content [fullscreen]="true" class="ion-padding">
+<ion-content [fullscreen]="true" class="ion-padding safe-area">
 
   <div class="perfil-header ion-text-center">
 
@@ -29,6 +29,10 @@
           <ion-select-option value="3">Bautizo</ion-select-option>
           <ion-select-option value="4">Fiesta Año Nuevo</ion-select-option>
         </ion-select>
+      </ion-item>
+
+        <ion-item lines="none"  (click)="logout()">
+        <ion-label>Salir</ion-label>
       </ion-item>
     </ion-list>
 

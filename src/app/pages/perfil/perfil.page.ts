@@ -6,6 +6,7 @@ import { addIcons } from 'ionicons';
 import { cogOutline, createOutline } from 'ionicons/icons';
 import { ServiciosService } from 'src/app/core/services/servicios.service';
 import { UserInfoService } from 'src/app/core/services/user-info.service';
+import { AuthService } from 'src/app/core/services/auth.service';
 
 @Component({
   selector: 'app-perfil',
@@ -18,6 +19,7 @@ export class PerfilPage implements OnInit {
 
   private servicios = inject(ServiciosService);
   private userInfoService = inject(UserInfoService);
+  private authService = inject(AuthService)
 
   user: any;
 
@@ -27,7 +29,9 @@ export class PerfilPage implements OnInit {
   constructor() {
     addIcons({ createOutline, cogOutline });
   }
-
+  logout(){
+    this.authService.logout();
+  }
   ngOnInit() {
     this.userInfoService.getUserData().subscribe(data => {
       this.user = data;
