@@ -29,7 +29,7 @@ export class CrearEventoModalComponent implements OnInit {
   public cEvento: FormGroup = this.fb.group({
     name: ['', [Validators.required,]],
     event_date: ['', Validators.required],
-    lugar: ['', Validators.required],
+    address: ['', Validators.required],
     // close_date: ['', Validators.required],
     total_guests: [10, Validators.required],
     max_photos_per_guest: [10, Validators.required],
@@ -58,7 +58,8 @@ export class CrearEventoModalComponent implements OnInit {
 
     const payload = {
       name: raw.name,
-      event_date: formatDate(raw.event_date, 'yyyy-MM-dd', 'en'),
+      event_date: formatDate(raw.event_date, 'yyyy-MM-dd HH:mm', 'en'),
+      address: raw.address,
       // close_date: formatDate(raw.close_date, 'yyyy-MM-dd', 'en'),
       total_guests: Number(raw.total_guests),
       max_photos_per_guest: Number(raw.max_photos_per_guest),

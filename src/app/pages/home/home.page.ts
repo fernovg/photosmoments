@@ -133,25 +133,25 @@ export class HomePage implements OnInit {
     }
   }
 
-  public alertButtonsEvento = [
-    {
-      text: 'OK',
-      handler: (data: any) => {
-        const codigo = Number(data.codigo);
-        this.uniseAEvento(codigo);
-      }
-    }
-  ];
-  public alertInputsEvento = [
-    {
-      name: 'codigo',
-      type: 'number',
-      inputmode: 'numeric',
-      placeholder: 'Codigo Del Evento',
-      min: 1,
-      max: 10,
-    }
-  ];
+  // public alertButtonsEvento = [
+  //   {
+  //     text: 'OK',
+  //     handler: (data: any) => {
+  //       const codigo = Number(data.codigo);
+  //       this.uniseAEvento(codigo);
+  //     }
+  //   }
+  // ];
+  // public alertInputsEvento = [
+  //   {
+  //     name: 'codigo',
+  //     type: 'number',
+  //     inputmode: 'numeric',
+  //     placeholder: 'Codigo Del Evento',
+  //     min: 1,
+  //     max: 10,
+  //   }
+  // ];
 
   uniseAEvento(payload: any) {
     this.isLoading = true;

@@ -54,7 +54,7 @@ export class SignupPage implements OnInit {
   registrar() {
     this.isLoading = true;
     const { name, lastname, phone, email, password, password_confirmation, user_type_id } = this.miRegister.value;
-    this.authService.register(name, lastname, phone, email, password, password_confirmation, user_type_id).subscribe({
+    this.authService.register(name, lastname, phone, email, password, password_confirmation).subscribe({
       next: (data) => {
         if (data) {
           this.isLoading = false;
