@@ -1,40 +1,38 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-button color="medium" (click)="cancel()">Cancelar</ion-button>
-    </ion-buttons>
-    <ion-title>Crear Evento</ion-title>
+  <ion-toolbar class="toolbar-header">
     <ion-buttons slot="end">
-      <ion-button (click)="confirm()" [strong]="true">Crear</ion-button>
+      <ion-button color="medium" (click)="cancel()"><i class="fa-solid fa-xmark"></i></ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content class="ion-padding">
 
+  <div class="hero">
+    <h1>
+      Crea tu próxima evento
+    </h1>
+  </div>
+
   <form action="" [formGroup]="cEvento">
     <ion-list>
 
       <ion-item lines="none">
-        <ion-input label="Nombre" label-placement="floating" type="text" formControlName="name"></ion-input>
+        <ion-input label="Nombre" label-placement="stacked" type="text" formControlName="name"
+          placeholder="Ingresa el nombre del evento"></ion-input>
       </ion-item>
 
-      <ion-accordion-group [multiple]="true">
-        <ion-accordion value="first">
-          <ion-item slot="header" color="light">
-            <ion-label>Fecha De Inicio</ion-label>
-          </ion-item>
-          <div class="ion-padding" slot="content"><ion-datetime presentation="date" formControlName="event_date"
-              name="event_date"></ion-datetime></div>
-        </ion-accordion>
-        <ion-accordion value="second">
-          <ion-item slot="header" color="light">
-            <ion-label>Fecha De Fin</ion-label>
-          </ion-item>
-          <div class="ion-padding" slot="content"><ion-datetime presentation="date" formControlName="close_date"
-              name="close_date"></ion-datetime></div>
-        </ion-accordion>
-      </ion-accordion-group>
+      <ion-item lines="none" (click)="abrirFecha()">
+        <ion-input label="Fecha" label-placement="stacked" type="text" formControlName="event_date" name="event_date"
+          readonly placeholder="Ingresa la fecha del evento"
+          [value]="fechaSeleccionada | date:'dd/MM/yyyy HH:mm'"></ion-input>
+        <i class="fa-solid fa-calendar-days"></i>
+      </ion-item>
+
+      <ion-item lines="none">
+        <ion-input label="Lugar" label-placement="stacked" type="text" formControlName="lugar" name="lugar"
+          placeholder="Escribe el lugar del evento"></ion-input>
+      </ion-item>
 
       <ion-item lines="none">
         <ion-toggle [enableOnOffLabels]="true" formControlName="can_view_photos_before_event"
@@ -59,16 +57,14 @@
             {{ g }}
           </ion-button>
 
-          <!-- Botón para personalizado -->
-          <ion-button size="small" fill="{{ customInvitados ? 'solid' : 'outline' }}" (click)="setInvitados('custom')">
-            Personalizado
-          </ion-button>
+          <div class="btn-badge">
+            <ion-button size="small" fill="{{ customInvitados ? 'solid' : 'outline' }}"
+              (click)="setInvitados('custom')">+50</ion-button>
+            <ion-badge>
+              <i class="fa-solid fa-crown"></i>
+            </ion-badge>
+          </div>
         </div>
-
-        <!-- Input personalizado -->
-        <ion-input *ngIf="customInvitados" type="number" placeholder="Cantidad" [value]="cEvento.value.total_guests"
-          (ionInput)="cEvento.patchValue({ total_guests: $event.detail.value })">
-        </ion-input>
       </ion-item>
 
       <!-- Cantidad de fotos -->
@@ -80,26 +76,43 @@
             {{ f }}
           </ion-button>
 
-          <ion-button size="small" fill="{{ customFotos ? 'solid' : 'outline' }}" (click)="setFotos('custom')">
-            Personalizado
-          </ion-button>
+          <div class="btn-badge">
+            <ion-button size="small" fill="{{ customFotos ? 'solid' : 'outline' }}" (click)="setFotos('custom')"><i
+                class="fa-solid fa-infinity"></i></ion-button>
+            <ion-badge>
+              <i class="fa-solid fa-crown"></i>
+            </ion-badge>
+          </div>
         </div>
-
-        <!-- Input personalizado -->
-        <ion-input *ngIf="customFotos" type="number" placeholder="Cantidad" [value]="cEvento.value.max_photos_per_guest"
-          (ionInput)="cEvento.patchValue({ max_photos_per_guest: $event.detail.value })">
-        </ion-input>
       </ion-item>
 
+      <!-- Cantidad de dias despues -->
       <ion-item lines="none">
         <ion-label position="stacked">Ver todas las fotos despues de:</ion-label>
         <div>
           <ion-button *ngFor="let d of dias" size="small"
             fill="{{ cEvento.value.days_before_upload === d ? 'solid' : 'outline' }}" (click)="setDias(d)">
             {{ d }} Dias</ion-button>
+
+          <div class="btn-badge">
+            <ion-button size="small" fill="{{ customDays ? 'solid' : 'outline' }}" (click)="setDias('custom')">
+              30 Días
+            </ion-button>
+
+            <ion-badge>
+              <i class="fa-solid fa-crown"></i>
+            </ion-badge>
+          </div>
+
         </div>
       </ion-item>
 
     </ion-list>
   </form>
 </ion-content>
+
+<ion-footer>
+  <ion-toolbar class="toolbar-footer">
+    <ion-button size="block" (click)="confirm()">Guardar</ion-button>
+  </ion-toolbar>
+</ion-footer>

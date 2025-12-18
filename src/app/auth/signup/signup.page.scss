@@ -1,22 +1,16 @@
+:host {
+    background-color: #ECE8DE;
+}
+
 .hero-login {
     // background-color: blue;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    text-align: center;
-    margin-bottom: 15px;
+    margin: 58px 0 38px 0;
 
-    img {
-        display: flex;
-        width: 210px;
-        margin-left: auto;
-        margin-right: auto;
-        // margin-bottom: 50px;
-        // margin-top: 70px;
-    }
-
-    p {
-        font-size: 14px;
+    h1 {
+        font-size: 30px;
+        font-weight: bold;
         color: var(--subtitulo-color);
         margin: 4px 0 0 0;
     }
@@ -28,7 +22,24 @@ form {
     flex-direction: column;
     flex-wrap: nowrap;
     // margin: 15px;
-    margin-bottom: 48px;
+    // margin-bottom: 48px;
+
+
+    .input-custom::part(label) {
+        color: var(--ion-color-primary);
+        font-size: 13px;
+        text-transform: uppercase;
+    }
+
+
+    ion-grid {
+        padding: 0;
+
+        ion-col {
+            padding-left: 0;
+            padding-right: 0;
+        }
+    }
 
     ion-item:first-of-type {
         margin-top: 0px;
@@ -42,17 +53,25 @@ form {
     }
 }
 
+.text-danger {
+    margin: 10px 0 0 30px;
+    font-size: 12px;
+    color: red;
+}
+
 .botones {
     // background-color: aqua;
     display: flex;
     flex-direction: column;
-    // flex-wrap: nowrap;
-    // margin: 15px;
+    margin-top: 86px;
     align-items: center;
 
     ion-button {
-        width: 100%;
+        width: 40%;
         max-width: 280px;
+        //font-size: 20px;
+        --padding-top: 10px;
+        --padding-bottom: 10px;
     }
 }
 
@@ -91,7 +110,7 @@ form {
     }
 
     .registro-link {
-        // margin-top: 90px;
+        margin-top: 40px;
         font-size: 14px;
         color: var(--subtitulo-color);
         text-align: center;

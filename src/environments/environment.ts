@@ -4,14 +4,14 @@
 
 export const environment = {
   production: false,
-  // base_url: 'http://localhost:8000/api',
-  // img_url: 'http://localhost:8000',
-  // base_url: 'http://192.168.1.105:8000/',
-  // img_url: 'http://192.168.1.105:8000/'
-  base_url2: 'https://pueblosmagicoshidalgo2025.com.mx/photos/public/api',
-  img_url: 'https://pueblosmagicoshidalgo2025.com.mx/photos/public/',
-base_url: 'http://192.168.1.69:8000/api'
-  
+  base_url: 'http://localhost:8000/api',
+  img_url: 'http://localhost:8000',
+  //base_url: 'http://127.0.0.1:8000/api',
+  //img_url: 'http://127.0.0.1:8000/'
+  //base_url: 'https://pueblosmagicoshidalgo2025.com.mx/photos/public/api',
+  //img_url: 'https://pueblosmagicoshidalgo2025.com.mx/photos/public/',
+  //base_url: 'http://192.168.1.69:8000/api'
+
   // base_url: 'https://8edcca57754f.ngrok-free.app/api',
 };
 

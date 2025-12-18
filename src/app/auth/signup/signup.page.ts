@@ -1,7 +1,7 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-import { IonBackButton, IonButtons, IonContent, IonHeader, IonToolbar, IonItem, IonInput, IonButton, IonProgressBar, IonIcon, IonText } from '@ionic/angular/standalone';
+import { IonBackButton, IonButtons, IonContent, IonHeader, IonToolbar, IonItem, IonInput, IonButton, IonProgressBar, IonIcon, IonText, IonGrid, IonRow, IonCol } from '@ionic/angular/standalone';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { Router } from '@angular/router';
 import { passwordsIgualesValidator, ValidatorsForm } from 'src/app/core/services/validator.service';
@@ -14,7 +14,7 @@ import { eye, eyeOff, logoGoogle } from 'ionicons/icons';
   templateUrl: './signup.page.html',
   styleUrls: ['./signup.page.scss'],
   standalone: true,
-  imports: [IonText, IonButton, IonInput, IonItem, IonBackButton, ReactiveFormsModule, IonButtons, IonButtons, IonContent, IonHeader, IonToolbar, CommonModule, FormsModule, IonProgressBar, IonIcon]
+  imports: [IonText, IonButton, IonInput, IonItem, IonBackButton, ReactiveFormsModule, IonButtons, IonButtons, IonContent, IonHeader, IonToolbar, CommonModule, FormsModule, IonProgressBar, IonIcon, IonGrid, IonRow, IonCol]
 })
 export class SignupPage implements OnInit {
 

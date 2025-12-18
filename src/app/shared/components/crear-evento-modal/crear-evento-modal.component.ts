@@ -1,17 +1,18 @@
 import { CommonModule, formatDate } from '@angular/common';
 import { Component, inject, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-import { IonButton, IonButtons, IonContent, IonHeader, IonInput, IonItem, IonModal, IonTitle, IonToolbar, ModalController, IonList, IonDatetime, IonAccordion, IonAccordionGroup, IonLabel, IonToggle, IonSelectOption, IonTabButton } from '@ionic/angular/standalone';
+import { IonButton, IonButtons, IonContent, IonHeader, IonInput, IonItem, IonToolbar, ModalController, IonList, IonLabel, IonToggle, IonBadge, IonFooter } from '@ionic/angular/standalone';
 import { ServiciosService } from 'src/app/core/services/servicios.service';
 import { ToastService } from 'src/app/core/services/toast.service';
 import { ValidatorsForm } from 'src/app/core/services/validator.service';
+import { FechaModalComponent } from '../fecha-modal/fecha-modal.component';
 @Component({
   selector: 'app-crear-evento-modal',
   standalone: true,
   templateUrl: './crear-evento-modal.component.html',
   styleUrls: ['./crear-evento-modal.component.scss'],
-  imports: [ IonLabel, IonList,
-    FormsModule, IonButton, IonButtons, IonContent, IonHeader, IonInput, IonItem, IonTitle, IonToolbar, ReactiveFormsModule, IonDatetime, IonAccordion, IonAccordionGroup, IonToggle, CommonModule]
+  imports: [IonLabel, IonList,
+    FormsModule, IonButton, IonButtons, IonContent, IonHeader, IonInput, IonItem, IonToolbar, ReactiveFormsModule, IonToggle, CommonModule, IonBadge, IonFooter]
 })
 export class CrearEventoModalComponent implements OnInit {
 
@@ -23,15 +24,18 @@ export class CrearEventoModalComponent implements OnInit {
 
   isLoading = false;
 
+  fechaSeleccionada: string | null = null;
+
   public cEvento: FormGroup = this.fb.group({
     name: ['', [Validators.required,]],
     event_date: ['', Validators.required],
-    close_date: ['', Validators.required],
+    lugar: ['', Validators.required],
+    // close_date: ['', Validators.required],
     total_guests: [10, Validators.required],
     max_photos_per_guest: [10, Validators.required],
     can_view_photos_before_event: [true],
     can_upload_photos_before_event: [true],
-    days_before_upload: [3, Validators.required],
+    days_before_upload: [1, Validators.required],
   });
 
   constructor() { }
@@ -55,7 +59,7 @@ export class CrearEventoModalComponent implements OnInit {
     const payload = {
       name: raw.name,
       event_date: formatDate(raw.event_date, 'yyyy-MM-dd', 'en'),
-      close_date: formatDate(raw.close_date, 'yyyy-MM-dd', 'en'),
+      // close_date: formatDate(raw.close_date, 'yyyy-MM-dd', 'en'),
       total_guests: Number(raw.total_guests),
       max_photos_per_guest: Number(raw.max_photos_per_guest),
       can_view_photos_before_event: !!raw.can_view_photos_before_event,
@@ -63,18 +67,20 @@ export class CrearEventoModalComponent implements OnInit {
       days_before_upload: Number(raw.days_before_upload)
     };
 
-    this.isLoading = true;
-    this.servicios.guardarDatos('events', payload).subscribe({
-      next: (data) => {
-        this.isLoading = false;
-        this.toastService.success('Creado Correctamente');
-        this.modalCtrl.dismiss(data, 'confirm');
-      },
-      error: (error) => {
-        this.isLoading = false;
-        this.toastService.error('Error al crear el evento');
-      }
-    })
+    console.log(payload);
+
+    // this.isLoading = true;
+    // this.servicios.guardarDatos('events', payload).subscribe({
+    //   next: (data) => {
+    //     this.isLoading = false;
+    //     this.toastService.success('Creado Correctamente');
+    //     this.modalCtrl.dismiss(data, 'confirm');
+    //   },
+    //   error: (error) => {
+    //     this.isLoading = false;
+    //     this.toastService.error('Error al crear el evento');
+    //   }
+    // })
   }
 
   valVerFotos() {
@@ -87,10 +93,11 @@ export class CrearEventoModalComponent implements OnInit {
 
   public invitados = [10, 15, 20, 30];
   public fotos = [10, 25, 50, 100, 150, 250];
-  public dias = [1, 3, 7];
+  public dias = [1, 7, 14];
 
   public customInvitados = false;
   public customFotos = false;
+  public customDays = false;
 
   setInvitados(value: number | 'custom') {
     if (value === 'custom') {
@@ -114,11 +121,26 @@ export class CrearEventoModalComponent implements OnInit {
 
   setDias(value: number | 'custom') {
     if (value === 'custom') {
-      this.customFotos = true;
+      this.customDays = true;
       this.cEvento.patchValue({ days_before_upload: null });
     } else {
-      this.customFotos = false;
+      this.customDays = false;
       this.cEvento.patchValue({ days_before_upload: value });
+    }
+  }
+
+  async abrirFecha() {
+    const modal = await this.modalCtrl.create({
+      component: FechaModalComponent,
+      breakpoints: [0, 0.32, 0.5],
+      initialBreakpoint: 0.32,
+    });
+
+    await modal.present();
+    const { data } = await modal.onWillDismiss();
+    if (data) {
+      this.fechaSeleccionada = data;
+      this.cEvento.patchValue({ event_date: data });
     }
   }
 

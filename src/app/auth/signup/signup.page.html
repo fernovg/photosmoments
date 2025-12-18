@@ -1,74 +1,81 @@
- <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-buttons slot="start">
-        <ion-back-button default-href="/" text=""></ion-back-button>
-      </ion-buttons>
-    </ion-toolbar>
-  </ion-header>
-<ion-content [fullscreen]="false">
+<ion-content [fullscreen]="false" class="ion-padding safe-area">
   <ion-progress-bar type="indeterminate" *ngIf="isLoading"></ion-progress-bar>
   <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-buttons slot="start">
-        <ion-back-button default-href="/" text=""></ion-back-button>
-      </ion-buttons>
-    </ion-toolbar>
   </ion-header>
 
   <div class="ion-padding contenido-login">
     <div class="hero-login">
-     <!-- <img src="assets/logo2.png" alt="">-->
-      <h2>Crear Cuenta</h2>
+      <!-- <img src="assets/logo2.png" alt=""> -->
+      <h1>Crea tu cuenta</h1>
     </div>
   </div>
 
   <form [formGroup]="miRegister" (submit)="registrar()">
-    <ion-item lines="none">
-      <ion-input label="Nombre" label-placement="floating" fill="solid" placeholder="Nombre" formControlName="name"
+    <ion-grid>
+      <ion-row>
+        <ion-col size="6">
+          <ion-item lines="none">
+            <ion-input class="input-custom" label="Nombre" label-placement="stacked" fill="solid" placeholder="Nombre"
+              formControlName="name">
+            </ion-input>
+          </ion-item>
+        </ion-col>
+
+        <ion-col size="6">
+          <ion-item lines="none">
+            <ion-input label="Apellidos" label-placement="stacked" fill="solid" placeholder="Apellidos"
+              formControlName="lastname">
+            </ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    <!-- <ion-item lines="none">
+      <ion-input label="Nombre" label-placement="stacked" fill="solid" placeholder="Escribe tu nombre" formControlName="name"
         name="name"></ion-input>
     </ion-item>
     <ion-item lines="none">
-      <ion-input label="Apellidos" label-placement="floating" fill="solid" placeholder="Apellidos"
+      <ion-input label="Apellidos" label-placement="stacked" fill="solid" placeholder="Escribe tu apellidos"
         formControlName="lastname" name="lastname"></ion-input>
-    </ion-item>
-    <ion-item lines="none">
-      <ion-input label="Telefono" label-placement="floating" fill="solid" type="tel" placeholder="888-888-8888"
+    </ion-item> -->
+    <!-- <ion-item lines="none">
+      <ion-input label="Telefono" label-placement="stacked" fill="solid" type="tel" placeholder="888-888-8888"
         formControlName="phone" name="phone"></ion-input>
+    </ion-item> -->
+    <ion-item lines="none">
+      <ion-input label="Correo" label-placement="stacked" fill="solid" placeholder="ingrese tu correo"
+        formControlName="email" name="email"></ion-input>
     </ion-item>
     <ion-item lines="none">
-      <ion-input label="Correo" label-placement="floating" fill="solid" placeholder="Correo" formControlName="email"
-        name="email"></ion-input>
-    </ion-item>
-    <ion-item lines="none">
-      <ion-input label="Contraseña" label-placement="floating" fill="solid" placeholder="Contraseña"
+      <ion-input label="Contraseña" label-placement="stacked" fill="solid" placeholder="Ingresa una contraseña"
         formControlName="password" name="password" [type]="showPassword1 ? 'text' : 'password'"></ion-input>
       <ion-button fill="clear" slot="end" aria-label="Show/hide" (click)="togglePasswordVisibility1()">
-        <ion-icon slot="icon-only" [name]="showPassword1 ? 'eye-off' : 'eye'" aria-hidden="true"></ion-icon>
+        <i class="fa-solid" [ngClass]="showPassword1 ? 'fa-eye-slash' : 'fa-eye'"></i>
       </ion-button>
     </ion-item>
     <ion-item lines="none">
-      <ion-input label="Confirma Contraseña" label-placement="floating" fill="solid" placeholder="Confirma Contraseña"
+      <ion-input label="Confirma" label-placement="stacked" fill="solid" placeholder="Confirmar la contraseña"
         formControlName="password_confirmation" name="password_confirmation"
         [type]="showPassword2 ? 'text' : 'password'"></ion-input>
       <ion-button fill="clear" slot="end" aria-label="Show/hide" (click)="togglePasswordVisibility2()">
-        <ion-icon slot="icon-only" [name]="showPassword2 ? 'eye-off' : 'eye'" aria-hidden="true"></ion-icon>
+        <i class="fa-solid" [ngClass]="showPassword2 ? 'fa-eye-slash' : 'fa-eye'"></i>
       </ion-button>
-      <ion-text color="danger" *ngIf="miRegister.get('password_confirmation')?.hasError('noSonIguales')">
+      <ion-text color="form-text text-danger" *ngIf="miRegister.get('password_confirmation')?.hasError('noSonIguales')">
         Las contraseñas no coinciden
       </ion-text>
     </ion-item>
     <div class="botones">
       <ion-button type="submit" [disabled]="miRegister.invalid || isLoading"
-        [ngClass]="{'disabled': miRegister.invalid}">Registrar</ion-button>
+        [ngClass]="{'disabled': miRegister.invalid}">Registrarme</ion-button>
     </div>
   </form>
 
   <div class="extra-login">
-    <div class="seperador">
+    <!-- <div class="seperador">
       <hr>
       <span>O Registrate Con</span>
     </div>
-    <ion-button expand="block" fill="outline" color="dark">Acceder Con Google</ion-button>
+    <ion-button expand="block" fill="outline" color="dark">Acceder Con Google</ion-button> -->
     <p class="registro-link">
       Ya Tienes Cuenta? <a href="/signin">Inicia Sesion Aqui</a>
     </p>
