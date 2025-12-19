@@ -23,8 +23,8 @@ import { timestamp } from 'rxjs';
   templateUrl: './home.page.html',
   styleUrls: ['./home.page.scss'],
   standalone: true,
-  imports: [IonItem, IonLabel, IonChip, IonIcon, IonButton, IonContent, IonCard,
-    IonCardContent, IonCardHeader, IonCardTitle, CommonModule, FormsModule, LoaderComponent, IonAlert],
+  imports: [IonLabel, IonChip, IonButton, IonContent, IonCard,
+    IonCardContent, IonCardHeader, IonCardTitle, CommonModule, FormsModule, LoaderComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class HomePage implements OnInit {

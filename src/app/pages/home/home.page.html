@@ -11,61 +11,54 @@
     </ion-card-content>
   </ion-card>
 
-  <!-- Botón principal para crear evento -->
+  <!-- boton principal para crear evento -->
   <div class="button-group">
     <ion-button color="primary" (click)="abrirCrearEvento()">
-      <ion-icon name="add-circle" slot="start"></ion-icon>
+      <i class="fa-solid fa-plus"></i>
       Crear evento
     </ion-button>
     <ion-button color="dark" fill="outline" (click)="abrirScanner()">
-    <!-- <ion-button color="dark" fill="outline" id="alert-evento"> -->
-      <ion-icon name="qr-code-outline" slot="start"></ion-icon>
+      <!-- <ion-button color="dark" fill="outline" id="alert-evento"> -->
+      <i class="fa-solid fa-qrcode"></i>
       Entrar
     </ion-button>
   </div>
 
   <!-- carrusel mis evetos -->
   <div class="mis-eventos">
-    <h2 class="ion-margin-top">Eventos</h2>
-    <swiper-container slides-per-view="1" space-between="20" pagination="true">
-      @for (item of eventos; track $index) {
-      <swiper-slide>
-        <ion-card class="evento-card" [href]="['tabs/evento/' + item.id]"
-          style="--img-url: url('https://img.freepik.com/vector-gratis/concepto-letras-feliz-cumpleanos_23-2148499329.jpg?semt=ais_hybrid&w=740')">
-          <div class="fondo-evento"></div>
-          <div class="contenido-evento">
-            <ion-card-header>.
-              <ion-card-title> {{ item.name }} </ion-card-title>
-            </ion-card-header>
-            <ion-card-content>
-              <ion-item lines="none">
-                <ion-icon name="calendar" slot="start"></ion-icon>
-                <ion-label>{{ item.event_date | date:'mediumDate' }}, 8:00 PM</ion-label>
-              </ion-item>
-              <!-- <ion-item lines="none">
-                <ion-icon name="location" slot="start"></ion-icon>
-                <ion-label>Salón Las Rosas</ion-label>
-              </ion-item> -->
+    <h1 class="ion-margin-top">Eventos</h1>
 
-              <!-- <ion-chip color="primary">
-                <ion-icon name="camera"></ion-icon>
-                <ion-label>{{ item.photos?.length || 0 }} fotos</ion-label>
-              </ion-chip>
-              <ion-chip color="tertiary">
-                <ion-icon name="people"></ion-icon>
-                <ion-label>8 invitados</ion-label>
-              </ion-chip> -->
-            </ion-card-content>
-          </div>
-        </ion-card>
-      </swiper-slide>
+    @for (item of eventos; track $index) {
+    <ion-card class="evento-card" [href]="['tabs/evento/' + item.id]">
+      @if(item.img){
+        <img alt="{{ item.name }}" src="https://ionicframework.com/docs/img/demos/card-media.png" />
       }
-    </swiper-container>
+
+      <div class="contenido-evento">
+        <ion-card-header>
+          <ion-card-title> {{ item.name }} </ion-card-title>
+          <ion-card-subtitle>{{ item.event_date | date:'mediumDate' }} - 8 PM</ion-card-subtitle>
+        </ion-card-header>
+        <ion-card-content>
+          <ion-chip>
+            <i class="fa-solid fa-image"></i>
+            <ion-label>{{ item.total_guests }}</ion-label>
+          </ion-chip>
+          <ion-chip>
+            <i class="fa-solid fa-user"></i>
+            <ion-label>{{ item.photos?.length }}</ion-label>
+          </ion-chip>
+        </ion-card-content>
+      </div>
+
+    </ion-card>
+    }
+
   </div>
 
   <!-- carta de proximo evento -->
 
-  @if (eventoProximo) {
+  <!-- @if (eventoProximo) {
   <div class="prox-evento">
     <ion-card class="evento-card" [href]="['tabs/evento/' + eventoProximo.id]"
       style="--img-url: url('https://img.freepik.com/vector-gratis/concepto-letras-feliz-cumpleanos_23-2148499329.jpg?semt=ais_hybrid&w=740')">
@@ -80,10 +73,6 @@
             <ion-icon name="calendar" slot="start"></ion-icon>
             <ion-label>{{ eventoProximo.event_date | date:'mediumDate' }}, 8:00 PM</ion-label>
           </ion-item>
-          <!-- <ion-item lines="none">
-              <ion-icon name="location" slot="start"></ion-icon>
-              <ion-label>Salón Las Rosas</ion-label>
-            </ion-item> -->
           <ion-chip color="tertiary">
             <ion-icon name="people"></ion-icon>
             <ion-label>8 invitados</ion-label>
@@ -111,10 +100,10 @@
       </div>
     </ion-card>
   </div>
-  }
+  } -->
 
 
-  <h2>Recuerdos recientes</h2>
+  <!-- <h2>Recuerdos recientes</h2>
 
   <ion-grid class="ion-padding">
     <ion-row>
@@ -125,7 +114,7 @@
         <ion-img src="https://picsum.photos/300/200?random=2"></ion-img>
       </ion-col>
     </ion-row>
-  </ion-grid>
+  </ion-grid> -->
 
 
   <!-- <ion-alert trigger="alert-evento" header="Ingrese Codigo Del Evento" [buttons]="alertButtonsEvento"

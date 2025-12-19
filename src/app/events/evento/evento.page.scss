@@ -1,106 +1,193 @@
-.button-group {
+.toolbar-header {
     display: flex;
-    justify-content: space-evenly;
     align-items: center;
-}
+    --background: transparent;
 
-ion-segment {
-    margin: 15px 0;
-}
-
-.publicacion-card {
-    margin: 12px 0;
-    // border-radius: 12px;
-    // overflow: hidden;
-    // box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-
-    .publicacion-header {
-        padding: 8px 0px;
-
-        ion-grid {
-            margin: 0;
-        }
-    }
-
-    .foto-perfil {
-        width: 42px;
-        height: 42px;
-        border-radius: 50%;
-        object-fit: cover;
-    }
-
-    .tiempo {
-        font-size: 12px;
-        color: #999;
-        margin: 2px 0 0;
-    }
-
-    .foto-publi {
-        width: 100%;
-        height: 300px;
-        object-fit: cover;
-        display: block;
+    ion-title {
+        text-align: left;
+        font-size: 32px;
+        padding-left: 30px; // ajusta si lo quieres más pegado
     }
 }
 
+.card-evento {
 
-.grid-foto {
-    margin: 0;
+    ion-card-header {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
 
-    .card-grid-foto {
-        margin: 0;
+        padding: 20px 2px 16px 2px;
 
-        position: relative;
-        overflow: hidden;
-
-        img {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-            display: block;
-        }
-
-        .overlay-inferior {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            background: rgba(180, 179, 179, 0.5); // semitransparente
-            color: white;
-            padding: 0 1px;
-            // z-index: 2;
+        .datos-evento {
+            display: flex;
+            flex-direction: column;
 
             ion-card-title {
-                color: white;
-                font-size: 14px;
-                margin: 0;
+                // font-size: 1.4rem;
+                font-size: 20px;
+                color: #000000;
             }
 
-            ion-button {
-                color: white;
+            ion-card-subtitle {
+                font-size: 18px;
+                color: #000000;
+            }
+        }
+
+    }
+
+    .button-group {
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+
+        ion-button {
+            font-size: 18px;
+        }
+    }
+
+    ion-segment {
+        margin: 15px 0;
+
+        ion-segment-button {
+            margin: 4px;
+
+            i {
+                font-size: 22px;
+
+                display: flex;
+                align-items: center;
+
+                p {
+                    font-size: 18px;
+                }
+            }
+
+        }
+    }
+
+    .publicacion-card {
+        margin: 12px 0;
+        border: 2px solid #f0f0f0;
+        box-shadow: 0 2px 10px #0000000d;
+
+        .publicacion-header {
+            padding: 0px 0px;
+
+            ion-grid {
+                margin: 0;
+            }
+        }
+
+        .foto-perfil {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .tiempo {
+            font-size: 12px;
+            color: #999;
+            margin: 2px 0 0;
+        }
+
+        .foto-publi {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            display: block;
+        }
+    }
+
+    .container-grid {
+
+        .cartas-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+
+            ion-card {
+                margin: 0;
+
+                img {
+                    width: 100%;
+                    // height: 200px;
+                    object-fit: cover;
+                    display: block;
+                }
+            }
+        }
+    }
+
+    .lista-publi {
+        ion-item {
+            .foto-publi {
+                width: 50px;
+                height: 50px;
+                object-fit: cover;
+                display: block;
+            }
+        }
+
+        ion-item-sliding {
+            ion-item {
+                display: flex;
+
+                ion-avatar {
+                    display: flex;
+                    align-items: center;
+
+                    img {
+                        width: 32px;
+                        height: auto;
+                        border-radius: 100%;
+                        object-fit: cover;
+                        display: block;
+                    }
+                }
+
+                ion-label {
+                    font-size: 20px;
+                }
+
+                ion-note {
+                    ion-chip {
+                        --background: transparent;
+                        --color: #000000;
+                        font-size: 18px;
+
+                        ion-label {
+                            font-size: 16px;
+                        }
+                    }
+                }
             }
         }
     }
 }
 
-.lista-publi {
-    ion-item {
-        .foto-publi {
-            width: 50px;
-            height: 50px;
-            object-fit: cover;
-            display: block;
-        }
-    }
+::ng-deep .evento-qr-modal {
+    --height: 60%;
+    --border-radius: 20px 20px 0 0;
+    --background: #ffffff;
+}
+
+::ng-deep .evento-qr-modal ion-content {
+    --padding-top: 16px;
+    --padding-bottom: 24px;
+    --padding-start: 16px;
+    --padding-end: 16px;
+}
+
+.qr-code {
+    width: 220px;
+    height: 220px;
+    margin: 16px auto;
+    display: block;
 }
 
 .content-modal {
-    display: flex;
-    background-color: red;
-
-    .qr-code {
-        margin: auto 0;
-        max-width: 100%;
-        height: auto;
-    }
+    text-align: center;
 }
