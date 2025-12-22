@@ -32,14 +32,13 @@ export class AuthService {
         );
     }
 
-    register(name: string, lastname: string, email: string, password: string, password_confirmation: string, user_type_id: number): Observable<AuthResponse> {
+    register(name: string, lastname: string, email: string, password: string, password_confirmation: string): Observable<AuthResponse> {
         const body = {
             name: name,
             lastname: lastname,
             email: email,
             password: password,
             password_confirmation: password_confirmation,
-            user_type_id: user_type_id
         };
         return this.http.post<AuthResponse>(`${this.baseUrl}/register`, body).pipe(
             switchMap(() => {

@@ -35,7 +35,7 @@ export class SignupPage implements OnInit {
     email: ['', [Validators.required, Validators.pattern(this.valiService.emailPattern)]],
     password: ['', Validators.required],
     password_confirmation: ['', Validators.required],
-    user_type_id: [1],
+    // user_type_id: [1],
   },
   {
     validators: [passwordsIgualesValidator('password', 'password_confirmation')]
@@ -53,8 +53,9 @@ export class SignupPage implements OnInit {
 
   registrar() {
     this.isLoading = true;
-    const { name, lastname, phone, email, password, password_confirmation, user_type_id } = this.miRegister.value;
-    this.authService.register(name, lastname, phone, email, password, password_confirmation).subscribe({
+    const {name, lastname, email, password, password_confirmation} = this.miRegister.value;
+    // console.log(this.miRegister.value);
+    this.authService.register(name, lastname, email, password, password_confirmation).subscribe({
       next: (data) => {
         if (data) {
           this.isLoading = false;
