@@ -1,15 +1,13 @@
-      import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonActionSheet, IonContent, IonHeader, IonTitle, IonToolbar, IonButton, IonIcon, IonSegment, IonSegmentButton, IonSegmentContent, IonSegmentView, IonCard, IonCardHeader, IonCardTitle, ModalController, IonAvatar, IonItem, IonGrid, IonRow, IonCol, IonList, IonLabel, IonModal, IonSearchbar, IonImg, IonFab, IonButtons, IonBackButton, IonCardContent, IonCardSubtitle, IonItemSliding, IonItemOptions, IonItemOption, IonNote, IonChip } from '@ionic/angular/standalone';
-import { addIcons } from 'ionicons';
-import { addCircle, albums, camera, ellipsisHorizontal, grid, heart, people, qrCodeOutline, settings, ellipsisHorizontalOutline, add } from 'ionicons/icons';
+import { IonContent, IonHeader, IonTitle, IonToolbar, IonButton, IonSegment, IonSegmentButton, IonSegmentContent, IonSegmentView, IonCard, IonCardHeader, IonCardTitle, ModalController, IonAvatar, IonItem, IonGrid, IonRow, IonCol, IonList, IonLabel, IonModal, IonButtons, IonBackButton, IonCardContent, IonCardSubtitle, IonItemSliding, IonItemOptions, IonItemOption, IonNote, IonChip } from '@ionic/angular/standalone';
+
 // import {  } from '@ionic/angular';
 import { GaleriaModalComponent } from 'src/app/shared/components/galeria-modal/galeria-modal.component';
-import { CrearEventoModalComponent } from 'src/app/shared/components/crear-evento-modal/crear-evento-modal.component';
 import { ServiciosService } from 'src/app/core/services/servicios.service';
 import { evento, eventoPhoto, guests } from 'src/app/core/models/general.interface';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { EditarEventoModalComponent } from 'src/app/shared/components/editar-evento-modal/editar-evento-modal.component';
 import { environment } from 'src/environments/environment';
 import { LoaderComponent } from 'src/app/shared/components/loader/loader.component';
@@ -20,7 +18,7 @@ import { UserInfoService } from 'src/app/core/services/user-info.service';
   templateUrl: './evento.page.html',
   styleUrls: ['./evento.page.scss'],
   standalone: true,
-  imports: [IonFab, IonModal, IonLabel, IonItem, IonAvatar, IonList, IonCol, IonRow, IonGrid, IonActionSheet, IonCardTitle, IonCardHeader, IonCard, IonSegmentButton, IonSegment, IonIcon, IonButton, IonContent, IonHeader, IonTitle, IonToolbar, IonSegmentContent, IonSegmentView, CommonModule, FormsModule, LoaderComponent, IonButtons, IonBackButton, IonCardContent, IonCardSubtitle, IonItemSliding, IonItemOptions, IonItemOption, IonNote, IonChip]
+  imports: [IonModal, IonLabel, IonItem, IonAvatar, IonList, IonCol, IonRow, IonGrid, IonCardTitle, IonCardHeader, IonCard, IonSegmentButton, IonSegment, IonButton, IonContent, IonHeader, IonTitle, IonToolbar, IonSegmentContent, IonSegmentView, CommonModule, FormsModule, LoaderComponent, IonButtons, IonBackButton, IonCardContent, IonCardSubtitle, IonItemSliding, IonItemOptions, IonItemOption, IonNote, IonChip]
 })
 export class EventoPage implements OnInit {
 
@@ -33,9 +31,7 @@ export class EventoPage implements OnInit {
   baseUrl = environment.img_url;
   user: any;
 
-  constructor() {
-    addIcons({ qrCodeOutline, add, settings, albums, grid, heart, ellipsisHorizontalOutline, addCircle, people, camera, ellipsisHorizontal });
-  }
+  constructor() {}
 
   evento: evento | null = null;
   eventoId: string | null = null;
@@ -99,42 +95,6 @@ export class EventoPage implements OnInit {
       }
     })
   }
-
-  //* Action Sheet
-  // isActionSheetOpen = false;
-
-  // public actionSheetButtons = [
-  //   {
-  //     text: 'Guardar',
-  //     data: {
-  //       action: 'save',
-  //     },
-  //   },
-  //   {
-  //     text: 'Borrar',
-  //     role: 'destructive',
-  //     data: {
-  //       action: 'delete',
-  //     },
-  //   },
-  //   // {
-  //   //   text: 'Compartir',
-  //   //   data: {
-  //   //     action: 'share',
-  //   //   },
-  //   // },
-  //   {
-  //     text: 'Cancelar',
-  //     role: 'cancel',
-  //     data: {
-  //       action: 'cancel',
-  //     },
-  //   },
-  // ]
-
-  // setOpen(isOpen: boolean) {
-  //   this.isActionSheetOpen = isOpen;
-  // }
 
   async abrirGaleria(index: number) {
     const modal = await this.modalCtrl.create({

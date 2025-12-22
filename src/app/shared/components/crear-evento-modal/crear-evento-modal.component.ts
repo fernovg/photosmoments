@@ -30,7 +30,6 @@ export class CrearEventoModalComponent implements OnInit {
     name: ['', [Validators.required,]],
     event_date: ['', Validators.required],
     address: ['', Validators.required],
-    // close_date: ['', Validators.required],
     total_guests: [10, Validators.required],
     max_photos_per_guest: [10, Validators.required],
     can_view_photos_before_event: [true],
@@ -60,7 +59,6 @@ export class CrearEventoModalComponent implements OnInit {
       name: raw.name,
       event_date: formatDate(raw.event_date, 'yyyy-MM-dd HH:mm', 'en'),
       address: raw.address,
-      // close_date: formatDate(raw.close_date, 'yyyy-MM-dd', 'en'),
       total_guests: Number(raw.total_guests),
       max_photos_per_guest: Number(raw.max_photos_per_guest),
       can_view_photos_before_event: !!raw.can_view_photos_before_event,
@@ -68,20 +66,20 @@ export class CrearEventoModalComponent implements OnInit {
       days_before_upload: Number(raw.days_before_upload)
     };
 
-    console.log(payload);
+    // console.log(payload);
 
-    // this.isLoading = true;
-    // this.servicios.guardarDatos('events', payload).subscribe({
-    //   next: (data) => {
-    //     this.isLoading = false;
-    //     this.toastService.success('Creado Correctamente');
-    //     this.modalCtrl.dismiss(data, 'confirm');
-    //   },
-    //   error: (error) => {
-    //     this.isLoading = false;
-    //     this.toastService.error('Error al crear el evento');
-    //   }
-    // })
+    this.isLoading = true;
+    this.servicios.guardarDatos('events', payload).subscribe({
+      next: (data) => {
+        this.isLoading = false;
+        this.toastService.success('Creado Correctamente');
+        this.modalCtrl.dismiss(data, 'confirm');
+      },
+      error: (error) => {
+        this.isLoading = false;
+        this.toastService.error('Error al crear el evento');
+      }
+    })
   }
 
   valVerFotos() {

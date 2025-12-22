@@ -31,7 +31,7 @@ export class SignupPage implements OnInit {
   public miRegister: FormGroup = this.formBuilder.group({
     name: ['', Validators.required],
     lastname: ['', Validators.required],
-    phone: ['', Validators.required],
+    // phone: ['', Validators.required],
     email: ['', [Validators.required, Validators.pattern(this.valiService.emailPattern)]],
     password: ['', Validators.required],
     password_confirmation: ['', Validators.required],
