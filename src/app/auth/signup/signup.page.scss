@@ -24,13 +24,16 @@ form {
     // margin: 15px;
     // margin-bottom: 48px;
 
-
-    .input-custom::part(label) {
-        color: var(--ion-color-primary);
-        font-size: 13px;
-        text-transform: uppercase;
+    ::ng-deep ion-input {
+        label {
+            .label-text-wrapper {
+                font-size: 24px;
+                font-weight: bold;
+                color: #000000;
+                margin: 0 0 10px 0;
+            }
+        }
     }
-
 
     ion-grid {
         padding: 0;

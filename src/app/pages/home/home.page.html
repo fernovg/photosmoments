@@ -29,11 +29,11 @@
     <h1 class="ion-margin-top">Eventos</h1>
 
     @for (item of eventos; track $index) {
+    @if (eventos) {
     <ion-card class="evento-card" [href]="['tabs/evento/' + item.id]">
       @if(item.img){
-        <img alt="{{ item.name }}" src="https://ionicframework.com/docs/img/demos/card-media.png" />
+      <img alt="{{ item.name }}" src="https://ionicframework.com/docs/img/demos/card-media.png" />
       }
-
       <div class="contenido-evento">
         <ion-card-header>
           <ion-card-title> {{ item.name }} </ion-card-title>
@@ -50,74 +50,15 @@
           </ion-chip>
         </ion-card-content>
       </div>
-
     </ion-card>
+    } @else {
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>No hay eventos</ion-card-title>
+      </ion-card-header>
+    </ion-card>
+    }
     }
 
   </div>
-
-  <!-- carta de proximo evento -->
-
-  <!-- @if (eventoProximo) {
-  <div class="prox-evento">
-    <ion-card class="evento-card" [href]="['tabs/evento/' + eventoProximo.id]"
-      style="--img-url: url('https://img.freepik.com/vector-gratis/concepto-letras-feliz-cumpleanos_23-2148499329.jpg?semt=ais_hybrid&w=740')">
-      <div class="fondo-evento"></div>
-      <div class="contenido-evento">
-        <ion-card-header>
-          <ion-card-title>{{ eventoProximo.name }}</ion-card-title>
-          <ion-card-subtitle>Proximo Evento</ion-card-subtitle>
-        </ion-card-header>
-        <ion-card-content>
-          <ion-item lines="none">
-            <ion-icon name="calendar" slot="start"></ion-icon>
-            <ion-label>{{ eventoProximo.event_date | date:'mediumDate' }}, 8:00 PM</ion-label>
-          </ion-item>
-          <ion-chip color="tertiary">
-            <ion-icon name="people"></ion-icon>
-            <ion-label>8 invitados</ion-label>
-          </ion-chip>
-        </ion-card-content>
-      </div>
-    </ion-card>
-  </div>
-  } @else {
-  <div class="prox-evento">
-    <ion-card class="evento-card"
-      style="--img-url: url('https://img.freepik.com/vector-gratis/concepto-letras-feliz-cumpleanos_23-2148499329.jpg?semt=ais_hybrid&w=740')">
-      <div class="fondo-evento"></div>
-      <div class="contenido-evento">
-        <ion-card-header>
-          <ion-card-title>No hay eventos</ion-card-title>
-          <ion-card-subtitle>Próximo Evento</ion-card-subtitle>
-        </ion-card-header>
-        <ion-card-content>
-          <ion-item lines="none">
-            <ion-icon name="calendar" slot="start"></ion-icon>
-            <ion-label>No hay eventos</ion-label>
-          </ion-item>
-        </ion-card-content>
-      </div>
-    </ion-card>
-  </div>
-  } -->
-
-
-  <!-- <h2>Recuerdos recientes</h2>
-
-  <ion-grid class="ion-padding">
-    <ion-row>
-      <ion-col size="6">
-        <ion-img src="https://picsum.photos/300/200?random=1"></ion-img>
-      </ion-col>
-      <ion-col size="6">
-        <ion-img src="https://picsum.photos/300/200?random=2"></ion-img>
-      </ion-col>
-    </ion-row>
-  </ion-grid> -->
-
-
-  <!-- <ion-alert trigger="alert-evento" header="Ingrese Codigo Del Evento" [buttons]="alertButtonsEvento"
-    [inputs]="alertInputsEvento"></ion-alert> -->
-
 </ion-content>

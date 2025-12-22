@@ -56,7 +56,7 @@ export class EventoPage implements OnInit {
           this.isLoading = false;
         },
         error: (error) => {
-          console.log(error);
+          // console.log(error);
           this.isLoading = false;
         }
       })
@@ -77,7 +77,7 @@ export class EventoPage implements OnInit {
         });
       },
       error: (error) => {
-        console.log(error);
+        // console.log(error);
       }
     })
   }
@@ -88,10 +88,10 @@ export class EventoPage implements OnInit {
     this.servicios.traerGuest(path, id, path1).subscribe({
       next: (data: any[]) => {
         this.guests = data;
-        console.log(this.guests);
+        // console.log(this.guests);
       },
       error: (error) => {
-        console.log(error);
+        // console.log(error);
       }
     })
   }

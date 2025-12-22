@@ -38,7 +38,7 @@
         </div>
       </ion-card-header>
 
-      <ion-segment value="gruest">
+      <ion-segment value="albums">
         <ion-segment-button value="albums" contentId="albums">
           <i class="fa-solid fa-images"></i>
         </ion-segment-button>
@@ -55,8 +55,9 @@
       <ion-segment-view>
 
         <ion-segment-content id="albums">
-
-          <ion-card class="publicacion-card" *ngFor="let img of eventoPhoto; let i = index">
+          @for (item of eventoPhoto; track $index) {
+          @if (eventoPhoto) {
+          <ion-card class="publicacion-card">
             <ion-card-header class="publicacion-header">
               <ion-grid>
                 <ion-row class="ion-align-items-center">
@@ -66,39 +67,52 @@
                       alt="Foto perfil" class="foto-perfil">
                   </ion-col>
                   <ion-col>
-                    <ion-card-title>{{ img.user?.name }}</ion-card-title>
+                    <ion-card-title>{{ item.user?.name }}</ion-card-title>
                     <!-- <p class="tiempo">Hace 2 minutos</p> -->
                   </ion-col>
                 </ion-row>
               </ion-grid>
             </ion-card-header>
-
-            <img class="foto-publi" [src]="baseUrl + img.thumbnail_path" (click)="abrirGaleria(i)"
+            <img class="foto-publi" [src]="baseUrl + item.thumbnail_path" (click)="abrirGaleria($index)"
               alt="Foto publicación">
-
           </ion-card>
-
+          } @else {
+          <ion-card class="publicacion-card">
+            <ion-card-header class="publicacion-header">
+              <ion-card-title>No hay fotos</ion-card-title>
+            </ion-card-header>
+          </ion-card>
+          }
+          }
         </ion-segment-content>
 
         <ion-segment-content id="grid">
 
+          @for (item of eventoPhoto; track $index) {
+          @if (eventoPhoto) {
           <div class="container-grid">
             <div class="cartas-grid">
-              <ion-card class="card-grid-foto" *ngFor="let img of eventoPhoto; let i = index">
-                <img [src]="baseUrl + img.thumbnail_path" alt="" (click)="abrirGaleria(i)">
+              <ion-card class="card-grid-foto">
+                <img [src]="baseUrl + item.thumbnail_path" alt="" (click)="abrirGaleria($index)">
               </ion-card>
             </div>
           </div>
+          } @else {
+          <ion-card class="publicacion-card">
+            <ion-card-header class="publicacion-header">
+              <ion-card-title>No hay fotos</ion-card-title>
+            </ion-card-header>
+          </ion-card>
+          }
+          }
 
         </ion-segment-content>
 
         <ion-segment-content id="gruest">
 
           <ion-list class="lista-publi">
-            <!-- <ion-item lines="none" *ngFor="let invitado of guests">
-            </ion-item> -->
 
-            @if(this.guests.length === 0){
+            @if(this.guests.length > 0){
             <ion-item-sliding>
               <ion-item [button]="true">
                 <ion-avatar aria-hidden="true" slot="start">
@@ -135,7 +149,8 @@
   </ion-card>
 
 
-  <ion-modal #modal trigger="open-modal" cssClass="evento-qr-modal" [initialBreakpoint]="0.5" [breakpoints]="[0, 0.25, 0.5, 0.6]">
+  <ion-modal #modal trigger="open-modal" cssClass="evento-qr-modal" [initialBreakpoint]="0.6"
+    [breakpoints]="[0, 0.25, 0.5, 0.6, 0.8]">
     <ng-template>
       <ion-content class="content-modal">
         <h2>QR</h2>
