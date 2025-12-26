@@ -13,7 +13,7 @@
 
   <ion-card class="card-evento">
     @if(evento?.cover_image_path){
-      <ion-img [src]="getCoverImage(evento)" alt="{{ evento?.name }}"></ion-img>
+      <ion-img class="foto-event" [src]="getCoverImage(evento)" alt="{{ evento?.name }}"></ion-img>
     } 
     <ion-card-content>
         <div class="button-group">

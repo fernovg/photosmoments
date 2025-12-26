@@ -32,7 +32,7 @@
       @if (eventos) {
       <ion-card class="evento-card" (click)="abrirEvento(item)">
           @if(item?.cover_image_path){
-            <ion-img [src]="getCoverImage(item)" alt="{{ item.name }}"></ion-img>
+            <ion-img class="foto-event" [src]="getCoverImage(item)" alt="{{ item.name }}"></ion-img>
           }
         <div class="contenido-evento">
           <ion-card-header>

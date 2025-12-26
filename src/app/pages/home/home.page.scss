@@ -28,6 +28,13 @@
         margin: 0 18.5px 0 18.5px;
     }
 
+    .foto-event {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+        display: block;
+    }
+
     .contenido-evento {
 
         ion-card-header {
