@@ -15,11 +15,15 @@
   </div>
 
   <div class="cover-selector">
-    <ion-item lines="none">
-      <ion-label position="stacked">Portada del evento</ion-label>
-      <input type="file" accept="image/*" (change)="onCoverSelected($event)">
-      <small>Formatos de imagen, máximo 5 MB.</small>
-    </ion-item>
+    <div class="cover-header">
+      <ion-label>Portada del evento</ion-label>
+      <ion-button size="small" fill="outline" (click)="coverInput.click()">
+        <i class="fa-solid fa-upload"></i>
+        Subir
+      </ion-button>
+      <input #coverInput type="file" accept="image/*" (change)="onCoverSelected($event)" hidden>
+    </div>
+    <small class="hint">Formatos de imagen, máximo 5 MB.</small>
     <div class="cover-preview" *ngIf="coverPreview">
       <ion-img [src]="coverPreview" alt="Portada seleccionada"></ion-img>
     </div>
