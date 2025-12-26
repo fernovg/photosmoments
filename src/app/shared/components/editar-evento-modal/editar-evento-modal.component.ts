@@ -1,20 +1,21 @@
 import { CommonModule, formatDate } from '@angular/common';
 import { Component, inject, input, OnInit, Input } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-import { IonButton, IonButtons, IonContent, IonHeader, IonInput, IonItem, IonModal, IonTitle, IonToolbar, ModalController, IonList, IonDatetime, IonAccordion, IonAccordionGroup, IonLabel, IonToggle, IonSelectOption, IonTabButton, IonAlert, IonImg } from '@ionic/angular/standalone';
+import { IonButton, IonButtons, IonContent, IonHeader, IonInput, IonItem, IonModal, IonTitle, IonToolbar, ModalController, IonList, IonDatetime, IonAccordion, IonAccordionGroup, IonLabel, IonToggle, IonSelectOption, IonTabButton, IonAlert, IonImg, IonFooter, IonBadge } from '@ionic/angular/standalone';
 import { ServiciosService } from 'src/app/core/services/servicios.service';
 import { ToastService } from 'src/app/core/services/toast.service';
 import { ValidatorsForm } from 'src/app/core/services/validator.service';
 import type { OverlayEventDetail } from '@ionic/core';
 import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
+import { FechaModalComponent } from '../fecha-modal/fecha-modal.component';
 
 @Component({
   selector: 'app-editar-evento-modal',
   templateUrl: './editar-evento-modal.component.html',
   styleUrls: ['./editar-evento-modal.component.scss'],
   imports: [IonLabel, IonList,
-    FormsModule, IonButton, IonButtons, IonContent, IonHeader, IonInput, IonItem, IonTitle, IonToolbar, ReactiveFormsModule, IonDatetime, IonAccordion, IonAccordionGroup, IonToggle, CommonModule, IonAlert, IonImg]
+    FormsModule, IonButton, IonButtons, IonContent, IonHeader, IonInput, IonItem, IonTitle, IonToolbar, ReactiveFormsModule, IonDatetime, IonAccordion, IonAccordionGroup, IonToggle, CommonModule, IonAlert, IonImg, IonFooter, IonBadge]
 })
 export class EditarEventoModalComponent implements OnInit {
 
@@ -29,6 +30,8 @@ export class EditarEventoModalComponent implements OnInit {
   private router = inject(Router);
 
   isLoading = false;
+
+  fechaSeleccionada: string | null = null;
   baseImgUrl = environment.img_url;
   placeholderCover = 'assets/evento.png';
   coverFile: File | null = null;
@@ -38,11 +41,11 @@ export class EditarEventoModalComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    // Crear el form
     this.cEvento = this.fb.group({
       name: ['', Validators.required],
       event_date: ['', Validators.required],
       close_date: ['', Validators.required],
+      address: ['', Validators.required],
       total_guests: ['', Validators.required],
       max_photos_per_guest: ['', Validators.required],
       can_view_photos_before_event: [true],
@@ -125,10 +128,11 @@ export class EditarEventoModalComponent implements OnInit {
 
   public invitados = [10, 15, 20, 30];
   public fotos = [10, 25, 50, 100, 150, 250];
-  public dias = [1, 3, 7];
+  public dias = [1, 7, 14];
 
   public customInvitados = false;
   public customFotos = false;
+  public customDays = false;
 
   setInvitados(value: number | 'custom') {
     if (value === 'custom') {
@@ -157,6 +161,21 @@ export class EditarEventoModalComponent implements OnInit {
     } else {
       this.customFotos = false;
       this.cEvento.patchValue({ days_before_upload: value });
+    }
+  }
+
+  async abrirFecha() {
+    const modal = await this.modalCtrl.create({
+      component: FechaModalComponent,
+      breakpoints: [0, 0.32, 0.40],
+      initialBreakpoint: 0.40,
+    });
+
+    await modal.present();
+    const { data } = await modal.onWillDismiss();
+    if (data) {
+      this.fechaSeleccionada = data;
+      this.cEvento.patchValue({ event_date: data });
     }
   }
 
@@ -223,4 +242,5 @@ export class EditarEventoModalComponent implements OnInit {
   setResult(event: CustomEvent<OverlayEventDetail>) {
     // console.log(`Dismissed with role: ${event.detail.role}`);
   }
+
 }
