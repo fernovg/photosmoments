@@ -13,9 +13,9 @@
 .card-evento {
 
     ion-card-header {
-        display: flex;
+       /* display: flex;
         flex-direction: row;
-        justify-content: space-between;
+        justify-content: end;*/
 
         padding: 20px 2px 16px 2px;
 
@@ -39,7 +39,7 @@
 
     .button-group {
         display: flex;
-        justify-content: space-evenly;
+        justify-content: end;
         align-items: center;
 
         ion-button {

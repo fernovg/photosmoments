@@ -90,3 +90,53 @@ form {
         width: 60%;
     }
 }
+
+.cover-selector {
+    margin-bottom: 16px;
+    padding: 12px;
+    border: 1px dashed #dcdde1;
+    border-radius: 12px;
+    background: #f8f9fb;
+
+    .cover-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 12px;
+
+        ion-label {
+            font-size: 16px;
+            font-weight: 600;
+            color: #1f2937;
+        }
+
+        ion-button {
+            --padding-start: 12px;
+            --padding-end: 12px;
+            --border-radius: 10px;
+            font-weight: 600;
+
+            i {
+                margin-right: 6px;
+            }
+        }
+    }
+
+    .hint {
+        display: block;
+        margin-top: 8px;
+        color: #6b7280;
+        font-size: 12px;
+    }
+
+    .cover-preview {
+        margin-top: 12px;
+
+        ion-img {
+            border-radius: 12px;
+            width: 100%;
+            height: auto;
+            overflow: hidden;
+        }
+    }
+}

@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { IonBackButton, IonButtons, IonContent, IonHeader, IonToolbar, IonItem, IonInput, IonButton, IonProgressBar, IonIcon } from '@ionic/angular/standalone';
 import { AuthService } from 'src/app/core/services/auth.service';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { ValidatorsForm } from 'src/app/core/services/validator.service';
 import { ToastService } from 'src/app/core/services/toast.service';
 import { addIcons } from 'ionicons';
@@ -14,7 +14,7 @@ import { ban, eye, eyeOff, eyeOffOutline, logoGoogle } from 'ionicons/icons';
   templateUrl: './login.page.html',
   styleUrls: ['./login.page.scss'],
   standalone: true,
-  imports: [IonIcon, IonProgressBar, IonButton, ReactiveFormsModule, IonInput, IonItem, IonBackButton, IonButtons, IonContent, IonHeader, IonToolbar, CommonModule, FormsModule]
+  imports: [RouterModule, IonIcon, IonProgressBar, IonButton, ReactiveFormsModule, IonInput, IonItem, IonBackButton, IonButtons, IonContent, IonHeader, IonToolbar, CommonModule, FormsModule]
 })
 export class LoginPage implements OnInit {
 
@@ -28,8 +28,8 @@ export class LoginPage implements OnInit {
   showPassword: boolean = false;
 
   public miLogin: FormGroup = this.formBuilder.group({
-    email: ['', [Validators.required, Validators.pattern(this.valiService.emailPattern)]],
-    password: ['', Validators.required],
+    email: ['andrea@mail.com', [Validators.required, Validators.pattern(this.valiService.emailPattern)]],
+    password: ['1234567', Validators.required],
   });
 
   constructor() { 
@@ -39,6 +39,7 @@ export class LoginPage implements OnInit {
   ngOnInit() {
     this.isLoggedIn();
     this.authService.headers();
+    this.authService.clearToken();
   }
   login() {
     this.isLoading = true;

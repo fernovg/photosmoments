@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import {
   IonContent, IonCard, IonCardContent, IonCardHeader, IonCardTitle, IonCardSubtitle, IonButton, IonIcon,
-  IonChip, IonLabel, IonItem, ModalController, IonAlert
+  IonChip, IonLabel, IonItem, ModalController, IonAlert, IonImg
 } from '@ionic/angular/standalone';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { addIcons } from 'ionicons';
@@ -15,8 +15,9 @@ import { UserInfoService } from 'src/app/core/services/user-info.service';
 import { LoaderComponent } from 'src/app/shared/components/loader/loader.component';
 import { CamscanModalComponent } from 'src/app/shared/components/camscan-modal/camscan-modal.component';
 import { ToastService } from 'src/app/core/services/toast.service';
-import { Router } from '@angular/router';
+import { Router, RouterLinkActive } from '@angular/router';
 import { timestamp } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-home',
@@ -24,7 +25,7 @@ import { timestamp } from 'rxjs';
   styleUrls: ['./home.page.scss'],
   standalone: true,
   imports: [IonLabel, IonChip, IonButton, IonContent, IonCard,
-    IonCardContent, IonCardHeader, IonCardTitle, CommonModule, FormsModule, LoaderComponent],
+    IonCardContent, IonCardHeader, IonCardTitle, CommonModule, FormsModule, LoaderComponent, RouterLinkActive, IonImg, IonCardSubtitle, IonItem],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class HomePage implements OnInit {
@@ -34,6 +35,9 @@ export class HomePage implements OnInit {
   private userInfoService = inject(UserInfoService);
   private toastService = inject(ToastService);
   private router = inject(Router);
+
+  baseImgUrl = environment.img_url;
+  placeholderCover = 'assets/evento.png';
 
   eventos: evento[] = [];
   eventoProximo: evento | null = null;
@@ -57,7 +61,10 @@ export class HomePage implements OnInit {
       // this.isLoading = isLoading;
     });
   }
-
+  hasActiveEvent(): boolean {
+    let eventsLength = this.eventos.filter(e => !e.is_guest).length
+    return (eventsLength >= 1);
+  }
   misEventos() {
     this.isLoading = true;
     this.servicios.traerDatos('events').subscribe({
@@ -152,7 +159,9 @@ export class HomePage implements OnInit {
   //     max: 10,
   //   }
   // ];
-
+  abrirEvento(evento: evento) {
+    this.router.navigate(['tabs/evento/' + evento.id]);
+  }
   uniseAEvento(payload: any) {
     this.isLoading = true;
     // alert(JSON.stringify(payload, null, 2));
@@ -169,5 +178,12 @@ export class HomePage implements OnInit {
       }
     })
 
+  }
+
+  getCoverImage(ev?: evento | null): string {
+    if (!ev?.cover_image_path) return this.placeholderCover;
+    const src = ev.cover_image_path;
+    if (src.startsWith('http')) return src;
+    return `${this.baseImgUrl}${src}`;
   }
 }

@@ -1,7 +1,8 @@
 import { CommonModule, formatDate } from '@angular/common';
 import { Component, inject, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-import { IonButton, IonButtons, IonContent, IonHeader, IonInput, IonItem, IonToolbar, ModalController, IonList, IonLabel, IonToggle, IonBadge, IonFooter } from '@ionic/angular/standalone';
+import { IonButton, IonButtons, IonContent, IonHeader, IonInput, IonItem, IonToolbar, ModalController, IonList, IonLabel, IonToggle, IonBadge, IonFooter, IonImg } from '@ionic/angular/standalone';
+import { NavController } from '@ionic/angular';
 import { ServiciosService } from 'src/app/core/services/servicios.service';
 import { ToastService } from 'src/app/core/services/toast.service';
 import { ValidatorsForm } from 'src/app/core/services/validator.service';
@@ -12,7 +13,7 @@ import { FechaModalComponent } from '../fecha-modal/fecha-modal.component';
   templateUrl: './crear-evento-modal.component.html',
   styleUrls: ['./crear-evento-modal.component.scss'],
   imports: [IonLabel, IonList,
-    FormsModule, IonButton, IonButtons, IonContent, IonHeader, IonInput, IonItem, IonToolbar, ReactiveFormsModule, IonToggle, CommonModule, IonBadge, IonFooter]
+    FormsModule, IonButton, IonButtons, IonContent, IonHeader, IonInput, IonItem, IonToolbar, ReactiveFormsModule, IonToggle, CommonModule, IonBadge, IonFooter, IonImg]
 })
 export class CrearEventoModalComponent implements OnInit {
 
@@ -21,10 +22,14 @@ export class CrearEventoModalComponent implements OnInit {
   private toastService = inject(ToastService);
   private valiService = inject(ValidatorsForm);
   private servicios = inject(ServiciosService);
+  private navCtrl = inject(NavController);
 
   isLoading = false;
 
   fechaSeleccionada: string | null = null;
+  coverFile: File | null = null;
+  coverPreview: string | null = null;
+  readonly maxCoverSize = 5 * 1024 * 1024;
 
   public cEvento: FormGroup = this.fb.group({
     name: ['', [Validators.required,]],
@@ -47,7 +52,6 @@ export class CrearEventoModalComponent implements OnInit {
   }
 
   confirm() {
-
     if (this.cEvento.invalid) {
       console.log(this.cEvento.value);
       this.toastService.error('Completa todos los campos requeridos');
@@ -56,30 +60,34 @@ export class CrearEventoModalComponent implements OnInit {
 
     const raw = this.cEvento.value;
 
-    const payload = {
-      name: raw.name,
-      event_date: formatDate(raw.event_date, 'yyyy-MM-dd HH:mm', 'en'),
-      close_date: formatDate(raw.event_date, 'yyyy-MM-dd HH:mm', 'en'),
-      address: raw.address,
-      total_guests: Number(raw.total_guests),
-      max_photos_per_guest: Number(raw.max_photos_per_guest),
-      can_view_photos_before_event: !!raw.can_view_photos_before_event,
-      can_upload_photos_before_event: !!raw.can_upload_photos_before_event,
-      days_before_upload: Number(raw.days_before_upload)
-    };
-
-    // console.log(payload);
+    const formData = new FormData();
+    formData.append('name', raw.name);
+    formData.append('event_date', formatDate(raw.event_date, 'yyyy-MM-dd HH:mm', 'en'));
+    formData.append('close_date', formatDate(raw.event_date, 'yyyy-MM-dd HH:mm', 'en'));
+    formData.append('address', raw.address);
+    formData.append('total_guests', String(Number(raw.total_guests)));
+    formData.append('max_photos_per_guest', String(Number(raw.max_photos_per_guest)));
+    formData.append('can_view_photos_before_event', raw.can_view_photos_before_event ? '1' : '0');
+    formData.append('can_upload_photos_before_event', raw.can_upload_photos_before_event ? '1' : '0');
+    formData.append('days_before_upload', String(Number(raw.days_before_upload)));
+    if (this.coverFile) {
+      formData.append('cover_image', this.coverFile);
+    }
 
     this.isLoading = true;
-    this.servicios.guardarDatos('events', payload).subscribe({
+    this.servicios.guardarDatos('events', formData).subscribe({
       next: (data) => {
         this.isLoading = false;
         this.toastService.success('Creado Correctamente');
         this.modalCtrl.dismiss(data, 'confirm');
+        const eventId = data?.id ?? data?.event?.id;
+        if (eventId) {
+          this.navCtrl.navigateForward(`/tabs/evento/${eventId}`);
+        }
       },
       error: (error) => {
         this.isLoading = false;
-        this.toastService.error('Error al crear el evento');
+        this.toastService.error(this.extractErrorMessage(error, 'Error al crear el evento'));
       }
     })
   }
@@ -133,8 +141,8 @@ export class CrearEventoModalComponent implements OnInit {
   async abrirFecha() {
     const modal = await this.modalCtrl.create({
       component: FechaModalComponent,
-      breakpoints: [0, 0.32, 0.5],
-      initialBreakpoint: 0.32,
+      breakpoints: [0, 0.32, 0.40],
+      initialBreakpoint: 0.40,
     });
 
     await modal.present();
@@ -143,6 +151,42 @@ export class CrearEventoModalComponent implements OnInit {
       this.fechaSeleccionada = data;
       this.cEvento.patchValue({ event_date: data });
     }
+  }
+
+  onCoverSelected(event: Event) {
+    const input = event.target as HTMLInputElement;
+    const file = input.files?.[0];
+    if (!file) return;
+
+    if (!file.type.startsWith('image/')) {
+      this.toastService.error('Solo se permiten imágenes.');
+      input.value = '';
+      this.coverFile = null;
+      this.coverPreview = null;
+      return;
+    }
+
+    if (file.size > this.maxCoverSize) {
+      this.toastService.error('La imagen debe pesar máximo 5 MB.');
+      input.value = '';
+      this.coverFile = null;
+      this.coverPreview = null;
+      return;
+    }
+
+    this.coverFile = file;
+    this.coverPreview = URL.createObjectURL(file);
+  }
+
+  private extractErrorMessage(error: any, fallback: string): string {
+    const validationErrors = error?.error?.errors;
+    if (validationErrors) {
+      const firstKey = Object.keys(validationErrors)[0];
+      if (firstKey && validationErrors[firstKey]?.length) {
+        return validationErrors[firstKey][0];
+      }
+    }
+    return error?.error?.message || fallback;
   }
 
 }
