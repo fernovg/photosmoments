@@ -26,10 +26,11 @@ export class LoginPage implements OnInit {
 
   isLoading = false;
   showPassword: boolean = false;
-
+//andrea@mail.com
+//1234567
   public miLogin: FormGroup = this.formBuilder.group({
-    email: ['andrea@mail.com', [Validators.required, Validators.pattern(this.valiService.emailPattern)]],
-    password: ['1234567', Validators.required],
+    email: ['', [Validators.required, Validators.pattern(this.valiService.emailPattern)]],
+    password: ['', Validators.required],
   });
 
   constructor() { 
