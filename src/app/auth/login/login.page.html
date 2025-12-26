@@ -4,11 +4,14 @@
 
   <div class="ion-padding contenido-login">
     <div class="hero-login">
-      <img src="assets/logo2.png" alt="">
+      <img src="assets/logo_lalo2.png" alt="">
     </div>
+ 
+   
   </div>
 
   <form [formGroup]="miLogin" (submit)="login()">
+    
     <ion-item lines="none">
       <ion-input type="email" class="input-custom" label="Correo" formControlName="email" name="email"
         label-placement="stacked" fill="solid" placeholder="example@mail.com" autocomplete="username"></ion-input>
@@ -44,5 +47,11 @@
       No Tienes Cuenta? <a routerLink="/signup">Registrate Aqui</a>
     </p>
   </div>
-
+   <br>
+    <br>
+     <br>
+      
+   <div class="ion-text-center">
+      by <br> <img style="width: 200px;" src="assets/logo_hor_1.png" alt="">
+    </div>
 </ion-content>
