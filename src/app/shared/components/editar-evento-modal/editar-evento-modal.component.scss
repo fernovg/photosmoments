@@ -1,0 +1,12 @@
+ion-content {
+  .cover-preview {
+    margin: 12px 0;
+
+    ion-img {
+      border-radius: 12px;
+      width: 100%;
+      height: auto;
+      overflow: hidden;
+    }
+  }
+}

@@ -12,33 +12,26 @@
 
 
   <ion-card class="card-evento">
-
-    @if(evento?.img){
-    <img alt="{{ evento?.name }}" src="https://ionicframework.com/docs/img/demos/card-media.png" />
-    }
-
+    @if(evento?.cover_image_path){
+      <ion-img [src]="getCoverImage(evento)" alt="{{ evento?.name }}"></ion-img>
+    } 
     <ion-card-content>
-       <div class="button-group">
+        <div class="button-group">
           <ion-button color="primary" id="open-modal" fill="outline" size="small">
             <i class="fa-solid fa-qrcode"></i>
             Invitar
           </ion-button>
-           @if(this.evento?.user?.id === this.user?.id) {
+          @if(this.evento?.user?.id === this.user?.id) {
           <ion-button color="dark" fill="outline" (click)="abrirEditarEvento(evento)" size="small">
             <i class="fa-solid fa-gear"></i>
           </ion-button>
-          } <!---->
+          }
         </div>
-      <!-- boton principal para crear evento -->
       <ion-card-header>
-       
           <ion-card-title>{{ evento?.event_date | date:'mediumDate' }} - {{ evento?.event_date | date:'h:mm a' }}</ion-card-title>
           @if(evento?.address){
             <ion-card-subtitle><i class="fa-solid fa-location-dot"></i> {{ evento?.address }}</ion-card-subtitle>
           } 
-           <div class="datos-evento">
-        </div>
-       
       </ion-card-header>
 
       <ion-segment value="albums">

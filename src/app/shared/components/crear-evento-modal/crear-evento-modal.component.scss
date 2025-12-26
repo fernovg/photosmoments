@@ -90,3 +90,22 @@ form {
         width: 60%;
     }
 }
+
+.cover-selector {
+    margin-bottom: 16px;
+
+    input {
+        margin-top: 8px;
+    }
+
+    .cover-preview {
+        margin-top: 12px;
+
+        ion-img {
+            border-radius: 12px;
+            width: 100%;
+            height: auto;
+            overflow: hidden;
+        }
+    }
+}

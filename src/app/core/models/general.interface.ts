@@ -23,6 +23,7 @@ export interface evento {
     address?: string;
     img?: string;
     is_guest?: boolean;
+    cover_image_path?: string;
 }
 
 export interface eventoPhoto {

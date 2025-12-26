@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import {
   IonContent, IonCard, IonCardContent, IonCardHeader, IonCardTitle, IonCardSubtitle, IonButton, IonIcon,
-  IonChip, IonLabel, IonItem, ModalController, IonAlert
+  IonChip, IonLabel, IonItem, ModalController, IonAlert, IonImg
 } from '@ionic/angular/standalone';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { addIcons } from 'ionicons';
@@ -17,6 +17,7 @@ import { CamscanModalComponent } from 'src/app/shared/components/camscan-modal/c
 import { ToastService } from 'src/app/core/services/toast.service';
 import { Router, RouterLinkActive } from '@angular/router';
 import { timestamp } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-home',
@@ -24,7 +25,7 @@ import { timestamp } from 'rxjs';
   styleUrls: ['./home.page.scss'],
   standalone: true,
   imports: [IonLabel, IonChip, IonButton, IonContent, IonCard,
-    IonCardContent, IonCardHeader, IonCardTitle, CommonModule, FormsModule, LoaderComponent, RouterLinkActive],
+    IonCardContent, IonCardHeader, IonCardTitle, CommonModule, FormsModule, LoaderComponent, RouterLinkActive, IonImg, IonCardSubtitle, IonItem],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class HomePage implements OnInit {
@@ -34,6 +35,9 @@ export class HomePage implements OnInit {
   private userInfoService = inject(UserInfoService);
   private toastService = inject(ToastService);
   private router = inject(Router);
+
+  baseImgUrl = environment.img_url;
+  placeholderCover = 'assets/evento.png';
 
   eventos: evento[] = [];
   eventoProximo: evento | null = null;
@@ -174,5 +178,12 @@ export class HomePage implements OnInit {
       }
     })
 
+  }
+
+  getCoverImage(ev?: evento | null): string {
+    if (!ev?.cover_image_path) return this.placeholderCover;
+    const src = ev.cover_image_path;
+    if (src.startsWith('http')) return src;
+    return `${this.baseImgUrl}${src}`;
   }
 }

@@ -1,7 +1,7 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonContent, IonHeader, IonTitle, IonToolbar, IonButton, IonSegment, IonSegmentButton, IonSegmentContent, IonSegmentView, IonCard, IonCardHeader, IonCardTitle, ModalController, IonAvatar, IonItem, IonGrid, IonRow, IonCol, IonList, IonLabel, IonModal, IonButtons, IonBackButton, IonCardContent, IonCardSubtitle, IonItemSliding, IonItemOptions, IonItemOption, IonNote, IonChip } from '@ionic/angular/standalone';
+import { IonContent, IonHeader, IonTitle, IonToolbar, IonButton, IonSegment, IonSegmentButton, IonSegmentContent, IonSegmentView, IonCard, IonCardHeader, IonCardTitle, ModalController, IonAvatar, IonItem, IonGrid, IonRow, IonCol, IonList, IonLabel, IonModal, IonButtons, IonBackButton, IonCardContent, IonCardSubtitle, IonItemSliding, IonItemOptions, IonItemOption, IonNote, IonChip, IonImg } from '@ionic/angular/standalone';
 
 // import {  } from '@ionic/angular';
 import { GaleriaModalComponent } from 'src/app/shared/components/galeria-modal/galeria-modal.component';
@@ -18,7 +18,7 @@ import { UserInfoService } from 'src/app/core/services/user-info.service';
   templateUrl: './evento.page.html',
   styleUrls: ['./evento.page.scss'],
   standalone: true,
-  imports: [IonModal, IonLabel, IonItem, IonAvatar, IonList, IonCol, IonRow, IonGrid, IonCardTitle, IonCardHeader, IonCard, IonSegmentButton, IonSegment, IonButton, IonContent, IonHeader, IonTitle, IonToolbar, IonSegmentContent, IonSegmentView, CommonModule, FormsModule, LoaderComponent, IonButtons, IonBackButton, IonCardContent, IonCardSubtitle, IonItemSliding, IonItemOptions, IonItemOption, IonNote, IonChip]
+  imports: [IonModal, IonLabel, IonItem, IonAvatar, IonList, IonCol, IonRow, IonGrid, IonCardTitle, IonCardHeader, IonCard, IonSegmentButton, IonSegment, IonButton, IonContent, IonHeader, IonTitle, IonToolbar, IonSegmentContent, IonSegmentView, CommonModule, FormsModule, LoaderComponent, IonButtons, IonBackButton, IonCardContent, IonCardSubtitle, IonItemSliding, IonItemOptions, IonItemOption, IonNote, IonChip, IonImg]
 })
 export class EventoPage implements OnInit {
 
@@ -29,6 +29,7 @@ export class EventoPage implements OnInit {
   private userInfoService = inject(UserInfoService);
 
   baseUrl = environment.img_url;
+  placeholderCover = 'assets/evento.png';
   user: any;
 
   constructor() {}
@@ -128,6 +129,11 @@ export class EventoPage implements OnInit {
     }
   }
 
-
+  getCoverImage(ev?: evento | null): string {
+    if (!ev?.cover_image_path) return this.placeholderCover;
+    const src = ev.cover_image_path;
+    if (src.startsWith('http')) return src;
+    return `${this.baseUrl}${src}`;
+  }
 
 }
