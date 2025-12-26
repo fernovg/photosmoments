@@ -22,8 +22,8 @@
       <!-- boton principal para crear evento -->
       <ion-card-header>
         <div class="datos-evento">
-          <ion-card-title>{{ evento?.event_date | date:'mediumDate' }} - 8 PM</ion-card-title>
-          <ion-card-subtitle><i class="fa-solid fa-location-dot"></i> Casa</ion-card-subtitle>
+          <ion-card-title>{{ evento?.event_date | date:'mediumDate' }} - {{ evento?.event_date | date:'h:mm a' }}</ion-card-title>
+          <ion-card-subtitle><i class="fa-solid fa-location-dot"></i> {{ evento?.address }}</ion-card-subtitle>
         </div>
         <div class="button-group">
           <ion-button color="primary" id="open-modal" fill="outline" size="small">

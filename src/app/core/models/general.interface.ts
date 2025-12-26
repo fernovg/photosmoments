@@ -20,7 +20,7 @@ export interface evento {
     qr_payload?: string;
     photos?: eventoPhoto[];
     user?: user;
-
+    address?: string;
     img?: string;
 }
 

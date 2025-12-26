@@ -15,7 +15,7 @@ import { UserInfoService } from 'src/app/core/services/user-info.service';
 import { LoaderComponent } from 'src/app/shared/components/loader/loader.component';
 import { CamscanModalComponent } from 'src/app/shared/components/camscan-modal/camscan-modal.component';
 import { ToastService } from 'src/app/core/services/toast.service';
-import { Router } from '@angular/router';
+import { Router, RouterLinkActive } from '@angular/router';
 import { timestamp } from 'rxjs';
 
 @Component({
@@ -24,7 +24,7 @@ import { timestamp } from 'rxjs';
   styleUrls: ['./home.page.scss'],
   standalone: true,
   imports: [IonLabel, IonChip, IonButton, IonContent, IonCard,
-    IonCardContent, IonCardHeader, IonCardTitle, CommonModule, FormsModule, LoaderComponent],
+    IonCardContent, IonCardHeader, IonCardTitle, CommonModule, FormsModule, LoaderComponent, RouterLinkActive],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class HomePage implements OnInit {
@@ -152,7 +152,9 @@ export class HomePage implements OnInit {
   //     max: 10,
   //   }
   // ];
-
+  abrirEvento(evento: evento) {
+    this.router.navigate(['tabs/evento/' + evento.id]);
+  }
   uniseAEvento(payload: any) {
     this.isLoading = true;
     // alert(JSON.stringify(payload, null, 2));

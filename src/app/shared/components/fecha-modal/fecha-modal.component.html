@@ -1,6 +1,12 @@
 <ion-content class="ion-padding">
 
-  <ion-datetime presentation="date-time" [preferWheel]="true" (ionChange)="seleccionar($event)"></ion-datetime>
+  <ion-datetime
+    #datetime
+    presentation="date-time"
+    [preferWheel]="true"
+    [value]="fecha"
+    (ionChange)="seleccionar($event)">
+  </ion-datetime>
   <br>
   <ion-button expand="block" (click)="cerrar()">Aceptar</ion-button>
 

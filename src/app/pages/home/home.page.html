@@ -30,7 +30,7 @@
 
     @for (item of eventos; track $index) {
     @if (eventos) {
-    <ion-card class="evento-card" [href]="['tabs/evento/' + item.id]">
+    <ion-card class="evento-card" (click)="abrirEvento(item)">
       @if(item.img){
       <img alt="{{ item.name }}" src="https://ionicframework.com/docs/img/demos/card-media.png" />
       }

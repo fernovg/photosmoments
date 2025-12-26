@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit, ViewChild } from '@angular/core';
 import { IonContent, IonDatetime, IonButton, ModalController } from "@ionic/angular/standalone";
 
 @Component({
@@ -9,7 +9,10 @@ import { IonContent, IonDatetime, IonButton, ModalController } from "@ionic/angu
 })
 export class FechaModalComponent implements OnInit {
 
-  fecha: any;
+  @ViewChild(IonDatetime) datetime?: IonDatetime;
+
+  fecha: string = '';
+  hoy: string = new Date().toISOString();
   private modalCtrl = inject(ModalController);
 
   constructor() { }
@@ -17,11 +20,13 @@ export class FechaModalComponent implements OnInit {
   ngOnInit() { }
 
   seleccionar(ev: any) {
+    console.log("fecha seleccionada:", ev.detail);
     this.fecha = ev.detail.value;
   }
 
   cerrar() {
-    this.modalCtrl.dismiss(this.fecha);
+    const valor = this.fecha || this.datetime?.value || this.hoy;
+    this.modalCtrl.dismiss(valor);
   }
 
 

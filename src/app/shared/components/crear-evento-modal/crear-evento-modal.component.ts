@@ -2,6 +2,7 @@ import { CommonModule, formatDate } from '@angular/common';
 import { Component, inject, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { IonButton, IonButtons, IonContent, IonHeader, IonInput, IonItem, IonToolbar, ModalController, IonList, IonLabel, IonToggle, IonBadge, IonFooter } from '@ionic/angular/standalone';
+import { NavController } from '@ionic/angular';
 import { ServiciosService } from 'src/app/core/services/servicios.service';
 import { ToastService } from 'src/app/core/services/toast.service';
 import { ValidatorsForm } from 'src/app/core/services/validator.service';
@@ -21,6 +22,7 @@ export class CrearEventoModalComponent implements OnInit {
   private toastService = inject(ToastService);
   private valiService = inject(ValidatorsForm);
   private servicios = inject(ServiciosService);
+  private navCtrl = inject(NavController);
 
   isLoading = false;
 
@@ -76,6 +78,11 @@ export class CrearEventoModalComponent implements OnInit {
         this.isLoading = false;
         this.toastService.success('Creado Correctamente');
         this.modalCtrl.dismiss(data, 'confirm');
+
+        if (data?.id) {
+          // Navegar al detalle del evento recién creado.
+          this.navCtrl.navigateForward(`/tabs/evento/${data.id}`);
+        }
       },
       error: (error) => {
         this.isLoading = false;
@@ -133,8 +140,8 @@ export class CrearEventoModalComponent implements OnInit {
   async abrirFecha() {
     const modal = await this.modalCtrl.create({
       component: FechaModalComponent,
-      breakpoints: [0, 0.32, 0.5],
-      initialBreakpoint: 0.32,
+      breakpoints: [0, 0.32, 0.40],
+      initialBreakpoint: 0.40,
     });
 
     await modal.present();

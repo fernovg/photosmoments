@@ -74,7 +74,7 @@ export class AuthService {
         return `${type} ${token}`;
     }
 
-    private clearToken() {
+    public clearToken() {
         localStorage.removeItem('access_token');
         localStorage.removeItem('token_type');
     }
