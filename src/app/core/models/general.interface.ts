@@ -22,6 +22,7 @@ export interface evento {
     user?: user;
     address?: string;
     img?: string;
+    is_guest?: boolean;
 }
 
 export interface eventoPhoto {

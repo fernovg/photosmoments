@@ -57,7 +57,10 @@ export class HomePage implements OnInit {
       // this.isLoading = isLoading;
     });
   }
-
+  hasActiveEvent(): boolean {
+    let eventsLength = this.eventos.filter(e => !e.is_guest).length
+    return (eventsLength >= 1);
+  }
   misEventos() {
     this.isLoading = true;
     this.servicios.traerDatos('events').subscribe({

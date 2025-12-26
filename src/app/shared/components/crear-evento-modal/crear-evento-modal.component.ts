@@ -49,7 +49,7 @@ export class CrearEventoModalComponent implements OnInit {
   }
 
   confirm() {
-
+    console.log("asds")
     if (this.cEvento.invalid) {
       console.log(this.cEvento.value);
       this.toastService.error('Completa todos los campos requeridos');
@@ -79,9 +79,9 @@ export class CrearEventoModalComponent implements OnInit {
         this.toastService.success('Creado Correctamente');
         this.modalCtrl.dismiss(data, 'confirm');
 
-        if (data?.id) {
+        if (data?.event.id) {
           // Navegar al detalle del evento recién creado.
-          this.navCtrl.navigateForward(`/tabs/evento/${data.id}`);
+          this.navCtrl.navigateForward(`/tabs/evento/${data?.event.id}`);
         }
       },
       error: (error) => {

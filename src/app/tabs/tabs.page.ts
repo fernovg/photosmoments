@@ -13,7 +13,7 @@ import { UserInfoService } from '../core/services/user-info.service';
   selector: 'app-tabs',
   templateUrl: 'tabs.page.html',
   styleUrls: ['tabs.page.scss'],
-  imports: [IonFabButton, IonFab, IonTabs, IonTabBar, IonTabButton, IonIcon, IonAlert],
+  imports: [IonFabButton, IonFab, IonTabs, IonTabBar, IonTabButton, IonIcon, IonAlert, IonLabel],
 })
 export class TabsPage {
 private userInfoService = inject(UserInfoService);

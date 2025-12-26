@@ -1,10 +1,10 @@
-<ion-content class="ion-padding safe-area" [fullscreen]="true">
+<ion-content class="safe-area" [fullscreen]="true">
   <app-loader [visible]="isLoading" mensaje="Cargando Evento..."></app-loader>
 
   <ion-header class="ion-no-border">
     <ion-toolbar class="toolbar-header">
       <ion-buttons slot="start">
-        <ion-back-button default-href="/" text=""></ion-back-button>
+        <ion-back-button text="" defaultHref="/tabs/inicio"></ion-back-button>
       </ion-buttons>
       <ion-title>{{ evento?.name }}</ion-title>
     </ion-toolbar>
@@ -18,24 +18,27 @@
     }
 
     <ion-card-content>
-
-      <!-- boton principal para crear evento -->
-      <ion-card-header>
-        <div class="datos-evento">
-          <ion-card-title>{{ evento?.event_date | date:'mediumDate' }} - {{ evento?.event_date | date:'h:mm a' }}</ion-card-title>
-          <ion-card-subtitle><i class="fa-solid fa-location-dot"></i> {{ evento?.address }}</ion-card-subtitle>
-        </div>
-        <div class="button-group">
+       <div class="button-group">
           <ion-button color="primary" id="open-modal" fill="outline" size="small">
             <i class="fa-solid fa-qrcode"></i>
             Invitar
           </ion-button>
-          <!-- @if(this.evento?.user?.id === this.user?.id) {
+           @if(this.evento?.user?.id === this.user?.id) {
           <ion-button color="dark" fill="outline" (click)="abrirEditarEvento(evento)" size="small">
             <i class="fa-solid fa-gear"></i>
           </ion-button>
-          } -->
+          } <!---->
         </div>
+      <!-- boton principal para crear evento -->
+      <ion-card-header>
+       
+          <ion-card-title>{{ evento?.event_date | date:'mediumDate' }} - {{ evento?.event_date | date:'h:mm a' }}</ion-card-title>
+          @if(evento?.address){
+            <ion-card-subtitle><i class="fa-solid fa-location-dot"></i> {{ evento?.address }}</ion-card-subtitle>
+          } 
+           <div class="datos-evento">
+        </div>
+       
       </ion-card-header>
 
       <ion-segment value="albums">
