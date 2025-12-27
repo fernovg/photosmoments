@@ -44,14 +44,11 @@
         </ion-card-header>
         <ion-card-content>
           <p><i class="fa-regular fa-calendar-xmark"></i> El evento no existe o fue eliminado.</p>
-          <ion-button expand="block" color="medium" fill="clear" (click)="openLoginModal()">
+          <ion-button expand="block" color="medium" fill="clear" (click)="redirect()">
             <i class="fa-solid fa-right-to-bracket"></i>
-            Ir al Login
+            Salir
           </ion-button>
-          <ion-button expand="block" color="secondary" fill="clear" (click)="openSignupModal()">
-            <i class="fa-solid fa-user-plus"></i>
-            Crear cuenta
-          </ion-button>
+         
           
         </ion-card-content>
       </ion-card>
