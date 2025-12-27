@@ -1,8 +1,6 @@
 import { Component, inject, Input, OnInit } from '@angular/core';
 import { PhotoService } from 'src/app/core/services/photo.service';
 import { IonContent, IonButton, IonIcon, ModalController, IonImg, IonHeader, IonToolbar, IonButtons, IonTitle } from '@ionic/angular/standalone';
-import { addIcons } from 'ionicons';
-import { home, people, book, person, camera } from 'ionicons/icons';
 import { CommonModule } from '@angular/common';
 import { UserPhoto } from 'src/app/core/models/photos.interface';
 import { ServiciosService } from 'src/app/core/services/servicios.service';
@@ -11,7 +9,7 @@ import { ServiciosService } from 'src/app/core/services/servicios.service';
   selector: 'app-camara-modal',
   templateUrl: './camara-modal.component.html',
   styleUrls: ['./camara-modal.component.scss'],
-  imports: [IonTitle, IonButtons, IonToolbar, IonHeader, IonImg, IonButton, IonContent, CommonModule, IonIcon],
+  imports: [IonTitle, IonButtons, IonToolbar, IonHeader, IonImg, IonButton, IonContent, CommonModule],
 })
 export class CamaraModalComponent implements OnInit {
 
@@ -24,9 +22,7 @@ export class CamaraModalComponent implements OnInit {
 
   isLoading = false;
 
-
   constructor() {
-    addIcons({ camera });
   }
 
   ngOnInit() { }

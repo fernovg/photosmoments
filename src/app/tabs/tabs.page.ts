@@ -34,6 +34,10 @@ private userInfoService = inject(UserInfoService);
     this.userInfoService.cargarInfo();
   }
 
+  ionViewWillEnter() {
+    this.misEventos();
+  }
+  
   misEventos() {
     this.servicios.traerDatos('events').subscribe({
       next: (eventos) => {

@@ -61,6 +61,11 @@ export class HomePage implements OnInit {
       // this.isLoading = isLoading;
     });
   }
+
+  ionViewWillEnter() {
+    this.misEventos();
+  }
+
   hasActiveEvent(): boolean {
     let eventsLength = this.eventos.filter(e => !e.is_guest).length
     return (eventsLength >= 1);
@@ -116,13 +121,8 @@ export class HomePage implements OnInit {
           guest_id: userId,
         };
         this.uniseAEvento(payload);
-        // console.log("Payload listo:", payload);
-        // alert(JSON.stringify(payload, null, 2));
       }
-      // this.unirseAEvento(res.data);
-
     }
-
   }
 
   async abrirCrearEvento() {
@@ -135,30 +135,12 @@ export class HomePage implements OnInit {
 
     const { data, role } = await modal.onDidDismiss();
     if (role === 'confirm') {
-      this.ngOnInit();
+      // this.ngOnInit();
+      this.ionViewWillEnter();
       // console.log(data, 'evento creado');
     }
   }
 
-  // public alertButtonsEvento = [
-  //   {
-  //     text: 'OK',
-  //     handler: (data: any) => {
-  //       const codigo = Number(data.codigo);
-  //       this.uniseAEvento(codigo);
-  //     }
-  //   }
-  // ];
-  // public alertInputsEvento = [
-  //   {
-  //     name: 'codigo',
-  //     type: 'number',
-  //     inputmode: 'numeric',
-  //     placeholder: 'Codigo Del Evento',
-  //     min: 1,
-  //     max: 10,
-  //   }
-  // ];
   abrirEvento(evento: evento) {
     this.router.navigate(['tabs/evento/' + evento.id]);
   }
@@ -186,4 +168,9 @@ export class HomePage implements OnInit {
     if (src.startsWith('http')) return src;
     return `${this.baseImgUrl}${src}`;
   }
+
+  // this.modalCtrl.dismiss({ deleted: true, eventId: this.evento.id });
+
+
+
 }

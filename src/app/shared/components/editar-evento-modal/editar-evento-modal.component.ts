@@ -1,7 +1,7 @@
 import { CommonModule, formatDate } from '@angular/common';
-import { Component, inject, input, OnInit, Input } from '@angular/core';
+import { Component, inject, OnInit, Input } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-import { IonButton, IonButtons, IonContent, IonHeader, IonInput, IonItem, IonModal, IonTitle, IonToolbar, ModalController, IonList, IonDatetime, IonAccordion, IonAccordionGroup, IonLabel, IonToggle, IonSelectOption, IonTabButton, IonAlert, IonImg, IonFooter, IonBadge } from '@ionic/angular/standalone';
+import { IonButton, IonButtons, IonContent, IonHeader, IonInput, IonItem, IonToolbar, ModalController, IonList, IonLabel, IonToggle, IonAlert, IonImg, IonFooter, IonBadge } from '@ionic/angular/standalone';
 import { ServiciosService } from 'src/app/core/services/servicios.service';
 import { ToastService } from 'src/app/core/services/toast.service';
 import { ValidatorsForm } from 'src/app/core/services/validator.service';
@@ -15,7 +15,7 @@ import { FechaModalComponent } from '../fecha-modal/fecha-modal.component';
   templateUrl: './editar-evento-modal.component.html',
   styleUrls: ['./editar-evento-modal.component.scss'],
   imports: [IonLabel, IonList,
-    FormsModule, IonButton, IonButtons, IonContent, IonHeader, IonInput, IonItem, IonTitle, IonToolbar, ReactiveFormsModule, IonDatetime, IonAccordion, IonAccordionGroup, IonToggle, CommonModule, IonAlert, IonImg, IonFooter, IonBadge]
+    FormsModule, IonButton, IonButtons, IonContent, IonHeader, IonInput, IonItem, IonToolbar, ReactiveFormsModule, IonToggle, CommonModule, IonAlert, IonImg, IonFooter, IonBadge]
 })
 export class EditarEventoModalComponent implements OnInit {
 
