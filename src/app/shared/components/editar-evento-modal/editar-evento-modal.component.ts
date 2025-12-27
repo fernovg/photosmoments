@@ -75,9 +75,13 @@ export class EditarEventoModalComponent implements OnInit {
     const raw = this.cEvento.value;
 
     const formData = new FormData();
+    formData.append('_method', 'PUT');
+    const eventDateIso = raw.event_date ? new Date(raw.event_date).toISOString() : '';
+    const closeDateIso = raw.close_date ? new Date(raw.close_date).toISOString() : '';
+
     formData.append('name', raw.name);
-    formData.append('event_date', formatDate(raw.event_date, 'yyyy-MM-dd HH:mm', 'en'));
-    formData.append('close_date', formatDate(raw.close_date, 'yyyy-MM-dd HH:mm', 'en'));
+    formData.append('event_date', eventDateIso);
+    formData.append('close_date', closeDateIso);
     formData.append('total_guests', String(Number(raw.total_guests)));
     formData.append('max_photos_per_guest', String(Number(raw.max_photos_per_guest)));
     formData.append('can_view_photos_before_event', raw.can_view_photos_before_event ? '1' : '0');
