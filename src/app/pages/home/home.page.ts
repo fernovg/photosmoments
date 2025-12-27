@@ -113,19 +113,28 @@ export class HomePage implements OnInit {
     const { data } = await this.modalService.modalScanner();
 
     if (data) {
-      // console.log("QR leído:", data);
-      const partes = data.split('|');
-      const eventId = Number(partes[0]);
+      const decoded = decodeURIComponent(data);
+      const partes = decoded.split('|').filter(Boolean);
+      const urlPart = partes[0] || '';
+      const eventId = Number(partes[1] || partes[0]);
       const userId = this.user.id;
-      // alert(eventId);
 
-      if (partes.length >= 1) {
-        const payload = {
-          event_id: eventId,
-          guest_id: userId,
-        };
-        this.uniseAEvento(payload);
+      if (!eventId || isNaN(eventId)) {
+        this.toastService.error('Código QR inválido');
+        return;
       }
+
+      // Si el QR trae una URL de invitación, redirige al flujo de invitación
+     //if (urlPart.includes('/invitar/')) {
+     //  this.router.navigateByUrl(urlPart, { replaceUrl: true });
+     //  return;
+     //}
+
+      const payload = {
+        event_id: eventId,
+        guest_id: userId,
+      };
+      this.uniseAEvento(payload);
     }
   }
 

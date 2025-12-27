@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, Input, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { IonBackButton, IonButtons, IonContent, IonHeader, IonToolbar, IonItem, IonInput, IonButton, IonProgressBar, IonIcon, IonText, IonGrid, IonRow, IonCol } from '@ionic/angular/standalone';
@@ -8,21 +8,24 @@ import { passwordsIgualesValidator, ValidatorsForm } from 'src/app/core/services
 import { ToastService } from 'src/app/core/services/toast.service';
 import { addIcons } from 'ionicons';
 import { eye, eyeOff, logoGoogle } from 'ionicons/icons';
+import { ModalController } from '@ionic/angular';
 
 @Component({
   selector: 'app-signup',
   templateUrl: './signup.page.html',
   styleUrls: ['./signup.page.scss'],
   standalone: true,
-  imports: [RouterModule, IonText, IonButton, IonInput, IonItem, IonBackButton, ReactiveFormsModule, IonButtons, IonButtons, IonContent, IonHeader, IonToolbar, CommonModule, FormsModule, IonProgressBar, IonIcon, IonGrid, IonRow, IonCol]
+  imports: [RouterModule, IonText, IonButton, IonInput, IonItem, IonBackButton, ReactiveFormsModule, IonButtons, IonButtons, IonContent, IonHeader, IonToolbar, CommonModule, FormsModule, IonProgressBar, IonIcon, IonGrid, IonRow, IonCol],
+  providers: [ModalController],
 })
 export class SignupPage implements OnInit {
-
+  @Input() isInvite: boolean = false;
   private formBuilder = inject(FormBuilder);
   private valiService = inject(ValidatorsForm);
   private toastService = inject(ToastService);
   private authService = inject(AuthService);
   private router = inject(Router);
+  private modalCtrl = inject(ModalController);
 
   isLoading = false;
   showPassword1: boolean = false;
@@ -45,7 +48,9 @@ export class SignupPage implements OnInit {
   constructor() {
     addIcons({ eye, eyeOff, logoGoogle });
   }
-
+dismiss() {
+    this.modalCtrl.dismiss();
+  }
   ngOnInit() {
     this.isLoggedIn();
     this.authService.headers();
@@ -59,8 +64,15 @@ export class SignupPage implements OnInit {
       next: (data) => {
         if (data) {
           this.isLoading = false;
-          this.toastService.success('Usuario creado correctamente');
-          this.router.navigate(['tabs/inicio']);
+          if(!this.isInvite){ 
+            this.toastService.success('Usuario creado correctamente');
+          }
+          if(!this.isInvite){
+             this.router.navigate(['tabs/inicio']);
+          } else {
+            this.modalCtrl.dismiss({ registered: data }, 'register-success');
+          }
+         
         } else {
           this.isLoading = false;
           this.toastService.error('Error al crear el usuario');

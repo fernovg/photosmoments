@@ -4,6 +4,11 @@
   </ion-header>
 
   <div class="ion-padding contenido-login">
+    @if(isInvite){
+    <ion-button fill="clear" size="large" class="close-modal" (click)="dismiss()">
+      <i class="fa-solid fa-xmark"></i>
+    </ion-button>
+    }
     <div class="hero-login">
       <!-- <img src="assets/logo2.png" alt=""> -->
       <h1>Crea tu cuenta</h1>
@@ -70,7 +75,8 @@
     </div>
   </form>
 
-  <div class="extra-login">
+  @if(!isInvite){
+    <div class="extra-login">
     <!-- <div class="seperador">
       <hr>
       <span>O Registrate Con</span>
@@ -80,5 +86,5 @@
       Ya Tienes Cuenta? <a routerLink="/signin">Inicia Sesion Aqui</a>
     </p>
   </div>
-
+  }
 </ion-content>

@@ -56,7 +56,10 @@ export class EditarEventoModalComponent implements OnInit {
     // Rellenar el form con los datos recibidos
     if (this.evento) {
       this.cEvento.patchValue(this.evento);
-      this.coverPreview = this.getCoverImage(this.evento.cover_image_path);
+      if(this.evento.cover_image_path){
+        this.coverPreview = this.getCoverImage(this.evento.cover_image_path);
+      }
+      
     }
   }
 

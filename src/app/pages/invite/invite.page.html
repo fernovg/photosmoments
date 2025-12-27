@@ -1,0 +1,60 @@
+<ion-content class="safe-area" [fullscreen]="true">
+ 
+
+  
+  <div class="ion-padding contenido-login">
+    <div class="hero-login">
+      <!-- <img src="assets/logo2.png" alt=""> -->
+      <h1>Unirme al evento</h1>
+    </div>
+  </div>
+
+  <div class="invite-wrapper">
+    <ion-card *ngIf="!eventNotFound; else noEvent">
+      <ion-card-header style="padding: 0;">
+        @if(event?.cover_image_path){
+          <ion-img class="cover" [src]="getCoverImage()" alt="{{ event?.name }}"></ion-img>
+        }
+        
+      
+      </ion-card-header>
+      <ion-card-content>
+        <ion-card-title> {{ event?.name || ('Evento ' + eventId) }}</ion-card-title>
+         <br>
+        <p class="muted"><i class="fa-regular fa-calendar"></i> {{ event?.event_date | date:'mediumDate' }} - {{ event?.event_date | date:'h:mm a' }}</p>
+        <p class="muted"><i class="fa-solid fa-location-dot"></i> {{ event?.address || 'Sin dirección' }}</p>
+        <br>
+        <p>Para unirte al evento, crea una cuenta o inicia sesión si ya tienes una.</p>
+        <br>
+        <ion-button expand="block" color="primary" (click)="openSignupModal()">
+          <i class="fa-solid fa-user-plus"></i>
+          Registrarme
+        </ion-button>
+        <ion-button expand="block" color="medium" fill="clear" (click)="openLoginModal()" >
+          <i class="fa-solid fa-right-to-bracket"></i>
+          Iniciar sesion
+        </ion-button>
+      </ion-card-content>
+    </ion-card>
+
+    <ng-template #noEvent>
+      <ion-card class="empty-card">
+        <ion-card-header>
+          <ion-card-title><i class="fa-solid fa-circle-xmark"></i> Evento no encontrado</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <p><i class="fa-regular fa-calendar-xmark"></i> El evento no existe o fue eliminado.</p>
+          <ion-button expand="block" color="medium" fill="clear" (click)="openLoginModal()">
+            <i class="fa-solid fa-right-to-bracket"></i>
+            Ir al Login
+          </ion-button>
+          <ion-button expand="block" color="secondary" fill="clear" (click)="openSignupModal()">
+            <i class="fa-solid fa-user-plus"></i>
+            Crear cuenta
+          </ion-button>
+          
+        </ion-card-content>
+      </ion-card>
+    </ng-template>
+  </div>
+</ion-content>

@@ -1,0 +1,40 @@
+.invite-wrapper {
+  padding: 16px;
+
+  ion-card {
+    border-radius: 16px;
+    overflow: hidden;
+  }
+
+  .cover {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 12px;
+    margin-bottom: 12px;
+    background: #e5e7eb;
+  }
+
+  .muted {
+    color: #6b7280;
+  }
+
+  .empty-card {
+    text-align: center;
+    background: #f8fafc;
+    border: 1px dashed #d9e1ec;
+    box-shadow: none;
+    border-radius: 14px;
+
+    ion-card-title {
+      color: #344870;
+    }
+
+    p {
+      margin-top: 8px;
+      color: #6b7280;
+    }
+  }
+}
+
+
