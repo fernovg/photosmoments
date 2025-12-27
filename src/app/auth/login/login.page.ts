@@ -28,8 +28,8 @@ export class LoginPage implements OnInit {
   showPassword: boolean = false;
 //andrea@mail.com 1234567
   public miLogin: FormGroup = this.formBuilder.group({
-    email: ['', [Validators.required, Validators.pattern(this.valiService.emailPattern)]],
-    password: ['', Validators.required],
+    email: ['andrea@mail.com', [Validators.required, Validators.pattern(this.valiService.emailPattern)]],
+    password: ['1234567', Validators.required],
   });
 
   constructor() { 
@@ -52,7 +52,7 @@ export class LoginPage implements OnInit {
         } else {
           this.toastService.success('Bienvenido!!!');
           this.isLoading = false;
-          this.router.navigate(['tabs/inicio']);
+          this.router.navigate(['/tabs/inicio'], { replaceUrl: true });
         }
       },
       error: (error) => {

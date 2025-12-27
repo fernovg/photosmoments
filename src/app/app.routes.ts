@@ -24,6 +24,10 @@ export const routes: Routes = [
     loadComponent: () => import('./auth/signup/signup.page').then( m => m.SignupPage)
   },
   {
+    path: 'invitar/:id',
+    loadComponent: () => import('./pages/invite/invite.page').then( m => m.InvitePage)
+  },
+  {
     path: '**',
     redirectTo: '', // fallback a bienvenida si no se encuentra
   },

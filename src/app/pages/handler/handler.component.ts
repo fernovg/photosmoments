@@ -15,7 +15,7 @@ export class HandlerComponent  implements OnInit {
   ngOnInit() {
     console.log("Handler works!");
     if(this.auth.isAuthenticated()){
-      this.router.navigate(['tabs/inicio']);
+      this.router.navigate(['/tabs/inicio'], { replaceUrl: true });
     } else {
       this.router.navigate(['signin']);
     }

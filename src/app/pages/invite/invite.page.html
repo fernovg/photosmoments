@@ -1,0 +1,19 @@
+<ion-content class="safe-area" [fullscreen]="true">
+  <ion-header class="ion-no-border">
+    <ion-toolbar>
+      <ion-title>Invitación</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <div class="invite-wrapper">
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>Evento: {{ eventId }}</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <p>Comparte este código o escanea el QR para unirte al evento.</p>
+        <ion-button expand="block" color="primary">Unirse</ion-button>
+      </ion-card-content>
+    </ion-card>
+  </div>
+</ion-content>
