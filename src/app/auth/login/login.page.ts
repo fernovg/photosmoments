@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, Input, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { IonBackButton, IonButtons, IonContent, IonHeader, IonToolbar, IonItem, IonInput, IonButton, IonProgressBar, IonIcon } from '@ionic/angular/standalone';
@@ -8,31 +8,34 @@ import { ValidatorsForm } from 'src/app/core/services/validator.service';
 import { ToastService } from 'src/app/core/services/toast.service';
 import { addIcons } from 'ionicons';
 import { ban, eye, eyeOff, eyeOffOutline, logoGoogle } from 'ionicons/icons';
+import { ModalController } from '@ionic/angular';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
   styleUrls: ['./login.page.scss'],
   standalone: true,
-  imports: [RouterModule, IonIcon, IonProgressBar, IonButton, ReactiveFormsModule, IonInput, IonItem, IonBackButton, IonButtons, IonContent, IonHeader, IonToolbar, CommonModule, FormsModule]
+  imports: [RouterModule, IonIcon, IonProgressBar, IonButton, ReactiveFormsModule, IonInput, IonItem, IonBackButton, IonButtons, IonContent, IonHeader, IonToolbar, CommonModule, FormsModule],
+  providers: [ModalController],
 })
 export class LoginPage implements OnInit {
-
+  @Input() isInvite: boolean = false;
   private formBuilder = inject(FormBuilder);
   private valiService = inject(ValidatorsForm);
   private toastService = inject(ToastService);
   private authService = inject(AuthService);
   private router = inject(Router);
+  private modalCtrl = inject(ModalController);
 
   isLoading = false;
   showPassword: boolean = false;
-//andrea@mail.com 1234567
+  //andrea@mail.com 1234567
   public miLogin: FormGroup = this.formBuilder.group({
     email: ['andrea@mail.com', [Validators.required, Validators.pattern(this.valiService.emailPattern)]],
     password: ['1234567', Validators.required],
   });
 
-  constructor() { 
+  constructor() {
     addIcons({ eye, eyeOff, logoGoogle });
   }
 
@@ -50,9 +53,17 @@ export class LoginPage implements OnInit {
           this.isLoading = false;
           this.toastService.error('Usuario o contraseña incorrectos');
         } else {
-          this.toastService.success('Bienvenido!!!');
+          if (!this.isInvite) {
+            this.toastService.success('Bienvenido!!!');
+          }
+
           this.isLoading = false;
-          this.router.navigate(['/tabs/inicio'], { replaceUrl: true });
+          if (!this.isInvite) {
+            this.router.navigate(['/tabs/inicio'], { replaceUrl: true });
+          } else {
+            this.modalCtrl.dismiss({ loggedIn: data }, 'login-success');
+          }
+
         }
       },
       error: (error) => {
@@ -87,9 +98,13 @@ export class LoginPage implements OnInit {
     }
   }
 
-    // Método para alternar la visibilidad de la contraseña
+  // Método para alternar la visibilidad de la contraseña
   togglePasswordVisibility() {
     this.showPassword = !this.showPassword;
+  }
+
+  dismiss() {
+    this.modalCtrl.dismiss();
   }
 
 }
