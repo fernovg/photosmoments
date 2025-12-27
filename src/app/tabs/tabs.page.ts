@@ -8,6 +8,7 @@ import { ServiciosService } from '../core/services/servicios.service';
 import { evento } from '../core/models/general.interface';
 import { Router } from '@angular/router';
 import { UserInfoService } from '../core/services/user-info.service';
+import { ModalService } from '../core/services/modal.service';
 
 @Component({
   selector: 'app-tabs',
@@ -22,6 +23,7 @@ export class TabsPage {
   public photoService = inject(PhotoService);
   private router = inject(Router);
   public environmentInjector = inject(EnvironmentInjector);
+  private modalService = inject(ModalService);
 
   eventos: evento[] = [];
   alertInputsCam: any[] = [];
@@ -60,17 +62,18 @@ export class TabsPage {
   async abrirCamara(eventoSeleccionado: any) {
     const photo = await this.photoService.addNewToGallery();
     if (photo) {
-      const modal = await this.modalCtrl.create({
-        component: CamaraModalComponent,
-        componentProps: {
-          photo: photo,
-          eventoId: eventoSeleccionado.id,
-          eventoNombre: eventoSeleccionado.name,
-        },
-        cssClass: 'modal-fullscreen'
-      });
-      await modal.present();
-      const { role, data } = await modal.onWillDismiss();
+      // const modal = await this.modalCtrl.create({
+      //   component: CamaraModalComponent,
+      //   componentProps: {
+      //     photo: photo,
+      //     eventoId: eventoSeleccionado.id,
+      //     eventoNombre: eventoSeleccionado.name,
+      //   },
+      //   cssClass: 'modal-fullscreen'
+      // });
+      // await modal.present();
+      // const { role, data } = await modal.onWillDismiss();
+      const { role, data } = await this.modalService.modalCamara(photo, eventoSeleccionado);
 
       if (role === 'confirm') {
         this.recargarEvento(eventoSeleccionado.id);
@@ -81,7 +84,7 @@ export class TabsPage {
   async manejarBotonCamara() {
     await this.misEventos();
     const rutaActual = this.router.url;
-    console.log('rutaActual', rutaActual);
+    // console.log('rutaActual', rutaActual);
 
     if (rutaActual.startsWith('/tabs/evento/')) {
       const partes = rutaActual.split('/');

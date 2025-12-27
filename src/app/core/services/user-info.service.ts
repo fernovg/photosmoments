@@ -35,7 +35,6 @@ export class UserInfoService {
         return this.isLoading$.asObservable();
     }
 
-    // Si necesitas obtenerlo de forma puntual sin suscribirte
     getUserDataValue(): any {
         return this.userData$.value;
     }

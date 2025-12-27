@@ -12,6 +12,7 @@ import { EditarEventoModalComponent } from 'src/app/shared/components/editar-eve
 import { environment } from 'src/environments/environment';
 import { LoaderComponent } from 'src/app/shared/components/loader/loader.component';
 import { UserInfoService } from 'src/app/core/services/user-info.service';
+import { ModalService } from 'src/app/core/services/modal.service';
 
 @Component({
   selector: 'app-evento',
@@ -27,7 +28,8 @@ export class EventoPage implements OnInit {
   // private route = inject(Router);
   private activatedRoute = inject(ActivatedRoute);
   private userInfoService = inject(UserInfoService);
-
+  private modalService = inject(ModalService);
+  
   baseUrl = environment.img_url;
   placeholderCover = 'assets/evento.png';
   user: any;
@@ -51,7 +53,6 @@ export class EventoPage implements OnInit {
       this.servicios.traerDatosId(path, id).subscribe({
         next: (data) => {
           this.evento = data;
-          console.log('evento');
           this.traerFotos(id);
           this.traerInvitados(id);
           // console.log(this.evento);
@@ -77,7 +78,6 @@ export class EventoPage implements OnInit {
         this.eventoPhoto = data.sort((a, b) => {
           return new Date(b.created_at).getTime() - new Date(a.created_at).getTime();
         });
-        console.log('fotos');
       },
       error: (error) => {
         // console.log(error);
@@ -91,7 +91,6 @@ export class EventoPage implements OnInit {
     this.servicios.traerGuest(path, id, path1).subscribe({
       next: (data: any[]) => {
         this.guests = data;
-        console.log('invitados');
         // console.log(this.guests);
       },
       error: (error) => {
@@ -101,31 +100,33 @@ export class EventoPage implements OnInit {
   }
 
   async abrirGaleria(index: number) {
-    const modal = await this.modalCtrl.create({
-      component: GaleriaModalComponent,
-      componentProps: {
-        imagenes: this.eventoPhoto,
-        slideIndex: index
-      },
-      cssClass: 'modal-fullscreen',
-      showBackdrop: true
-    });
-    await modal.present();
+    // const modal = await this.modalCtrl.create({
+    //   component: GaleriaModalComponent,
+    //   componentProps: {
+    //     imagenes: this.eventoPhoto,
+    //     slideIndex: index
+    //   },
+    //   cssClass: 'modal-fullscreen',
+    //   showBackdrop: true
+    // });
+    // await modal.present();
+    const { data } = await this.modalService.modalGaleria(this.eventoPhoto, index);
   }
 
   async abrirEditarEvento(evento: any) {
-    const modal = await this.modalCtrl.create({
-      component: EditarEventoModalComponent,
-      componentProps: {
-        evento
-      },
-      cssClass: 'modal-fullscreen',
-      showBackdrop: true
-    });
-    await modal.present();
+    // const modal = await this.modalCtrl.create({
+    //   component: EditarEventoModalComponent,
+    //   componentProps: {
+    //     evento
+    //   },
+    //   cssClass: 'modal-fullscreen',
+    //   showBackdrop: true
+    // });
+    // await modal.present();
+    // const { data, role } = await modal.onDidDismiss();
 
-    //para capturar la respuesta al cerrar
-    const { data, role } = await modal.onDidDismiss();
+    const { role } = await this.modalService.modalEditarEvento(evento);
+
     if (role === 'confirm') {
       this.ngOnInit();
       // console.log(data, 'evento actualizado');

@@ -18,6 +18,7 @@ import { ToastService } from 'src/app/core/services/toast.service';
 import { Router, RouterLinkActive } from '@angular/router';
 import { timestamp } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { ModalService } from 'src/app/core/services/modal.service';
 
 @Component({
   selector: 'app-home',
@@ -35,6 +36,7 @@ export class HomePage implements OnInit {
   private userInfoService = inject(UserInfoService);
   private toastService = inject(ToastService);
   private router = inject(Router);
+  private modalService = inject(ModalService);
 
   baseImgUrl = environment.img_url;
   placeholderCover = 'assets/evento.png';
@@ -101,14 +103,14 @@ export class HomePage implements OnInit {
   }
 
   async abrirScanner() {
-    // console.log('Apunte con la cámara al código QR del evento al que desea unirse.');
+    // const modal = await this.modalCtrl.create({
+    //   component: CamscanModalComponent,
+    //   backdropDismiss: false,
+    // });
+    // await modal.present();
+    // const { data } = await modal.onWillDismiss();
 
-    const modal = await this.modalCtrl.create({
-      component: CamscanModalComponent,
-      backdropDismiss: false,
-    });
-    await modal.present();
-    const { data } = await modal.onWillDismiss();
+    const { data } = await this.modalService.modalScanner();
 
     if (data) {
       const decoded = decodeURIComponent(data);
@@ -146,14 +148,15 @@ export class HomePage implements OnInit {
   }
 
   async abrirCrearEvento() {
-    const modal = await this.modalCtrl.create({
-      component: CrearEventoModalComponent,
-      cssClass: 'modal-fullscreen',
-      showBackdrop: true
-    });
-    await modal.present();
+    // const modal = await this.modalCtrl.create({
+    //   component: CrearEventoModalComponent,
+    //   cssClass: 'modal-fullscreen',
+    //   showBackdrop: true
+    // });
+    // await modal.present(); 
+    // const { data, role } = await modal.onDidDismiss();
 
-    const { data, role } = await modal.onDidDismiss();
+    const { data, role } = await this.modalService.modalCrearEvento();
     if (role === 'confirm') {
       // this.ngOnInit();
       this.ionViewWillEnter();
@@ -164,6 +167,7 @@ export class HomePage implements OnInit {
   abrirEvento(evento: evento) {
     this.router.navigate(['tabs/evento/' + evento.id]);
   }
+
   uniseAEvento(payload: any) {
     this.isLoading = true;
     // alert(JSON.stringify(payload, null, 2));
@@ -179,7 +183,6 @@ export class HomePage implements OnInit {
         this.toastService.error('Error al unirse al evento');
       }
     })
-
   }
 
   getCoverImage(ev?: evento | null): string {
