@@ -51,6 +51,7 @@ export class EventoPage implements OnInit {
       this.servicios.traerDatosId(path, id).subscribe({
         next: (data) => {
           this.evento = data;
+          console.log('evento');
           this.traerFotos(id);
           this.traerInvitados(id);
           // console.log(this.evento);
@@ -76,6 +77,7 @@ export class EventoPage implements OnInit {
         this.eventoPhoto = data.sort((a, b) => {
           return new Date(b.created_at).getTime() - new Date(a.created_at).getTime();
         });
+        console.log('fotos');
       },
       error: (error) => {
         // console.log(error);
@@ -89,6 +91,7 @@ export class EventoPage implements OnInit {
     this.servicios.traerGuest(path, id, path1).subscribe({
       next: (data: any[]) => {
         this.guests = data;
+        console.log('invitados');
         // console.log(this.guests);
       },
       error: (error) => {

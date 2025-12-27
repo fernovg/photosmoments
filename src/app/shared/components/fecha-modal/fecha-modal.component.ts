@@ -19,6 +19,19 @@ export class FechaModalComponent implements OnInit {
 
   ngOnInit() { }
 
+  diasPasados = (dateString: string) => {
+    const fecha = new Date(dateString);
+
+    const hoy = new Date();
+    hoy.setHours(0, 0, 0, 0);
+
+    const comFecha = new Date(fecha);
+    comFecha.setHours(0, 0, 0, 0);
+
+    return comFecha >= hoy;
+
+  };
+
   seleccionar(ev: any) {
     console.log("fecha seleccionada:", ev.detail);
     this.fecha = ev.detail.value;
