@@ -13,25 +13,26 @@
 
   <ion-card class="card-evento">
     @if(evento?.cover_image_path){
-      <ion-img class="foto-event" [src]="getCoverImage(evento)" alt="{{ evento?.name }}"></ion-img>
-    } 
+    <ion-img class="foto-event" [src]="getCoverImage(evento)" alt="{{ evento?.name }}"></ion-img>
+    }
     <ion-card-content>
-        <div class="button-group">
-          <ion-button color="primary" id="open-modal" fill="outline" size="small">
-            <i class="fa-solid fa-qrcode"></i>
-            Invitar
-          </ion-button>
-          @if(this.evento?.user?.id === this.user?.id) {
-          <ion-button color="dark" fill="outline" (click)="abrirEditarEvento(evento)" size="small">
-            <i class="fa-solid fa-gear"></i>
-          </ion-button>
-          }
-        </div>
+      <div class="button-group">
+        <ion-button color="primary" id="open-modal" fill="outline" size="small">
+          <i class="fa-solid fa-qrcode"></i>
+          Invitar
+        </ion-button>
+        @if(this.evento?.user?.id === this.user?.id) {
+        <ion-button color="dark" fill="outline" (click)="abrirEditarEvento(evento)" size="small">
+          <i class="fa-solid fa-gear"></i>
+        </ion-button>
+        }
+      </div>
       <ion-card-header>
-          <ion-card-title>{{ evento?.event_date | date:'mediumDate' }} - {{ evento?.event_date | date:'h:mm a' }}</ion-card-title>
-          @if(evento?.address){
-            <ion-card-subtitle><i class="fa-solid fa-location-dot"></i> {{ evento?.address }}</ion-card-subtitle>
-          } 
+        <ion-card-title>{{ evento?.event_date | date:'mediumDate' }} - {{ evento?.event_date | date:'h:mm a'
+          }}</ion-card-title>
+        @if(evento?.address){
+        <ion-card-subtitle><i class="fa-solid fa-location-dot"></i> {{ evento?.address }}</ion-card-subtitle>
+        }
       </ion-card-header>
 
       <ion-segment value="albums">
@@ -145,16 +146,16 @@
   </ion-card>
 
 
-  <ion-modal #modal trigger="open-modal" cssClass="evento-qr-modal" [initialBreakpoint]="0.6"
-    [breakpoints]="[0, 0.25, 0.5, 0.6, 0.8]">
+  <ion-modal #modal trigger="open-modal" cssClass="evento-qr-modal" [initialBreakpoint]="0.9"
+    [breakpoints]="[0, 0.25, 0.5, 0.6, 0.8, 0.9]">
     <ng-template>
       <ion-content class="content-modal">
         <h2>QR</h2>
         <!-- <img [src]="baseUrl + evento?.qr_payload" alt="" class="qr-code"> -->
         <img [src]="baseUrl + evento?.qr_code_path" alt="" class="qr-code">
 
-        <p>Para unirte a este evento, escanee el código QR o ingrese el siguiente codigo:</p>
-        <h2>{{ evento?.id }}</h2>
+        <p>Para unirte a este evento, escanee el código QR</p>
+        <!-- <h2>{{ evento?.id }}</h2> -->
         <!-- <ion-text color="primary">
           <a href="https://pueblosmagicoshidalgo2025.com.mx/photos/public/events/{{ evento?.id }}">
             https://pueblosmagicoshidalgo2025.com.mx/photos/public/events/{{ evento?.id }}

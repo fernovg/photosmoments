@@ -151,3 +151,14 @@ form {
     }
   }
 }
+
+.button-group {
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  gap: 10px;
+
+  ion-button {
+    font-size: 18px;
+  }
+}

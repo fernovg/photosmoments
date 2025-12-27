@@ -119,14 +119,16 @@
 
     </ion-list>
   </form>
-
-  <ion-button expand="block" id="present-alert" color="danger">Eliminar Evento</ion-button>
   <ion-alert trigger="present-alert" header="Seguro que quieres elminar este evento?" [buttons]="alertButtons"
     (didDismiss)="setResult($event)"></ion-alert>
 </ion-content>
 
 <ion-footer>
   <ion-toolbar class="toolbar-footer">
-    <ion-button size="block" (click)="confirm()">Guardar</ion-button>
+    <div class="button-group">
+      <ion-button id="present-alert" color="danger">Eliminar Evento</ion-button>
+      <ion-button (click)="confirm()">Guardar</ion-button>
+    </div>
+
   </ion-toolbar>
 </ion-footer>
