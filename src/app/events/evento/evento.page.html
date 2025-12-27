@@ -52,8 +52,8 @@
       <ion-segment-view>
 
         <ion-segment-content id="albums">
+          @if (eventoPhoto?.length) {
           @for (item of eventoPhoto; track $index) {
-          @if (eventoPhoto) {
           <ion-card class="publicacion-card">
             <ion-card-header class="publicacion-header">
               <ion-grid>
@@ -73,34 +73,36 @@
             <img class="foto-publi" [src]="baseUrl + item.thumbnail_path" (click)="abrirGaleria($index)"
               alt="Foto publicación">
           </ion-card>
+          }
           } @else {
-          <ion-card class="publicacion-card">
+          <ion-card class="publicacion-card placeholder-card">
             <ion-card-header class="publicacion-header">
               <ion-card-title>No hay fotos</ion-card-title>
             </ion-card-header>
+            <div class="placeholder-thumb"></div>
           </ion-card>
-          }
           }
         </ion-segment-content>
 
         <ion-segment-content id="grid">
 
-          @for (item of eventoPhoto; track $index) {
-          @if (eventoPhoto) {
+          @if (eventoPhoto?.length) {
           <div class="container-grid">
             <div class="cartas-grid">
+              @for (item of eventoPhoto; track $index) {
               <ion-card class="card-grid-foto">
                 <img [src]="baseUrl + item.thumbnail_path" alt="" (click)="abrirGaleria($index)">
               </ion-card>
+              }
             </div>
           </div>
           } @else {
-          <ion-card class="publicacion-card">
+          <ion-card class="publicacion-card placeholder-card">
             <ion-card-header class="publicacion-header">
               <ion-card-title>No hay fotos</ion-card-title>
             </ion-card-header>
+            <div class="placeholder-thumb"></div>
           </ion-card>
-          }
           }
 
         </ion-segment-content>
@@ -131,9 +133,12 @@
               </ion-item-options>
             </ion-item-sliding>
             } @else {
-            <ion-item lines="none">
-              <ion-label>No hay invitados</ion-label>
-            </ion-item>
+             <ion-card class="publicacion-card placeholder-card">
+            <ion-card-header class="publicacion-header">
+              <ion-card-title>No hay Invitados</ion-card-title>
+            </ion-card-header>
+            <div class="placeholder-thumb"></div>
+          </ion-card>
             }
 
           </ion-list>

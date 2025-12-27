@@ -32,7 +32,7 @@ export class ServiciosService {
   }
 
   actualizarDatos(endpoint: string, data: any): Observable<any> {
-    return this.http.put<any>(`${this.baseUrl}/${endpoint}`, data);
+    return this.http.post<any>(`${this.baseUrl}/${endpoint}`, data);
   }
 
   eliminarDatos(endpoint: string): Observable<any> {

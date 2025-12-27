@@ -61,9 +61,12 @@ export class CrearEventoModalComponent implements OnInit {
     const raw = this.cEvento.value;
 
     const formData = new FormData();
+    const eventDateIso = raw.event_date ? new Date(raw.event_date).toISOString() : '';
+    const closeDateIso = raw.event_date ? new Date(raw.event_date).toISOString() : '';
+
     formData.append('name', raw.name);
-    formData.append('event_date', formatDate(raw.event_date, 'yyyy-MM-dd HH:mm', 'en'));
-    formData.append('close_date', formatDate(raw.event_date, 'yyyy-MM-dd HH:mm', 'en'));
+    formData.append('event_date', eventDateIso);
+    formData.append('close_date', closeDateIso);
     formData.append('address', raw.address);
     formData.append('total_guests', String(Number(raw.total_guests)));
     formData.append('max_photos_per_guest', String(Number(raw.max_photos_per_guest)));
