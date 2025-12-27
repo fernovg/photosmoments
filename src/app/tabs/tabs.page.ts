@@ -1,5 +1,5 @@
 import { Component, EnvironmentInjector, inject } from '@angular/core';
-import { IonTabs, IonTabBar, IonTabButton, IonIcon, IonLabel, IonFab, IonFabButton, ModalController, IonAlert } from '@ionic/angular/standalone';
+import { IonTabs, IonTabBar, IonTabButton, IonIcon, IonFab, IonFabButton, ModalController, IonAlert } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
 import { home, people, book, person, camera } from 'ionicons/icons';
 import { CamaraModalComponent } from '../shared/components/camara-modal/camara-modal.component';
@@ -13,10 +13,10 @@ import { UserInfoService } from '../core/services/user-info.service';
   selector: 'app-tabs',
   templateUrl: 'tabs.page.html',
   styleUrls: ['tabs.page.scss'],
-  imports: [IonFabButton, IonFab, IonTabs, IonTabBar, IonTabButton, IonIcon, IonAlert, IonLabel],
+  imports: [IonFabButton, IonFab, IonTabs, IonTabBar, IonTabButton, IonIcon, IonAlert],
 })
 export class TabsPage {
-private userInfoService = inject(UserInfoService);
+  private userInfoService = inject(UserInfoService);
   private servicios = inject(ServiciosService);
   private modalCtrl = inject(ModalController);
   public photoService = inject(PhotoService);
@@ -37,7 +37,7 @@ private userInfoService = inject(UserInfoService);
   ionViewWillEnter() {
     this.misEventos();
   }
-  
+
   misEventos() {
     this.servicios.traerDatos('events').subscribe({
       next: (eventos) => {
@@ -79,6 +79,7 @@ private userInfoService = inject(UserInfoService);
   }
 
   async manejarBotonCamara() {
+    await this.misEventos();
     const rutaActual = this.router.url;
     console.log('rutaActual', rutaActual);
 
