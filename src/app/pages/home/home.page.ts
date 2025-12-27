@@ -114,27 +114,36 @@ export class HomePage implements OnInit {
 
     if (data) {
       const decoded = decodeURIComponent(data);
-      const partes = decoded.split('|').filter(Boolean);
-      const urlPart = partes[0] || '';
-      const eventId = Number(partes[1] || partes[0]);
       const userId = this.user.id;
 
-      if (!eventId || isNaN(eventId)) {
+      // Caso URL directa tipo https://photosmoments.vercel.app/invitar/1
+      const inviteMatch = decoded.match(/\/invitar\/(\d+)/);
+      if (inviteMatch) {
+        const inviteId = Number(inviteMatch[1]);
+        if (inviteId && !isNaN(inviteId)) {
+          // this.router.navigate(['/invitar', inviteId], { replaceUrl: true });
+          //  return;
+          const payload = {
+            event_id: inviteId,
+            guest_id: userId,
+          };
+          this.uniseAEvento(payload);
+        }
+      } else {
         this.toastService.error('Código QR inválido');
         return;
       }
 
-      // Si el QR trae una URL de invitación, redirige al flujo de invitación
-     //if (urlPart.includes('/invitar/')) {
-     //  this.router.navigateByUrl(urlPart, { replaceUrl: true });
-     //  return;
-     //}
+      // Caso payload con pipes http://...|eventId|...
+      //const partes = decoded.split('|').filter(Boolean);
+      //const eventId = Number(partes[1] || partes[0]);
+      //
+      //if (!eventId || isNaN(eventId)) {
+      //  this.toastService.error('Código QR inválido');
+      //  return;
+      //}
 
-      const payload = {
-        event_id: eventId,
-        guest_id: userId,
-      };
-      this.uniseAEvento(payload);
+
     }
   }
 
